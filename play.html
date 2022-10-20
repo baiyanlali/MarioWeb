@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CheerpJ test</title>
+    <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+  </head>
+  <body>
+  </body>
+  <script>
+    function showPreloadProgress(loadedFiles, totalFiles)
+    {
+    console.log("Percentage loaded "+(loadedFiles*100/totalFiles));
+    }
+    var cheerpjListener = {preloadProgress:showPreloadProgress};
+    cheerpjInit({listener:cheerpjListener});
+    //cheerpjInit();
+    cheerpjCreateDisplay(800,600);
+    //cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l", "0");
+    
+    console.log("done");
+
+    cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
+    var returnVal = cjCall("Play", "otherMain", "0", "f_l", "0");//
+    returnVal.then(function(e) { console.log("the return val is ready");  });
+    //console.log(returnVal);
+    // cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
+    // var actionSequenceInBytes = cjCall("MarioProxy", "play", "0", "f_l", "0");
+  </script>
+</html>

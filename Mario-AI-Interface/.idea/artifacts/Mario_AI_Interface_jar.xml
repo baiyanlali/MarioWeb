@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Mario-AI-Interface:jar">
+    <output-path>$USER_HOME$/Documents/MarioGAN/cheerpj_2.3</output-path>
+    <root id="archive" name="Mario-AI-Interface.jar">
+      <element id="module-output" name="Mario-AI-Interface" />
+    </root>
+  </artifact>
+</component>
