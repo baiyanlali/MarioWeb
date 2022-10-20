@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EDRL-web.iml" filepath="$PROJECT_DIR$/EDRL-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MarioWeb.iml" filepath="$PROJECT_DIR$/.idea/MarioWeb.iml" />
     </modules>
   </component>
 </project>
