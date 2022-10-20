@@ -22,7 +22,11 @@
 
     cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
     var returnVal = cjCall("Play", "otherMain", "0", "f_l", "0");//
-    returnVal.then(function(e) { console.log("the return val is ready");  });
+    returnVal.then(function(e) { 
+      console.log("the return val is ready");  
+      console.log(returnVal.data[0]);
+    
+    }).catch(e => console.log("Critical failure: " + e.message));
     //console.log(returnVal);
     // cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
     // var actionSequenceInBytes = cjCall("MarioProxy", "play", "0", "f_l", "0");
