@@ -42,7 +42,8 @@ public class Assets {
     }
 
     private static Image getImage(GraphicsConfiguration gc, String imageName) throws IOException {
-//        File file = new File(System.getProperty("user.dir") + "/img/" + imageName);  // Local test
+        //FIXME web/local
+        //File file = new File(System.getProperty("user.dir") + "/img/" + imageName);  // Local test
         File file = new File("/app/img/" + imageName);  // For web
         BufferedImage source = ImageIO.read(file);
         Image image = gc.createCompatibleImage(source.getWidth(), source.getHeight(), Transparency.BITMASK);

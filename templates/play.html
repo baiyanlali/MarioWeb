@@ -4,18 +4,11 @@
     <meta charset="utf-8">
     <title>CheerpJ test</title>
     <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+    <script>
+      window.onload = function () {
 
-  </head>
-  <body>
-  </body>
-  <br />{{ py2htmlstr }}
-  <script>
-    function showPreloadProgress(loadedFiles, totalFiles)
-    {
-    console.log("Percentage loaded "+(loadedFiles*100/totalFiles));
-    }
-//上传测井数据表到服务器数据库 
-    function PostToServer(data) {
+        }
+      function PostToServer(data) {
       
       var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
       httpRequest.open("POST","");  //调用AddDataToServer
@@ -31,24 +24,52 @@
       //httpRequest.send((""+data));
     }
 
-    var cheerpjListener = {preloadProgress:showPreloadProgress};
-    cheerpjInit({listener:cheerpjListener});
-    //cheerpjInit();
+
+    </script>
+  </head>
+  <body>
+  </body>
+  <br />{{ py2htmlstr }}
+  <script>
+
+
+
+
+
+
+    cheerpjInit();
     cheerpjCreateDisplay(800,600);
-    //cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l", "0");
+    cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
     
     console.log("done");
 
-    cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
-    var returnVal = cjCall("Play", "otherMain", "0", "f_l", "0");//
-    returnVal.then(function(e) { 
+    //cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
+    var returnVal = cjCall("Play", "playGameMain", "0", "f_l");
+
+    returnVal.then(function(){ 
       console.log("the return val is ready");  
       console.log(returnVal.value);
-      PostToServer(returnVal.value);
+      PostToServer(returnVal.value);    
+    });
     
-    }).catch(e => console.log("Critical failure: " + e.message));
+    //.then(function(){console.log(" over2 ");});
+    //.catch((e) => {});
+
+
     //console.log(returnVal);
     // cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
     // var actionSequenceInBytes = cjCall("MarioProxy", "play", "0", "f_l", "0");
+
   </script>
+  <form>
+    <input type="button" id="replayButton" value="Replay">
+    </form>
+    <script>
+    var button = document.getElementById("replayButton");
+          button.onclick = function(){
+            //alert("WTF?")
+            cjCall("Play", "replayGameMain", "0", "f_l");
+          };
+    </script>
+
 </html>

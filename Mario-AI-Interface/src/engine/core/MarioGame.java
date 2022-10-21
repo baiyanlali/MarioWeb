@@ -94,8 +94,8 @@ public class MarioGame {
      * @param timer number of ticks for that level to be played. Setting timer to anything &lt;=0 will make the time infinite
      * @return statistics about the current game
      */
-    public MarioResult playGame(String level, int timer, String resultPath) {
-        return this.runGame(new HumanAgent(), level, timer, 0, true, 30, 2, resultPath);
+    public MarioResult playGame(MarioAgent gameAgent,String level, int timer, String resultPath) {
+        return this.runGame(gameAgent, level, timer, 0, true, 30, 2, resultPath);
     }
 
     /**
