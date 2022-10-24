@@ -21,7 +21,15 @@ def eval():
 
 
 @app.route('/', methods=['POST'])
-def getData():
+def getJSONData():
+    if request.method == 'POST':
+        print("POST")
+        print(request.json)
+        return redirect(url_for('datapage'))
+
+
+@app.route('/', methods=['POST'])
+def getRadioData():
     if request.method == 'POST':
         print("POST")
         print(request.json)
