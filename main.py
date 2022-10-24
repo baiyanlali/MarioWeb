@@ -15,6 +15,11 @@ def datapage():
     return bufferJson
 
 
+@app.route('/eval')
+def eval():
+    return render_template('eval.html')
+
+
 @app.route('/', methods=['POST'])
 def getData():
     if request.method == 'POST':

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+
+
+  </head>
+  <div id="replayWindow">
+    <div id="replayWindowGame">
+    </div>
+    <div align="center"><button onClick="closeReplayWindow()">Close Window</button></div>
+  </div>
+  <body>
+
+    <div align="center"><button onClick="Replay('test1')">Replay Game1</button></div>
+    <div align="center"><button onClick="Replay('test2')">Replay Game2</button></div>
+    <script>
+        //The Funtions
+        function closeReplayWindow(){
+            var replayWindow=document.getElementById("replayWindow");
+            replayWindow.style.visibility = 'hidden';	
+        }
+        function Replay(id){
+            var replayWindow=document.getElementById("replayWindow");
+            replayWindow.style.visibility = 'visible';
+            cjCall("Play", "replayGameMain", id, id);
+        }
+        window.onload=function(){
+            closeReplayWindow();
+        }
+    </script>
+    <script>
+        cheerpjInit();
+        var divElement = document.getElementById("replayWindowGame");
+        cheerpjCreateDisplay(500,500,divElement);
+        cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
+        closeReplayWindow();
+    </script>
+  </body>
+
+
+
+</html>
