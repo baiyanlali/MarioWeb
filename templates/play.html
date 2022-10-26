@@ -11,7 +11,7 @@
         return returnVal.then(function(){ 
           console.log("the return val is ready");  
           console.log(returnVal.value);
-          PostToServer(returnVal.value);    
+          PostToServer(level,returnVal.value);    
         });
       }
     
@@ -24,7 +24,7 @@
         }
       }
 
-      function PostToServer(data) {
+      function PostToServer(level, data) {
       var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
       httpRequest.open("POST","");  //调用AddDataToServer
       httpRequest.setRequestHeader("Content-Type", "application/json");   //设置请求头信息
@@ -33,9 +33,7 @@
           //alert('添加成功');
         }
       }
-      // console.log(typeof Array.from(data));
-      // console.log(Array.from(data));
-      httpRequest.send(JSON.stringify(Array.from(data))); //设置为发送给服务器数据
+      httpRequest.send(JSON.stringify(level+","+Array.from(data))); //设置为发送给服务器数据
     }
     </script>
 
