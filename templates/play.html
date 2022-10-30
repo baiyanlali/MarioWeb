@@ -5,71 +5,97 @@
     <title>CheerpJ test</title>
     <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
     <script>
-      window.onload = function () {
-
+      //The Funtions
+      function PlayLevel(group, level){
+        var returnVal = cjCall("Play", "playGameMain", group, level);
+        return returnVal.then(function(){ 
+          console.log("the return val is ready");  
+          console.log(returnVal.value);
+          PostToServer(level,returnVal.value);    
+        });
+      }
+    
+      function Replay(){
+        cjCall("Play", "replayGameMain", "test2", "test2");
+      };
+      function GameOver(){
+        if(alert("Game Over!")){
+    
         }
-      function PostToServer(data) {
-      
+      }
+
+      function PostToServer(level, data) {
       var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
       httpRequest.open("POST","");  //调用AddDataToServer
       httpRequest.setRequestHeader("Content-Type", "application/json");   //设置请求头信息
       httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-          alert('添加成功');
+          //alert('添加成功');
         }
       }
-      console.log(typeof Array.from(data));
-      console.log(Array.from(data));
-      httpRequest.send(JSON.stringify(Array.from(data))); //设置为发送给服务器数据
-      //httpRequest.send((""+data));
+      httpRequest.send(JSON.stringify(level+","+Array.from(data))); //设置为发送给服务器数据
     }
-
-
     </script>
+
   </head>
   <body>
+    <div align="center">
+      <h1>Mario Game User Test</h1>
+    </div>
+    <div align="center" id = "GameWindow">
+      
+    </div>
+    <div align="center"><button onClick="Replay()">Replay Game</button></div>
   </body>
-  <br />{{ py2htmlstr }}
+
   <script>
-
-
-
-
-
-
+    //Init Cheerpj Framework
     cheerpjInit();
-    cheerpjCreateDisplay(800,600);
+    /*
+    function cheerpjCreateDisplay(w, h, oldElem)
+    {
+      // Create a div element that will contain all Java Windows
+      var element = document.createElement("div");
+      cjDisplay = element;
+      element.id="cheerpjDisplay";
+      if(oldElem && w<0 && h<0)
+      {
+        // Compute the sizes from the parent
+        element.style.width="100%";
+        element.style.height="100%";
+      }
+      else
+      {
+        element.style.width=w+"px";
+        element.style.height=h+"px";
+      }
+      element.classList.add("cheerpjLoading");
+      element.classList.add("bordered");
+      if(oldElem)
+        oldElem.appendChild(element);
+      else
+        document.body.appendChild(element);
+      cheerpjSetStatus(cjStatus, element);
+      return element;
+    }*/
+    var divElement = document.getElementById("GameWindow");
+    cheerpjCreateDisplay(500,500,divElement);
     cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
-    
-    console.log("done");
+    console.log("Cheerpj Initialize Succeed!");
 
-    //cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
-    var returnVal = cjCall("Play", "playGameMain", "0", "f_l");
-
-    returnVal.then(function(){ 
-      console.log("the return val is ready");  
-      console.log(returnVal.value);
-      PostToServer(returnVal.value);    
-    });
-    
-    //.then(function(){console.log(" over2 ");});
-    //.catch((e) => {});
-
-
-    //console.log(returnVal);
-    // cheerpjRunJar("/app/Mario-AI-Interface.jar"); 
-    // var actionSequenceInBytes = cjCall("MarioProxy", "play", "0", "f_l", "0");
+    PlayLevel("test1", "test1")
+    .then(function (){alert("Game Over!")})
+    .then(PlayLevel("test2", "test2")
+    .then(function (){
+      alert("Go to Evaluation Window")
+      window.location.href = window.location.href + "\eval"
+  
+    }));
+  
 
   </script>
-  <form>
-    <input type="button" id="replayButton" value="Replay">
-    </form>
-    <script>
-    var button = document.getElementById("replayButton");
-          button.onclick = function(){
-            //alert("WTF?")
-            cjCall("Play", "replayGameMain", "0", "f_l");
-          };
-    </script>
+
+
+
 
 </html>

@@ -39,7 +39,7 @@ public class Play {
 
     public static byte[] playGameMain(String groupID, String levelName){
 
-        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);			// For web
+        String levelPath = String.format("/app/levels/%s.lvl", levelName);			// For web
         String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
 
         MarioGame game = new MarioGame();
@@ -49,7 +49,7 @@ public class Play {
     }
 
     public static void replayGameMain(String groupID, String levelName){
-        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);		    // For web
+        String levelPath = String.format("/app/levels/%s.lvl", levelName);		    // For web
         String repPath = String.format("/files/%s_sav.rep", levelName);	                                    // For web
 
 //        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);			// For local
