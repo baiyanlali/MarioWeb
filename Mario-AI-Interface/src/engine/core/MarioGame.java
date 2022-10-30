@@ -56,6 +56,7 @@ public class MarioGame {
     private MarioRender render = null;
     private MarioAgent agent = null;
     private MarioWorld world = null;
+    private int initialLives;
 
     /**
      * Create a mario game to be played
@@ -85,6 +86,9 @@ public class MarioGame {
         if (agent instanceof KeyAdapter) {
             this.render.addKeyListener((KeyAdapter) this.agent);
         }
+    }
+    public MarioResult playGame(String level, String resultPath) {
+        return this.runGame(new agents.HumanAgent(), level, 200, 0, true, 30, 2, resultPath);
     }
 
     /**
@@ -144,6 +148,7 @@ public class MarioGame {
         if (visual) {
             this.world.initializeVisuals(this.render.getGraphicsConfiguration());
         }
+        this.world.lives = this.initialLives;
         this.world.mario.isLarge = marioState > 0;
         this.world.mario.isFire = marioState > 1;
         this.world.update(new boolean[MarioActions.numberOfActions()]);
@@ -206,15 +211,18 @@ public class MarioGame {
         return new MarioResult(this.world, gameEvents, agentEvents);
     }
     public static void showNewWindow(JFrame relativeWindow) {
-        // 创建一个新窗口
-        JFrame newJFrame = new JFrame("新的窗口");
+        // 鍒涘缓涓�涓柊绐楀彛
+        JFrame newJFrame = new JFrame("鏂扮殑绐楀彛");
 
         newJFrame.setSize(250, 250);
 
-        // 把新窗口的位置设置到 relativeWindow 窗口的中心
+        // 鎶婃柊绐楀彛鐨勪綅缃缃埌 relativeWindow 绐楀彛鐨勪腑蹇�
         newJFrame.setLocationRelativeTo(relativeWindow);
 
         newJFrame.setVisible(true);
+    }
+    public void setLives(int lives) {
+        this.initialLives = lives;
     }
 
 }

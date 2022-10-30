@@ -404,11 +404,36 @@ public class Mario extends MarioSprite {
                 this.isLarge = false;
             }
             invulnerableTime = 32;
-        } else {
-            if (this.world != null) {
+        } else if (this.world != null) {
+            if (this.world.lives <= 0) {
                 this.world.lose();
+            } else {
+                this.world.lives -= 1;
+                this.world.deaths += 1;
+                world.pauseTimer = 3 * POWERUP_TIME;
+                invulnerableTime = 32;
             }
         }
+    }
+
+    public void getDrop() {
+        if (!this.alive)
+            return;
+
+        this.oldLarge = this.isLarge;
+        this.oldFire = this.isFire;
+        this.isFire = false;
+        this.isLarge = false;
+        if (this.world != null) {
+            if (this.world.lives <= 0) {
+                this.world.lose();
+            } else if (invulnerableTime <= 0) {
+                this.world.lives -= 1;
+                this.world.deaths += 1;
+                world.pauseTimer = 3 * POWERUP_TIME;
+            }
+        }
+        invulnerableTime = 72;
     }
 
     public void getFlower() {

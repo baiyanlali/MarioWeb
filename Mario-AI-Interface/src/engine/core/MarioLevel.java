@@ -21,6 +21,7 @@ public class MarioLevel {
     private int[][] levelTiles;
     private SpriteType[][] spriteTemplates;
     private int[][] lastSpawnTime;
+    private boolean[][] solidMap;
     private MarioTilemap graphics;
     private MarioImage flag;
 
@@ -41,6 +42,7 @@ public class MarioLevel {
         this.levelTiles = new int[lines[0].length()][lines.length];
         this.spriteTemplates = new SpriteType[lines[0].length()][lines.length];
         this.lastSpawnTime = new int[lines[0].length()][lines.length];
+        this.solidMap = new boolean[lines[0].length()][lines.length];
         for (int y = 0; y < lines.length; y++) {
             for (int x = 0; x < lines[y].length(); x++) {
                 this.levelTiles[x][y] = 0;
@@ -54,6 +56,7 @@ public class MarioLevel {
         for (int y = 0; y < lines.length; y++) {
             for (int x = 0; x < lines[y].length(); x++) {
                 Character c = lines[y].charAt(x);
+                this.solidMap[x][y] = this.isSolid(c);
                 switch (c) {
                     case 'M':
                         this.marioTileX = x;
@@ -283,10 +286,12 @@ public class MarioLevel {
         level.exitTileY = this.exitTileY;
         level.levelTiles = new int[this.levelTiles.length][this.levelTiles[0].length];
         level.lastSpawnTime = new int[this.levelTiles.length][this.levelTiles[0].length];
+        level.solidMap = new boolean[this.levelTiles.length][this.levelTiles[0].length];
         for (int x = 0; x < level.levelTiles.length; x++) {
             for (int y = 0; y < level.levelTiles[x].length; y++) {
                 level.levelTiles[x][y] = this.levelTiles[x][y];
                 level.lastSpawnTime[x][y] = this.lastSpawnTime[x][y];
+                level.solidMap[x][y] = this.solidMap[x][y];
             }
         }
         level.spriteTemplates = this.spriteTemplates;
@@ -385,5 +390,12 @@ public class MarioLevel {
         if (cameraX + MarioGame.width >= this.exitTileX * 16) {
             this.flag.render(og, this.exitTileX * 16 - 8 - cameraX, Math.max(1, this.exitTileY - 11) * 16 + 16 - cameraY);
         }
+    }
+
+    public boolean standable(int xTile, int yTile) {
+        if (yTile >= this.tileHeight)
+            return false;
+        else
+            return !this.solidMap[xTile][yTile] && this.solidMap[xTile][yTile+1];
     }
 }

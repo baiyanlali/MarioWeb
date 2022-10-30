@@ -3,7 +3,6 @@ package engine.core;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.util.ArrayList;
-
 import engine.effects.*;
 import engine.graphics.MarioBackground;
 import engine.helper.EventType;
@@ -13,6 +12,9 @@ import engine.helper.TileFeature;
 import engine.sprites.*;
 
 public class MarioWorld {
+    public static final int onlineTimerMax = 100000;
+
+
     public GameStatus gameStatus;
     public int pauseTimer = 0;
     public int fireballsOnScreen = 0;
@@ -24,9 +26,12 @@ public class MarioWorld {
     public boolean visuals;
     public int currentTick;
     //Status
-    public int coins, lives;
+    public int coins, lives, kills, deaths, jumps, items;
+    public int airStart, airTime;
     public ArrayList<MarioEvent> lastFrameEvents;
 
+//    private int segTime = -1;
+//    private int passedSegs = 0;
     private MarioEvent[] killEvents;
     private ArrayList<MarioSprite> sprites;
     private ArrayList<Shell> shellsToCheck;
@@ -37,6 +42,8 @@ public class MarioWorld {
     private ArrayList<MarioEffect> effects;
 
     private MarioBackground[] backgrounds = new MarioBackground[2];
+//    private boolean revivable = false;
+    //    private int totalEnemies;
 
     public MarioWorld(MarioEvent[] killEvents) {
         this.pauseTimer = 0;
@@ -49,6 +56,9 @@ public class MarioWorld {
         this.effects = new ArrayList<>();
         this.lastFrameEvents = new ArrayList<>();
         this.killEvents = killEvents;
+        this.lives = 0;
+        this.kills = 0;
+        this.deaths = 0;
     }
 
     public void initializeVisuals(GraphicsConfiguration graphicsConfig) {
@@ -93,7 +103,20 @@ public class MarioWorld {
         this.mario.alive = true;
         this.mario.world = this;
         this.sprites.add(this.mario);
+//        totalEnemies = getEnemies().size();
     }
+
+//    public int getTotalEnemies() {
+//        return level.totalEnemies;
+//    }
+
+//    public int getEnemiesRemain() {
+//        int n = 0;
+//        for (int x = (int)(mario.x / 16) + MarioGame.width / 2; x < level.tileWidth; x++) {
+//            n += level.enemyNumList.get(x);
+//        }
+//        return n;
+//    }
 
     public ArrayList<MarioSprite> getEnemies() {
         ArrayList<MarioSprite> enemies = new ArrayList<>();
@@ -141,6 +164,16 @@ public class MarioWorld {
         if (this.mario.isFire) {
             marioState = 2;
         }
+        if (eventType == EventType.STOMP_KILL || eventType == EventType.FIRE_KILL || eventType == EventType.SHELL_KILL)
+            this.kills++;
+        if (eventType == EventType.COLLECT && eventParam != MarioForwardModel.OBS_COIN)
+            this.items++;
+        if (eventType == EventType.JUMP) {
+            this.jumps++;
+            this.airStart = this.currentTick;
+        }
+        if (eventType == EventType.LAND)
+            this.airTime += (this.currentTick - this.airStart);
         this.lastFrameEvents.add(new MarioEvent(eventType, eventParam, mario.x, mario.y, marioState, this.currentTick));
     }
 
@@ -185,6 +218,27 @@ public class MarioWorld {
     public void timeout() {
         this.gameStatus = GameStatus.TIME_OUT;
         this.mario.alive = false;
+    }
+
+    public void revive() {
+        int newTileX = (int) this.mario.x / 16;
+        int newTileY = (int) this.mario.y / 16;
+        try {
+            l: while (true) {
+                for (int y = this.level.tileHeight - 2; y >= 8; y--) {
+                    if (this.level.standable(newTileX, y)) {
+                        newTileY = y;
+                        break l;
+                    }
+                }
+                newTileX--;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            this.lose();
+            return;
+        }
+        this.mario.x = (float)(newTileX * 16.0 + 8);
+        this.mario.y = (float)(newTileY * 16.0);
     }
 
     public int[][] getSceneObservation(float centerX, float centerY, int detail) {
@@ -304,6 +358,10 @@ public class MarioWorld {
 
         if (this.currentTimer > 0) {
             this.currentTimer -= 30;
+//            if (this.segTime > 0 && (int) (this.mario.x / 512) > this.passedSegs) {
+//                this.passedSegs = (int) (this.mario.x / 512);
+//                this.currentTimer = Math.min(this.currentTimer + this.segTime, 2 * this.segTime) ;
+//            }
             if (this.currentTimer <= 0) {
                 this.currentTimer = 0;
                 this.timeout();
@@ -332,11 +390,18 @@ public class MarioWorld {
         for (MarioSprite sprite : sprites) {
             if (sprite.x < cameraX - 64 || sprite.x > cameraX + MarioGame.width + 64 || sprite.y > this.level.height + 32) {
                 if (sprite.type == SpriteType.MARIO) {
-                    this.lose();
+                    if (this.lives > 0) {
+                        this.mario.getDrop();
+                        this.revive();
+                    }
+                    else
+                        this.lose();
                 }
-                this.removeSprite(sprite);
-                if (this.isEnemy(sprite) && sprite.y > MarioGame.height + 32) {
-                    this.addEvent(EventType.FALL_KILL, sprite.type.getValue());
+                else{
+                    this.removeSprite(sprite);
+                    if (this.isEnemy(sprite) && sprite.y > MarioGame.height + 32) {
+                        this.addEvent(EventType.FALL_KILL, sprite.type.getValue());
+                    }
                 }
                 continue;
             }
@@ -433,6 +498,9 @@ public class MarioWorld {
         if (this.killEvents != null) {
             for (MarioEvent k : this.killEvents) {
                 if (this.lastFrameEvents.contains(k)) {
+//                    if (this.revivable)
+//                        this.revive();
+//                    else
                     this.lose();
                 }
             }
@@ -526,4 +594,13 @@ public class MarioWorld {
             this.effects.get(i).render(og, cameraX, cameraY);
         }
     }
+
+//    public void setSegTime(int segTime) {
+//        this.segTime = segTime;
+//        this.currentTimer = 2 * segTime;
+//    }
+
+    //    public void setRevivable(boolean revivable) {
+//        this.revivable = revivable;
+//    }
 }

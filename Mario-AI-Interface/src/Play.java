@@ -23,29 +23,33 @@ public class Play {
     public static void main(String[] args) throws IOException {
         String groupID = args[0];
         String levelName = args[1];
-//        MarioGame game = new MarioGame();
-//
-////        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);		// For web
-////        String repPath = String.format("/files/tmp.rep");	                                        // For web
-//
-//        String levelPath = String.format("./levels/group%s/%s.txt", groupID, levelName);			// For local
-//        String repPath = String.format("./reps/%s_sav.rep", levelName);	                            // For local
+        MarioGame game = new MarioGame();
+
+//        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);		// For web
+//        String repPath = String.format("/files/tmp.rep");	                                        // For web
+        game.setLives(10);
+        String levelPath = String.format("./levels/group%s/%s.txt", groupID, levelName);			// For local
+        String repPath = String.format("./reps/%s_sav.rep", levelName);	                            // For local
+        MarioResult r2 = game.playGame(getLevel(levelPath), repPath);
 //        MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 200, repPath);
 
 //        MarioGame game2 = new MarioGame();
-//        MarioResult r2 = game2.playGame(getLevel(levelPath),200,repPath)
 
     }
 
-    public static byte[] playGameMain(String groupID, String levelName){
+    public static byte[] playGameMain(String groupID, String levelName, int lives){
 
         String levelPath = String.format("/app/levels/%s.lvl", levelName);			// For web
         String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
-
         MarioGame game = new MarioGame();
+		game.setLives(lives);
         MarioResult tmpResult = game.playGame(new HumanAgent(),getLevel(levelPath), 200, repPath);
 
         return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
+    }
+
+    public static byte[] playGameMain(String groupID, String levelName){
+        return playGameMain(groupID, levelName, 0);
     }
 
     public static void replayGameMain(String groupID, String levelName){
