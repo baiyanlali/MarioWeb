@@ -10,7 +10,7 @@ evalDataPath = "evals/"
 @app.route('/')
 def index():
     py2htmlstr = 'py2html test str'
-    return render_template('play.html', py2htmlstr=py2htmlstr)
+    return render_template('GamePlay.html', py2htmlstr=py2htmlstr)
 
 
 @app.route('/eval')

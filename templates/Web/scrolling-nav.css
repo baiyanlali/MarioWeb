@@ -1,0 +1,109 @@
+
+
+header {
+  padding: 500px 0 500px;
+}
+
+@media (min-width: 992px) {
+  header {
+    padding: 150px 500px 150px 0px;
+  }
+}
+
+section {
+  padding: 150px 0;
+}
+
+
+.font_bk{
+  border:2px solid #a1a1a1;
+  border-radius:10px;
+  padding:3px 5px 4px 4px; 
+}
+
+.blog-bg {
+  background: #2b2b2b;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.blog-bg h4 {
+  color: #dadada;
+  padding-top: 0px;
+}
+
+.blog-bg h5 {
+  color: #dadada;
+  font-size: 11px;
+}
+
+.blog-content {
+  padding-top: 10px;
+  background: #f2f2f2;
+}
+.centered {
+  text-align: center;
+}
+.row {
+  margin-right: 0px;
+  margin-left: -15px;
+}
+
+.bg-primary1{
+  background-color: transparent;
+}
+.navbar-brand1{
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+/* ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: transparent;
+} */
+
+
+#headerwrap {
+  /* background: url(../img/7.png) no-repeat center top; */
+
+  background: linear-gradient(to right, grey , black); /* 标准的语法（必须放在最后） */
+  margin-top: -50px;
+  padding-top: 120px;
+  text-align: center;
+  background-attachment: relative;
+  background-position: center center;
+  min-height: 550px;
+  width: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
