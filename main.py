@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -7,18 +8,17 @@ app = Flask(__name__, static_folder='')
 replayDataPath = "reps/"
 evalDataPath = "evals/"
 
-@app.route('/')
-def index():
-    py2htmlstr = 'py2html test str'
-    return render_template('GamePlay.html', py2htmlstr=py2htmlstr)
+@app.route('/gameplay')
+def gameplay():
+    return render_template('GamePlay.html')
 
 
-@app.route('/eval')
-def eval():
-    return render_template('eval.html')
+@app.route('/gameanno')
+def gameanno():
+    return render_template('GameAnnotation.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/gameplay', methods=['POST'])
 def getJSONData():
     if request.method == 'POST':
         print("POST Game")
@@ -26,12 +26,13 @@ def getJSONData():
         saveFile(replayDataPath, request.json[4], request.json)
     return "Catch JSON Data"
 
-@app.route('/eval', methods=['POST'])
+@app.route('/gameanno', methods=['POST'])
 def getRadioData():
     if request.method == 'POST':
         print("POST Eval")
-        print(request.json)
-        saveFile(evalDataPath,"eval",request.json[0]+request.json[1]+request.json[2])
+        print(request.values)
+
+        #saveFile(evalDataPath,"gameanno",request.json[0]+request.json[1]+request.json[2])
     return "catch Radio"
 
 def saveFile(path,filename,content):
