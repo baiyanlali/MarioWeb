@@ -197,7 +197,24 @@
       </div>
     </div>
   </nav>
+  <script>
+function Replay(id){
+    if(id==1){
+        console.log("{{level1}}")
+        var replayWindow=document.getElementById("replayWindow");
+        replayWindow.style.visibility = 'visible';
+        cjCall("Play", "replayGameMain", "{{level1}}", "{{level1}}");
+    }else if(id==2){
+        console.log("{{level2}}")
+        var replayWindow=document.getElementById("replayWindow");
+        replayWindow.style.visibility = 'visible';
+        cjCall("Play", "replayGameMain", "{{level2}}", "{{level2}}");
+    }else{
 
+    }
+
+}
+  </script>
 
   <script>
     window.onload=function(){
@@ -224,12 +241,12 @@
       <h4>Level A Review</h4>
       <p style="color:darkgrey">Drag Picture To Move</p>
       <div  style="overflow-x: scroll; height: 350px;" >
-        <img src="../templates/Web/test1.png" height="100%">
+        <img src="../levels/{{level1}}.png" height="100%">
       </div>
       
       <br><br>
 
-      <button onclick="Replay('test1')" class="cirButton"><b> Watch Level A Replay</b> </button>
+      <button onclick="Replay(1)" class="cirButton"><b> Watch Level A Replay</b> </button>
     </div>
     <div class="col-md-2"></div> 
 
@@ -238,12 +255,12 @@
       <p style="color:darkgrey">Drag Picture To Move</p>
 
       <div  style="overflow-x: scroll; height: 350px;" >
-        <img src="../templates/Web/test2.png" height="100%">
+        <img src="../levels/{{level2}}.png" height="100%">
       </div>
             
       <br><br>
 
-      <button onclick="Replay('test2')" class="cirButton"><b> Watch Level B Replay</b> </button>
+      <button onclick="Replay(2)" class="cirButton"><b> Watch Level B Replay</b> </button>
     </div>
   </div>
   </div>
@@ -254,6 +271,7 @@
         <i class="icon-cloud"></i> Annotation Questions
       </h1>
       <br>
+      <form>
       <div class="row clearfix">
         <div class="col-md-6">
 
@@ -280,12 +298,14 @@
 
         </div>
       </div>
+      </form>
     </div>
 <br><br>
   <div class="row clearfix">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <button onclick="getRadioValue()" class="cirButton"> <h3>Submit</h3> </button>.
+      <!-- <button onclick="getRadioValue()" class="cirButton"> <h3>Submit</h3> </button>. -->
+      <p><input type = "submit" value = "submit" /></p>
       <br><br>
     </div> 
 
@@ -294,9 +314,7 @@
     </div> 
     <div class="col-md-6">
       <button onclick="getRadioValue()" class="cirButton"> Submit </button>
-    </div> 
-
-    
+    </div>     
   </div>
 </section>
 

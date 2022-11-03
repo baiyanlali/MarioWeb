@@ -2,11 +2,7 @@ function closeReplayWindow(){
     var replayWindow=document.getElementById("replayWindow");
     replayWindow.style.visibility = 'hidden';	
 }
-function Replay(id){
-    var replayWindow=document.getElementById("replayWindow");
-    replayWindow.style.visibility = 'visible';
-    cjCall("Play", "replayGameMain", id, id);
-}
+
 function getValue(){
     var radio = document.getElementsByName("gameRadio");
     for (i=0; i<radio.length; i++) {
@@ -65,16 +61,25 @@ function PlayLevel(group, level){
     
     }
 
-    function getLevels(){
-        var gameLevelstr = "{{gamelevels}}";
+    function getLevels(gameLevelstr){
+        console.log(gameLevelstr)
         var levels = gameLevelstr.split(",")
-        levels.replace("&#39;","")
-        gameLevels.replace("[","")
-        gameLevels.replace("]","")
+        var level1 = levels[0];
+        var level2 = levels[1];
+        level1=cleanStr(level1)
+        level2=cleanStr(level2)
             
-            console.log(levels);
-            console.log(levels[0]);
-            var level1 = "test1";
-            var level2 = "test2";
-            return 0;
+        console.log(level1);
+        console.log(level2);
+        return [level1,level2];
+    }
+
+    function cleanStr(str){
+        str=str.replace("&#39;","")
+        str=str.replace("&#39;","")
+        str=str.replace("[","")
+        str=str.replace("]","")
+        str=str.replace(" ","")
+        str=str.replace(" ","")
+        return str;
     }
