@@ -119,3 +119,8 @@ class ExcelWork:
         for temp in range(1, self.sheet.max_row + 1):
             columnList.append(self.getCell(temp, c))
         return columnList
+    def getMaxRow(self):
+        return self.sheet.max_row
+
+    def saveFile(self):
+        self.excel.save(self.filePath)

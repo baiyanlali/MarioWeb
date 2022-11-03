@@ -26,15 +26,20 @@ function getValue(){
 //     }
 //     httpRequest.send(JSON.stringify(data)); //设置为发送给服务器数据
 // }
-function PostToServer(data) {
-    $.post(window.location.href, {'key1':'5'});
+function PostToServer(url,data) {
+    if(url == null){
+        $.post(window.location.href, data);
+    }else{
+        $.post(url, data);
+    }
 }
 function PlayLevel(group, level){
     var returnVal = cjCall("Play", "playGameMain", group, level);
     return returnVal.then(function(){ 
       console.log("the return val is ready");  
       console.log(returnVal.value);
-      PostToServer(level,returnVal.value);    
+      PostToServer(window.location.href+"/data",returnVal.value);    
+      //Array.from()
     });
   }
 
