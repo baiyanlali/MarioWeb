@@ -63,4 +63,18 @@ function PlayLevel(group, level){
     // var addressID = $("input[name='sex']:checked").val();
     // alert(addressID)
     
-}
+    }
+
+    function getLevels(){
+        var gameLevelstr = "{{gamelevels}}";
+        var levels = gameLevelstr.split(",")
+        levels.replace("&#39;","")
+        gameLevels.replace("[","")
+        gameLevels.replace("]","")
+            
+            console.log(levels);
+            console.log(levels[0]);
+            var level1 = "test1";
+            var level2 = "test2";
+            return 0;
+    }

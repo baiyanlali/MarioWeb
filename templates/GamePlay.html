@@ -207,13 +207,15 @@
               return element;
             }*/
             var divElement = document.getElementById("GameWindow");
+            var level1 = "test1";
+            var level2 = "test2";
             cheerpjCreateDisplay(500,500,divElement);
             cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
             console.log("Cheerpj Initialize Succeed!");
-        
-            PlayLevel("test1", "test1")
+            
+            PlayLevel(level1, level1)
             .then(function (){alert("Game Over!")})
-            .then(PlayLevel("test2", "test2")
+            .then(PlayLevel(level2, level2)
             .then(function (){
               alert("Go to Evaluation Window")
               window.location.href = "/annotation"

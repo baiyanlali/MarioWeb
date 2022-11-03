@@ -1,14 +1,16 @@
 import os
-from pyExcel import ExcelWork
+import csv
+from IDManager import idManager
 
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, static_folder='')
+idm = idManager()
 
 replayDataPath = "reps/"
 evalDataPath = "evals/"
 
-questionarePath = "data/questionare.xlsx"
+questionarePath = "data/questionare.csv"
 
 
 @app.route('/annotation')
@@ -22,15 +24,16 @@ def gamepreplay():
         result = request.form
         ip = request.remote_addr
         # Save the result to questionare
-        excel = ExcelWork(questionarePath)
-        questionareLine = excel.getMaxRow()+1
-        print(questionareLine)
-        excel.setCell(questionareLine,1,ip)
-        excel.setCell(questionareLine, 2, result.get("gamestyle"))
-        excel.setCell(questionareLine, 3, result.get("frequency"))
-        excel.setCell(questionareLine, 4, result.get("age"))
-        excel.saveFile()
-        print(questionareLine)
+        write_csv(questionarePath,[ip,result.get("gamestyle"),result.get("frequency"),result.get("age")])
+        # excel = ExcelWork(questionarePath)
+        # questionareLine = excel.getMaxRow()+1
+        # print(questionareLine)
+        # excel.setCell(questionareLine,1,ip)
+        # excel.setCell(questionareLine, 2, result.get("gamestyle"))
+        # excel.setCell(questionareLine, 3, result.get("frequency"))
+        # excel.setCell(questionareLine, 4, result.get("age"))
+        # excel.saveFile()
+        # print(questionareLine)
         print(result.get("gamestyle"))
         return redirect(url_for('gameplay', id=ip))
 
@@ -42,8 +45,8 @@ def gamequestion():
 
 @app.route('/gameplay/<id>')
 def gameplay(id):
-    print(id)
-    return render_template('GamePlay.html')
+    gamelevels = idm.getLevels(id)
+    return render_template('GamePlay.html',gamelevels = gamelevels)
 
 
 @app.route('/annotation/<id>')
@@ -78,7 +81,10 @@ def saveFile(path, filename, content):
     f = open(file_path, "w", encoding="utf8")
     f.write(content)
     f.close()
-
+def write_csv(path, data):
+    with open(path,'a+') as f:
+        csv_write = csv.writer(f)
+        csv_write.writerow(data)
 
 if __name__ == '__main__':
     app.debug = True
