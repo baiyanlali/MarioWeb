@@ -203,12 +203,12 @@ function Replay(id){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level1}}", "{{level1}}");
+        cjCall("Play", "replayGameMain", "{{level1}}", "{{level1}}",5);
     }else if(id==2){
         console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level2}}", "{{level2}}");
+        cjCall("Play", "replayGameMain", "{{level2}}", "{{level2}}",5);
     }else{
 
     }
