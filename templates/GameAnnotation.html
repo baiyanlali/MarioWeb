@@ -271,7 +271,7 @@ function Replay(id){
         <i class="icon-cloud"></i> Annotation Questions
       </h1>
       <br>
-      <form>
+      <form action="http://localhost:5000/radioresult" method="POST">
       <div class="row clearfix">
         <div class="col-md-6">
 
@@ -297,11 +297,11 @@ function Replay(id){
           </label>
 
         </div>
-      </div>
-      </form>
-    </div>
+
+      
+    
 <br><br>
-  <div class="row clearfix">
+  
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <!-- <button onclick="getRadioValue()" class="cirButton"> <h3>Submit</h3> </button>. -->
@@ -315,7 +315,8 @@ function Replay(id){
     <div class="col-md-6">
       <button onclick="getRadioValue()" class="cirButton"> Submit </button>
     </div>     
-  </div>
+      </div>
+    </form>
 </section>
 
 

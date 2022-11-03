@@ -3,6 +3,7 @@ import csv
 class idManager():
     levelNum = 200
     ip_dic = {}
+    ip_recent = {}
     def __int__(self):
         self.levelNum = 200
 
@@ -19,9 +20,12 @@ class idManager():
             levels[1] = random.randint(1, self.levelNum)
         self.ip_dic[ip].append(levels[1])
 
-        #return ["lvl"+str(levels[0]),"lvl"+str(levels[1])]
-        return ["test1","test2"]
+        self.ip_recent[ip] = [levels[0],levels[1]]
+        return ["lvl"+str(levels[0]),"lvl"+str(levels[1])]
+        #return ["test1","test2"]
 
+    def getRecent(self,ip):
+        return self.ip_recent[ip]
     def write_csv(self,path, data):
         with open(path, 'a+') as f:
             csv_write = csv.writer(f)

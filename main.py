@@ -22,11 +22,12 @@ def gamepreanno():
 @app.route('/result', methods=['POST', 'GET'])
 def gamepreplay():
     if request.method == 'POST':
-
         result = request.form
         ip = request.remote_addr
         # Save the result to questionare
-        idm.write_csv(questionarePath, [ip, result.get("gamestyle"), result.get("frequency"), result.get("age")])
+        idm.write_csv(questionarePath,
+                      [ip, result.get("gamestyle"), result.get("frequency"), result.get("age"), result.get("gender"),
+                       ""])
         # excel = ExcelWork(questionarePath)
         # questionareLine = excel.getMaxRow()+1
         # print(questionareLine)
@@ -39,6 +40,9 @@ def gamepreplay():
         print(result.get("gamestyle"))
         return redirect(url_for('gameplay', id=ip))
 
+@app.route('/again')
+def gamepreplayAgain():
+    return redirect(url_for('gameplay', id=request.remote_addr))
 
 @app.route('/')
 def gamequestion():
@@ -55,9 +59,9 @@ def gameplay(id):
 def gameanno(id):
     print("anno " + id)
 
-    gamelevels = idm.getLevels(id)
-    level1 = gamelevels[0]
-    level2 = gamelevels[1]
+    gamelevels = idm.getRecent(id)
+    level1 = "lvl"+str(gamelevels[0])
+    level2 = "lvl"+str(gamelevels[1])
     return render_template('GameAnnotation.html', level1=level1, level2=level2)
 
 
@@ -67,22 +71,23 @@ def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
         print(request.values)
-        #FIXME: NOT SAVING!
+        # FIXME: NOT SAVING!
         saveFile(replayDataPath, request.json[4], request.json)
-    return "Catch JSON Data"
+    return "get!"
 
 
-@app.route('/annotation/<id>/data', methods=['POST'])
-def getRadioData(id):
+@app.route('/radioresult', methods=['POST'])
+def getRadioData():
     if request.method == 'POST':
         print("POST Eval")
-        print(request.values)
         result = request.form
+        print(result)
         ip = request.remote_addr
-        idm.write_csv(annotationPath,[ip,"a","b","anno"])
+        ipRecent = idm.getRecent(ip)
+        idm.write_csv(annotationPath, [ip, ipRecent[0],ipRecent[1] , result["fun"]])
 
         # saveFile(evalDataPath,"gameanno",request.json[0]+request.json[1]+request.json[2])
-    return "catch Radio"
+    return render_template("GameOver.html")
 
 
 def saveFile(path, filename, content):
