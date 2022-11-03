@@ -84,7 +84,7 @@ def getJSONData(id):
     return "get!"
 
 
-@app.route('/radioresult', methods=['POST'])
+@app.route('/annotation/radioresult', methods=['POST'])
 def getRadioData():
     if request.method == 'POST':
         print("POST Eval")
