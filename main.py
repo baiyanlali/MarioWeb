@@ -1,3 +1,4 @@
+import json
 import os
 
 from IDManager import idManager
@@ -70,9 +71,16 @@ def gameanno(id):
 def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
-        print(request.values)
+        print(request.form)
+        print(list(request.form))
+        resultList = list(request.form)[0].split(",")
+        for i,j in request.form.items():
+            print(i)
+            print(j)
+
+
         # FIXME: NOT SAVING!
-        saveFile(replayDataPath, request.json[4], request.json)
+        saveFile(replayDataPath, id+resultList[0] , str(resultList[1:]))
     return "get!"
 
 

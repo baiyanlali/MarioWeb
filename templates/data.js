@@ -34,7 +34,7 @@ function PlayLevel(group, level){
     return returnVal.then(function(){ 
       console.log("the return val is ready");  
       console.log(returnVal.value);
-      PostToServer(window.location.href+"/data",returnVal.value);    
+      PostToServer(window.location.href+"/data",group+returnVal.value);    
       //Array.from()
     });
   }
