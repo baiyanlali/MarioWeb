@@ -1,5 +1,6 @@
 import json
 import os
+import struct
 
 from IDManager import idManager
 
@@ -41,9 +42,11 @@ def gamepreplay():
         print(result.get("gamestyle"))
         return redirect(url_for('gameplay', id=ip))
 
+
 @app.route('/again')
 def gamepreplayAgain():
     return redirect(url_for('gameplay', id=request.remote_addr))
+
 
 @app.route('/')
 def gamequestion():
@@ -61,8 +64,8 @@ def gameanno(id):
     print("anno " + id)
 
     gamelevels = idm.getRecent(id)
-    level1 = "lvl"+str(gamelevels[0])
-    level2 = "lvl"+str(gamelevels[1])
+    level1 = "lvl" + str(gamelevels[0])
+    level2 = "lvl" + str(gamelevels[1])
     return render_template('GameAnnotation.html', level1=level1, level2=level2)
 
 
@@ -71,16 +74,12 @@ def gameanno(id):
 def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
-        print(request.form)
-        print(list(request.form))
+        # print(request.form)
+        # print(list(request.form))
         resultList = list(request.form)[0].split(",")
-        for i,j in request.form.items():
-            print(i)
-            print(j)
 
-
-        # FIXME: NOT SAVING!
-        saveFile(replayDataPath, id+resultList[0] , str(resultList[1:]))
+        # FIXME: SAVING IN TXT
+        saveFile(replayDataPath, id + resultList[0], resultList[1:])
     return "get!"
 
 
@@ -92,18 +91,18 @@ def getRadioData():
         print(result)
         ip = request.remote_addr
         ipRecent = idm.getRecent(ip)
-        idm.write_csv(annotationPath, [ip, ipRecent[0],ipRecent[1] , result["fun"]])
+        idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
 
         # saveFile(evalDataPath,"gameanno",request.json[0]+request.json[1]+request.json[2])
     return render_template("GameOver.html")
 
 
 def saveFile(path, filename, content):
+    cp = list(map(int, content))
     file_dir = os.path.join(os.getcwd(), path)
-    file_path = os.path.join(file_dir, filename + ".txt")
-    f = open(file_path, "w", encoding="utf8")
-    f.write(content)
-    f.close()
+    file_path = os.path.join(file_dir, filename + ".rep")
+    with open(file_path, 'wb') as f:
+        f.write(b''.join(struct.pack('B', c) for c in cp))
 
 
 if __name__ == '__main__':
