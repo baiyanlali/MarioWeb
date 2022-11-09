@@ -37,22 +37,22 @@ public class Play {
 
     }
 
-    public static byte[] playGameMain(String groupID, String levelName, int lives){
+    public static byte[] playGameMain(String levelName, int lives, boolean control){
 
         String levelPath = String.format("/app/levels/%s.lvl", levelName);			// For web
         String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
         MarioGame game = new MarioGame();
 		game.setLives(lives);
-        MarioResult tmpResult = game.playGame(new HumanAgent(),getLevel(levelPath), 200, repPath);
+        MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), 200, repPath);
 
         return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
     }
 
-    public static byte[] playGameMain(String groupID, String levelName){
-        return playGameMain(groupID, levelName, 0);
+    public static byte[] playGameMain(String levelName){
+        return playGameMain(levelName, 0, true);
     }
 
-    public static void replayGameMain(String groupID, String levelName, int lives){
+    public static void replayGameMain(String levelName, int lives){
         String levelPath = String.format("/app/levels/%s.lvl", levelName);		    // For web
         String repPath = String.format("/files/%s_sav.rep", levelName);	                                    // For web
 

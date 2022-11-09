@@ -88,7 +88,7 @@ public class MarioGame {
         }
     }
     public MarioResult playGame(String level, String resultPath) {
-        return this.runGame(new agents.HumanAgent(), level, 200, 0, true, 30, 2, resultPath);
+        return this.runGame(new agents.HumanAgent(true), level, 200, 0, true, 30, 2, resultPath);
     }
 
     /**

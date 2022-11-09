@@ -10,7 +10,11 @@ import engine.helper.MarioActions;
 
 public class HumanAgent extends KeyAdapter implements MarioAgent {
     private boolean[] actions = null;
+    private boolean oldControl = true;
 
+    public HumanAgent(boolean oldControl){
+        this.oldControl = oldControl;
+    }
     @Override
     public void initialize(MarioForwardModel model, MarioTimer timer) {
         actions = new boolean[MarioActions.numberOfActions()];
@@ -40,23 +44,45 @@ public class HumanAgent extends KeyAdapter implements MarioAgent {
         if (this.actions == null) {
             return;
         }
-        switch (keyCode) {
-            case KeyEvent.VK_LEFT:
-                this.actions[MarioActions.LEFT.getValue()] = isPressed;
-                break;
-            case KeyEvent.VK_RIGHT:
-                this.actions[MarioActions.RIGHT.getValue()] = isPressed;
-                break;
-            case KeyEvent.VK_DOWN:
-                this.actions[MarioActions.DOWN.getValue()] = isPressed;
-                break;
-            case KeyEvent.VK_S:
-                this.actions[MarioActions.JUMP.getValue()] = isPressed;
-                break;
-            case KeyEvent.VK_A:
-                this.actions[MarioActions.SPEED.getValue()] = isPressed;
-                break;
+        if(oldControl){
+            switch (keyCode) {
+                case KeyEvent.VK_LEFT:
+                    this.actions[MarioActions.LEFT.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    this.actions[MarioActions.RIGHT.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    this.actions[MarioActions.DOWN.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_S:
+                    this.actions[MarioActions.JUMP.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_A:
+                    this.actions[MarioActions.SPEED.getValue()] = isPressed;
+                    break;
+            }
         }
+        else{
+            switch (keyCode) {
+                case KeyEvent.VK_A:
+                    this.actions[MarioActions.LEFT.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_D:
+                    this.actions[MarioActions.RIGHT.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_S:
+                    this.actions[MarioActions.DOWN.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_J:
+                    this.actions[MarioActions.JUMP.getValue()] = isPressed;
+                    break;
+                case KeyEvent.VK_K:
+                    this.actions[MarioActions.SPEED.getValue()] = isPressed;
+                    break;
+            }
+        }
+
     }
 
 }

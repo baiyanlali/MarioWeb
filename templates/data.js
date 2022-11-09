@@ -29,12 +29,12 @@ function PostToServer(url,data) {
         $.post(url, data);
     }
 }
-function PlayLevel(group, level){
-    var returnVal = cjCall("Play", "playGameMain", group, level,5);
+function PlayLevel(level,control){
+    var returnVal = cjCall("Play", "playGameMain", level, 5, control);
     return returnVal.then(function(){ 
       console.log("the return val is ready");  
       console.log(returnVal.value);
-      PostToServer(window.location.href+"/data",group+returnVal.value);    
+      PostToServer(window.location.href+"/data",level+returnVal.value);    
       //Array.from()
     });
   }
