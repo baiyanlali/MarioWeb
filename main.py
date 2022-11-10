@@ -60,8 +60,8 @@ def getJSONData(id):
         # print(request.form)
         # print(list(request.form))
         resultList = list(request.form)[0].split(",")
-
-        saveFile(replayDataPath, id + resultList[0], resultList[1:])
+        print(resultList)
+        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
     return "get!"
 
 
