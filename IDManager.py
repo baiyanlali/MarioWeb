@@ -2,9 +2,11 @@ import random
 import csv
 class idManager():
     levelNum = 200
+    timeMin = 1
     ip_dic = {}
     ip_recent = {}
     ip_control = {}
+    ip_time = {}
     def __int__(self):
         self.levelNum = 200
 
@@ -32,7 +34,20 @@ class idManager():
             self.ip_control[ip] = 0
         else:
             self.ip_control[ip] = 1
-
+    def getTimes(self,ip):
+        print(self.ip_time[ip])
+        if ip not in self.ip_time.keys():
+            return 0
+        else:
+            if self.ip_time[ip]>=self.timeMin:
+                return 1
+            else:
+                return 0
+    def addTimes(self,ip):
+        if ip not in self.ip_time.keys():
+            self.ip_time[ip] = 0
+        self.ip_time[ip] = self.ip_time[ip]+1
+        return self.ip_time[ip]
 
     def getControl(self,ip):
         return self.ip_control[ip]

@@ -57,12 +57,10 @@ def gameplay(id):
 def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
-        # print(request.form)
-        # print(list(request.form))
         resultList = list(request.form)[0].split(",")
         print(resultList)
         saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
-    return "get!"
+    return "return!"
 
 
 
@@ -77,16 +75,19 @@ def gameanno(id):
 
 @app.route('/annotation/radioresult', methods=['POST'])
 def getRadioData():
+    ip = request.remote_addr
+
     if request.method == 'POST':
         print("POST Eval")
         result = request.form
         print(result)
-        ip = request.remote_addr
         ipRecent = idm.getRecent(ip)
         idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
-
+        idm.addTimes(ip)
         # saveFile(evalDataPath,"gameanno",request.json[0]+request.json[1]+request.json[2])
-    return render_template("GameOver.html")
+    finish = idm.getTimes(ip)
+
+    return render_template("GameOver.html",finish = finish)
 
 
 
