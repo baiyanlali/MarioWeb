@@ -124,7 +124,6 @@
       </div>
       <br>
 
-
       <div class="row clearfix">
 
         <div class="col-md-12">
@@ -133,6 +132,18 @@
           </div>
           <div align="center" id = "GameWindow">
             
+          </div>
+          <div align = "center" style="visibility: hidden;" id = "next">
+            <br>
+            <button onclick="
+            window.location.href = window.location.href;
+            "><h3>Play Next Tutorial</h3></button>
+          </div>
+          <div align = "center" style="visibility: hidden;" id = "game">
+            <br>
+            <button onclick="
+            window.location.href = window.location.href+'/data'
+            "><h3>Play Real Game</h3></button>
           </div>
 
           <script>
@@ -166,7 +177,7 @@
               return element;
             }*/
             var divElement = document.getElementById("GameWindow");
-            var level = "Tutorial"+"{{tutorial}}";
+            var level = "t"+"{{tutorial}}";
 
             cheerpjCreateDisplay(500,500,divElement);
             cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
@@ -176,8 +187,11 @@
             PlayLevel(level,control)
             .then(function (){
               //play next?
-              alert("Go to Evaluation Window")
-              window.location.href = "/annotation"
+              if ("{{next}}"=="1"){
+                document.getElementById("next").style.visibility = "visible";
+              }
+              document.getElementById("game").style.visibility = "visible";
+              
             });
           
         

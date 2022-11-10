@@ -32,7 +32,7 @@ def gamepreplay():
                        ""])
         idm.setControl(ip, result.get("control"))
         print(result.get("gamestyle"))
-        return redirect(url_for('gameplay', id=ip))
+        return redirect(url_for('gametutorial', id=ip))
 
 
 @app.route('/again')
@@ -44,9 +44,13 @@ def gamepreplayAgain():
 def gamequestion():
     return render_template('GameQuestion.html')
 
-@app.route('/gametutorial/<id>/<level>')
-def gametutorial(id, level):
-    return render_template('GameTutorial.html', tutorial=level)
+@app.route('/gametutorial/<id>')
+def gametutorial(id):
+    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id))
+
+@app.route('/gametutorial/<id>/data')
+def gametutorialdata(id):
+    return redirect(url_for('gameplay', id=id))
 
 @app.route('/gameplay/<id>')
 def gameplay(id):

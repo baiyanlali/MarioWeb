@@ -3,10 +3,12 @@ import csv
 class idManager():
     levelNum = 200
     timeMin = 1
+    tutorialMax = 3
     ip_dic = {}
     ip_recent = {}
     ip_control = {}
     ip_time = {}
+    ip_tutorial = {}
     def __int__(self):
         self.levelNum = 200
 
@@ -49,6 +51,23 @@ class idManager():
         self.ip_time[ip] = self.ip_time[ip]+1
         return self.ip_time[ip]
 
+    def addTutorial(self,ip):
+
+        if ip not in self.ip_tutorial.keys():
+            self.ip_tutorial[ip] = 1
+            return 1
+        else:
+            if self.ip_tutorial[ip]>self.tutorialMax:
+                return 1
+            else:
+                self.ip_tutorial[ip] = self.ip_tutorial[ip] + 1
+                return self.ip_tutorial[ip]
+
+    def hasNextTutorial(self,ip):
+        if self.ip_tutorial[ip] == self.tutorialMax:
+            return 0
+        else:
+            return 1
     def getControl(self,ip):
         return self.ip_control[ip]
     def write_csv(self,path, data):
