@@ -2,7 +2,7 @@ import random
 import csv
 class idManager():
     levelNum = 200
-    timeMin = 1
+    timeMin = 2
     tutorialMax = 3
     ip_dic = {}
     ip_recent = {}
