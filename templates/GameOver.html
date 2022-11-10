@@ -159,16 +159,10 @@
         </h1>
         <br>
         <button onclick='window.location.href = "/again"'>Play And Annotate Again!</button>
-        <button id = "Finish" onclick="if(firefox) {
-          var opened=window.open('about:blank','_self');   
-          opened.opener=null;
-          opened.close();
-       } else {  
-          window.opener = null;
-          window.open('', '_self');
-          window.close();
-       }
-       ;">Finish!</button>
+        <button id = "Finish" onclick="
+         window.location.href = "about:blank";
+        window.close();
+       ">Finish!</button>
       </div>
 </section>
 
