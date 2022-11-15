@@ -71,6 +71,6 @@ class idManager():
     def getControl(self,ip):
         return self.ip_control[ip]
     def write_csv(self,path, data):
-        with open(path, 'a+') as f:
+        with open(path, 'a+', newline='') as f:
             csv_write = csv.writer(f)
-            csv_write.writerow(data)
+            csv_write.writerow([*data, ''])
