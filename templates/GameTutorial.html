@@ -133,70 +133,72 @@
           <div align="center" id = "GameWindow">
             
           </div>
-          <div align = "center" style="visibility: hidden;" id = "next">
-            <br>
-            <button onclick="
-            window.location.href = window.location.href;
-            "><h3>Play Next Tutorial</h3></button>
-          </div>
-          <div align = "center" style="visibility: hidden;" id = "game">
-            <br>
-            <button onclick="
-            window.location.href = window.location.href+'/data'
-            "><h3>Play Real Game</h3></button>
-          </div>
-
-          <script>
-            //Init Cheerpj Framework
-            cheerpjInit();
-            /*
-            function cheerpjCreateDisplay(w, h, oldElem)
-            {
-              // Create a div element that will contain all Java Windows
-              var element = document.createElement("div");
-              cjDisplay = element;
-              element.id="cheerpjDisplay";
-              if(oldElem && w<0 && h<0)
-              {
-                // Compute the sizes from the parent
-                element.style.width="100%";
-                element.style.height="100%";
-              }
-              else
-              {
-                element.style.width=w+"px";
-                element.style.height=h+"px";
-              }
-              element.classList.add("cheerpjLoading");
-              element.classList.add("bordered");
-              if(oldElem)
-                oldElem.appendChild(element);
-              else
-                document.body.appendChild(element);
-              cheerpjSetStatus(cjStatus, element);
-              return element;
-            }*/
-            var divElement = document.getElementById("GameWindow");
-            var level = "t"+"{{tutorial}}";
-
-            cheerpjCreateDisplay(500,500,divElement);
-            cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
-            console.log("Cheerpj Initialize Succeed!");
-
-            var control = false;
-            PlayLevel(level,control)
-            .then(function (){
-              //play next?
-              if ("{{next}}"=="1"){
-                document.getElementById("next").style.visibility = "visible";
-              }
-              document.getElementById("game").style.visibility = "visible";
-              
-            });
           
-        
-          </script>
         </div>
+        
+        <div class="col-md-6" align="center" style="visibility: visible;" id = "next">
+          <br>
+          <button onclick="
+          window.location.href = window.location.href;
+          "><h3>Play Next Tutorial</h3></button>
+        </div>
+        <div class="col-md-6" align="center" style="visibility: visible;" id = "game">
+          <br>
+          <button onclick="
+          window.location.href = window.location.href+'/data'
+          "><h3>Play Real Game</h3></button>
+        </div>
+
+        <script>
+          //Init Cheerpj Framework
+          cheerpjInit();
+          /*
+          function cheerpjCreateDisplay(w, h, oldElem)
+          {
+            // Create a div element that will contain all Java Windows
+            var element = document.createElement("div");
+            cjDisplay = element;
+            element.id="cheerpjDisplay";
+            if(oldElem && w<0 && h<0)
+            {
+              // Compute the sizes from the parent
+              element.style.width="100%";
+              element.style.height="100%";
+            }
+            else
+            {
+              element.style.width=w+"px";
+              element.style.height=h+"px";
+            }
+            element.classList.add("cheerpjLoading");
+            element.classList.add("bordered");
+            if(oldElem)
+              oldElem.appendChild(element);
+            else
+              document.body.appendChild(element);
+            cheerpjSetStatus(cjStatus, element);
+            return element;
+          }*/
+          var divElement = document.getElementById("GameWindow");
+          var level = "t"+"{{tutorial}}";
+
+          cheerpjCreateDisplay(500,500,divElement);
+          cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
+          console.log("Cheerpj Initialize Succeed!");
+
+          var control = false;
+          PlayLevel(level,control)
+          .then(function (){
+            //play next?
+            if ("{{next}}"=="1"){
+              document.getElementById("next").style.visibility = "visible";
+            }
+            document.getElementById("game").style.visibility = "visible";
+            
+          });
+        
+      
+        </script>
       </div>
       <br>
       
