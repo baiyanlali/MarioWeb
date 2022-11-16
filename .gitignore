@@ -29,3 +29,6 @@ replay_pid*
 *.pyc
 .idea/workspace.xml
 .idea/workspace.xml
+.idea/workspace.xml
+__pycache__/IDManager.cpython-39.pyc
+*.pyc
