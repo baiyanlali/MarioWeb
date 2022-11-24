@@ -4,12 +4,13 @@
     <list default="true" id="c32bfd4e-6189-47f3-9d6c-c1825d3d7e5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IDManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/IDManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/annotation.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/annotation.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/questionare.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/questionare.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/GameAnnotation2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GameAnnotation2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/GameOver.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GameOver.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/GamePlay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GamePlay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/GamePlay2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GamePlay2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/GameQuestion.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GameQuestion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/GameTutorial.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/GameTutorial.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +174,7 @@
       <workItem from="1668492153120" duration="654000" />
       <workItem from="1668520247886" duration="913000" />
       <workItem from="1669042021967" duration="608000" />
-      <workItem from="1669266954441" duration="4319000" />
+      <workItem from="1669266954441" duration="7584000" />
     </task>
     <servers />
   </component>
@@ -193,7 +194,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MarioWeb$test.coverage" NAME="test Coverage Results" MODIFIED="1668079935841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MarioWeb$Flask__main_py_.coverage" NAME="Flask (main.py) Coverage Results" MODIFIED="1669267399800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/MarioWeb$Flask__main_py_.coverage" NAME="Flask (main.py) Coverage Results" MODIFIED="1669275362710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/MarioWeb$Flask__main_py___1_.coverage" NAME="Flask (main.py) (1) Coverage Results" MODIFIED="1668079945407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

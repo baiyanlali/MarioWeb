@@ -4,7 +4,7 @@ import csv
 
 class idManager():
     levelNum = 200
-    timeMin = 2
+    timeMin = 1
     tutorialMax = 3
     ip_dic = {}
     ip_recent = {}
@@ -35,6 +35,8 @@ class idManager():
         return self.ip_recent[ip]
 
     def getLevel(self, ip):
+        if ip not in self.ip_dic.keys():
+            self.ip_dic[ip] = []
         level = random.randint(1, self.levelNum)
         while level in self.ip_dic[ip]:
             level = random.randint(1, self.levelNum)

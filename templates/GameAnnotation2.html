@@ -200,18 +200,24 @@
       </div>
     </div>
   </nav>
+<script>
+      window.onload=function(){
+        console.log("{{finish}}");
+        console.log("{{finish}}" == "1")
+        if("{{finish}}" == "1"){
+          document.getElementById("Finish").style.visibility = "visible";
+        }else{
+          document.getElementById("Finish").style.visibility = "hidden";
+        }
+      }
+</script>
   <script>
 function Replay(id){
     if(id==1){
-        console.log("{{level1}}")
+        console.log("{{level}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level1}}",5);
-    }else if(id==2){
-        console.log("{{level2}}")
-        var replayWindow=document.getElementById("replayWindow");
-        replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level2}}",5);
+        cjCall("Play", "replayGameMain", "{{level}}",5);
     }else{
 
     }
@@ -244,59 +250,46 @@ function Replay(id){
     <br>
     <div class="row clearfix">
 
-    <div class="col-md-5">
-      <h4>Level A Review</h4>
+    <div class="col-md-12">
+      <h4>Level Review</h4>
       <p style="color:darkgrey">Drag Picture To Move</p>
       <div  style="overflow-x: scroll; height: 350px;" >
-        <img src="../levels/{{level1}}.png" height="100%">
+        <img src="../levels/{{level}}.png" height="100%">
       </div>
       
       <br><br>
 
       <button onclick="Replay(1)" class="cirButton"><b> Watch Level A Replay</b> </button>
     </div>
-    <div class="col-md-2"></div> 
 
-    <div class="col-md-5">
-      <h4>Level B Review</h4>
-      <p style="color:darkgrey">Drag Picture To Move</p>
-
-      <div  style="overflow-x: scroll; height: 350px;" >
-        <img src="../levels/{{level2}}.png" height="100%">
-      </div>
-            
-      <br><br>
-
-      <button onclick="Replay(2)" class="cirButton"><b> Watch Level B Replay</b> </button>
-    </div>
   </div>
   </div>
 
 <br><br>
     <div class="container">
       <h1>
-        <i class="icon-cloud"></i> Annotation Questions
+        <i class="icon-cloud"></i> Annotation Part
       </h1>
       <br>
       <div class="row clearfix">
 
         <br><br>
 
-        <div class="col-md-6" align="center" style="visibility: hidden;" id = "again">
+        <div class="col-md-6" align="center" style="visibility: visible;" id = "again">
           <br>
           <button onclick="
           window.location.href = '/stage2pre'
           "><h3>Practice More</h3></button>
         </div>
 
-        <div class="col-md-6" align="center" style="visibility: hidden;" id = "game">
+        <div class="col-md-6" align="center" style="visibility: visible;" id = "game">
           <br>
           <button onclick="
           window.location.href = '/stage2game'
           "><h3>Play Real Game</h3></button>
         </div>
 
-        <div class="col-md-6" align="center" style="visibility: hidden;" id = "over">
+        <div class="col-md-6" align="center" style="visibility: visible;" id = "over">
           <br>
           <button onclick="
             window.location.href = 'about:blank';

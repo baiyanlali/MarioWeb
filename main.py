@@ -100,18 +100,19 @@ def getRadioData():
 
 @app.route('/stage2pre')
 def getStage2():
-    return redirect(url_for('gameplay2', id=request.remote_addr, w = False))
+    return redirect(url_for('gameplay2', id=request.remote_addr))
 
 
 @app.route('/stage2game')
 def getStage2game():
-    return redirect(url_for('gameplay2', id=request.remote_addr, w = True))
+
+    return redirect(url_for('gameplay2', id=request.remote_addr))
 
 
 @app.route('/gameplay2/<id>')
-def gameplay2(id, w):
-
-    return render_template('GamePlay2.html', gamelevel=idm.getLevel(id), control=idm.getControl(id), w=w)
+def gameplay2(id):
+    print("id "+id)
+    return render_template('GamePlay2.html', gamelevel=idm.getLevel(id), control=idm.getControl(id))
 
 
 @app.route('/annotation2')
