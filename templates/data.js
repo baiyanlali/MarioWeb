@@ -61,17 +61,15 @@ function PlayLevel(level,control){
     
     }
 
-    function getLevels(gameLevelstr){
+    function getLevels(gameLevelstr,num){
         console.log(gameLevelstr)
         var levels = gameLevelstr.split(",")
-        var level1 = levels[0];
-        var level2 = levels[1];
-        level1=cleanStr(level1)
-        level2=cleanStr(level2)
-            
-        console.log(level1);
-        console.log(level2);
-        return [level1,level2];
+        var result = []
+        for (i = 0; i < num; i++) {
+            result[i] = cleanStr(levels[i])
+         }
+
+        return result;
     }
 
     function cleanStr(str){

@@ -32,7 +32,9 @@ def gamepreplay():
                        ""])
         idm.setControl(ip, result.get("control"))
         print(result.get("gamestyle"))
-        return redirect(url_for('gametutorial', id=ip))
+        # return redirect(url_for('gametutorial', id=ip))
+        # debug use:
+        return redirect(url_for('gameanno2', id=ip))
 
 
 @app.route('/gametutorial/<id>')
@@ -53,7 +55,8 @@ def gametutorialdata(id):
 @app.route('/gameplay/<id>')
 def gameplay(id):
     gamelevels = idm.getLevels(id)
-    return render_template('GamePlay.html', gamelevels=gamelevels, control=idm.getControl(id))
+    return render_template('GamePlay.html', gamelevels=gamelevels, control=idm.getControl(id), levelNum=2,
+                           jump="/annotation")
 
 
 @app.route('/gameplay/<id>/data', methods=['POST'])
@@ -73,7 +76,7 @@ def gamepreanno():
 
 @app.route('/annotation/<id>')
 def gameanno(id):
-    if(id != "radioresult"):
+    if (id != "radioresult"):
         print("anno " + id)
         gamelevels = idm.getRecent(id)
         level1 = "lvl" + str(gamelevels[0])
@@ -92,52 +95,60 @@ def getRadioData():
         ipRecent = idm.getRecent(ip)
         idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
         idm.addTimes(ip)
-        # saveFile(evalDataPath,"gameanno",request.json[0]+request.json[1]+request.json[2])
     finish = idm.getTimes(ip)
 
-    return render_template("GameOver.html", finish=finish, stage=1)
+    return render_template("GameOver.html", finish=finish, stage=2)
 
 
-@app.route('/stage2pre')
-def getStage2():
-    return redirect(url_for('gameplay2', id=request.remote_addr))
-
-
-@app.route('/stage2game')
-def getStage2game():
-
-    return redirect(url_for('gameplay2', id=request.remote_addr))
+@app.route("/gameover/<stage>")
+def over(stage):
+    return render_template("GameOver.html", finish=1, stage=stage)
 
 
 @app.route('/gameplay2/<id>')
 def gameplay2(id):
-    print("id "+id)
-    return render_template('GamePlay2.html', gamelevel=idm.getLevel(id), control=idm.getControl(id))
+    gamelevels = idm.getTypeLevels(id)
+    return render_template('GamePlay.html', gamelevels=gamelevels, control=idm.getControl(id), levelNum=3,
+                           jump="/annotation2")
+
+
+@app.route('/gameplay2/<id>/data', methods=['POST'])
+def getJSONData2(id):
+    if request.method == 'POST':
+        print("POST Game")
+        resultList = list(request.form)[0].split(",")
+        print(resultList)
+        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
+    return "return!"
 
 
 @app.route('/annotation2')
 def gamepreanno2():
-    return redirect(url_for('gameanno2', id=request.remote_addr))
+    return redirect(url_for('gameanno', id=request.remote_addr))
 
 
 @app.route('/annotation2/<id>')
 def gameanno2(id):
-    print("anno2 " + id)
-    level = "lvl" + str(idm.getRecent(id))
-    return render_template('GameAnnotation2.html', level=level)
+    if id != "result":
+        print("anno " + id)
+        # gamelevels = idm.getRecent(id)
+        gamelevels = idm.getTypeLevels(id)
+        level1 = gamelevels[0]
+        level2 = gamelevels[1]
+        level3 = gamelevels[2]
+        return render_template('GameAnnotation2.html', level1=level1, level2=level2, level3=level3)
+    else:
+        print(id)
 
 
-@app.route('/annotation2/result', methods=['POST'])
-def getAnno2result():
-    ip = request.remote_addr
-
+@app.route('/annotation2/<id>/result', methods=['POST'])
+def gameannoresult2(id):
     if request.method == 'POST':
-        print("POST Eval")
-        result = request.form
-        # FIXME:  do something to save data
-    finish = idm.getTimes(ip)
+        print("result! " + id)
+        resultList = list(request.form)[0].split(",")
+        print(resultList)
 
-    return render_template("GameOver.html", finish=finish, stage=2)
+        return redirect(url_for('over',stage=2))
 
 
 def saveFile(path, filename, content):
@@ -148,11 +159,6 @@ def saveFile(path, filename, content):
         f.write(b''.join(struct.pack('B', c) for c in cp))
 
 
-def saveFile2():
-    print("Save File for Stage2")
-
-
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=False)
+    # app.run()

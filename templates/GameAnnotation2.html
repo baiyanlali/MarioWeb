@@ -2,6 +2,8 @@
 <!-- saved from url=(0029)http://aingames.cn/index.html -->
 <html lang="en"><script id="allow-copy_script">(function t(){var t=!1;document.addEventListener("allow_copy",(function(n){t=n.detail.unlock}));var n=["copy","cut","contextmenu","selectstart","mousedown","mouseup","mousemove","keydown","keypress","keyup"],e=function(n){t&&(n.stopPropagation(),n.stopImmediatePropagation&&n.stopImmediatePropagation())};n.forEach((function(t){document.documentElement.addEventListener(t,e,{capture:!0})}))})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   </script>
   
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,18 +21,10 @@
   <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>
   <!-- Custom styles for this template -->
   <link href="../templates/Web/scrolling-nav.css" rel="stylesheet">
-  <link href="../templates/Web/css2" rel="stylesheet">
+  <link href="../templates/Web/css2" rel="stylesheet"><script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
 
   <style>
-    
-    #funding {
-      cursor: pointer;R
-    }
-
-    #prove {
-      display: none;
-    }
-
     #funding:hover+#prove {
       display: block;
     }
@@ -56,47 +50,6 @@
       height:60px;
       border-radius:15px;
     }
-
-    .groupname{
-      justify-content: center;
-      display:flex;
-      position:relative;
-      text-align:center;
-      font-size:45px;
-      font-weight:bold;
-    }
-
-    .slogan{
-      justify-content: center;
-      display:flex;
-      position:relative;
-      text-align:center;
-      font-size:40px;
-      font-style: italic;
-      /* font-weight:Light 300 italic; */
-      font-family: 'Consolas', monospace;
-      color: #c4cbcf;
-    }
-
-    .hiddenpart{
-      opacity: 0;
-      max-width: 0;
-      color:#c4cbcf;
-      transition: 1.3s ease-out;
-    }
-
-    .slogan:hover .hiddenpart{
-      opacity: 1;
-      max-width: 10em;
-    }
-    .news_prefix{
-      display: inline-block;
-      width: 30px;
-      height: 30px; 
-      background-image: url("static/img/news_prefix.png");
-      background-size: 150px, 30px;
-    }
-
     svg{
       width: 50px;
       height: 26px;
@@ -106,42 +59,37 @@
   display:block;
   line-height:100px;
 }
-.option-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  position: relative;
-  top: 13.33333px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 40px;
-  width: 40px;
-  transition: all 0.15s ease-out 0s;
-  background: #cbd1d8;
-  border: none;
+    .wrapper{
+  background: #fff;
+  padding: 25px;
+  max-width: 460px;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper .item{
   color: #fff;
+  display: flex;
+  margin-bottom: 8px;
+  padding: 12px 17px;
+  background: #304B5F;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .item:last-child{
+  margin-bottom: 0px;
+}
+.wrapper .item .text{
+  font-size: 18px;
+  font-weight: 400;
+}
+.wrapper .item i{
+  font-size: 18px;
   cursor: pointer;
-  display: inline-block;
-  margin-right: 0.5rem;
-  outline: none;
-  position: relative;
-  z-index: 1000;
 }
-.option-input:hover {
-  background: #9faab7;
-}
-.option-input:checked {
-  background: #0d007e;
-}
-.option-input.radio {
-  border-radius: 50%;
-}
-.option-input.radio::after {
-  border-radius: 50%;
-}
+
+
 
 
 
@@ -200,26 +148,25 @@
       </div>
     </div>
   </nav>
-<script>
-      window.onload=function(){
-        console.log("{{finish}}");
-        console.log("{{finish}}" == "1")
-        if("{{finish}}" == "1"){
-          document.getElementById("Finish").style.visibility = "visible";
-        }else{
-          document.getElementById("Finish").style.visibility = "hidden";
-        }
-      }
-</script>
   <script>
 function Replay(id){
     if(id==1){
-        console.log("{{level}}")
+        console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level}}",5);
+        cjCall("Play", "replayGameMain", "{{level1}}",5);
+    }else if(id==2){
+        console.log("{{level2}}")
+        var replayWindow=document.getElementById("replayWindow");
+        replayWindow.style.visibility = 'visible';
+        cjCall("Play", "replayGameMain", "{{level2}}",5);
+    }else if(id==3){
+        console.log("{{level2}}")
+        var replayWindow=document.getElementById("replayWindow");
+        replayWindow.style.visibility = 'visible';
+        cjCall("Play", "replayGameMain", "{{level3}}",5);
     }else{
-
+        console.log("No such ID")
     }
 
 }
@@ -250,55 +197,112 @@ function Replay(id){
     <br>
     <div class="row clearfix">
 
-    <div class="col-md-12">
-      <h4>Level Review</h4>
+    <div class="col-md-4">
+      <h4>Collector Review</h4>
       <p style="color:darkgrey">Drag Picture To Move</p>
       <div  style="overflow-x: scroll; height: 350px;" >
-        <img src="../levels/{{level}}.png" height="100%">
+        <img src="../levels/{{level1}}.png" height="100%">
       </div>
       
       <br><br>
 
-      <button onclick="Replay(1)" class="cirButton"><b> Watch Level A Replay</b> </button>
+      <button onclick="Replay(1)" class="cirButton"><b> Watch Collector Level Replay</b> </button>
     </div>
 
+
+    <div class="col-md-4">
+      <h4>Killer Review</h4>
+      <p style="color:darkgrey">Drag Picture To Move</p>
+
+      <div  style="overflow-x: scroll; height: 350px;" >
+        <img src="../levels/{{level2}}.png" height="100%">
+      </div>
+            
+      <br><br>
+
+      <button onclick="Replay(2)" class="cirButton"><b> Watch Killer Level Replay</b> </button>
+    </div>
+
+    <div class="col-md-4">
+      <h4>Runner Review</h4>
+      <p style="color:darkgrey">Drag Picture To Move</p>
+
+      <div  style="overflow-x: scroll; height: 350px;" >
+        <img src="../levels/{{level3}}.png" height="100%">
+      </div>
+
+      <br><br>
+
+      <button onclick="Replay(3)" class="cirButton"><b> Watch Runner Level Replay</b> </button>
+    </div>
   </div>
   </div>
 
 <br><br>
     <div class="container">
       <h1>
-        <i class="icon-cloud"></i> Annotation Part
+        <i class="icon-cloud"></i> What's their "fun" rank?
       </h1>
       <br>
-      <div class="row clearfix">
 
-        <br><br>
+          <div class="wrapper">
+            <div class="item">
+              <span class="text">Collector Level</span>
+              <i class="fas fa-bars" ></i>
+            </div>
+            <div class="item">
+              <span class="text">Killer Level</span>
+              <i class="fas fa-bars"></i>
+            </div>
+            <div class="item">
+              <span class="text">Runner Level</span>
+              <i class="fas fa-bars"></i>
+            </div>
 
-        <div class="col-md-6" align="center" style="visibility: visible;" id = "again">
-          <br>
-          <button onclick="
-          window.location.href = '/stage2pre'
-          "><h3>Practice More</h3></button>
-        </div>
+          </div>
 
-        <div class="col-md-6" align="center" style="visibility: visible;" id = "game">
-          <br>
-          <button onclick="
-          window.location.href = '/stage2game'
-          "><h3>Play Real Game</h3></button>
-        </div>
+  <script>
+    const dragArea = document.querySelector(".wrapper");
+    s = new Sortable(dragArea, {
+      animation: 350,
+      dataIdAttr: "a"
+    });
+    function post(URL, PARAM) {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+            var opt = document.createElement("textarea");
+            opt.name = PARAM;
+            opt.value = PARAM;
+            // alert(opt.name)
+            temp.appendChild(opt);
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+    //['443', '3v3', '3vq'] [c,k,r]
+    function postOrder(){
+        slist = s.toArray();
+        result = []
+        for (i = 0; i < 3; i++) {
+            if(slist[i] === '443'){
+               result[i] = "c"
+            }else if(slist[i] === '3v3'){
+               result[i] = "k"
+            }else if(slist[i] === '3vq'){
+               result[i] = "r"
+            }else{
+                console.log("you have change the name, dont you?")
+            }
+        }
+        post(window.location.href+"/result",result)
+    }
+  </script>
+      <br>
+    <button onclick="postOrder()">Submit</button>
+   </div>
 
-        <div class="col-md-6" align="center" style="visibility: visible;" id = "over">
-          <br>
-          <button onclick="
-            window.location.href = 'about:blank';
-            window.close();
-          "><h3>Finish Annotation</h3></button>
-        </div>
-
-      </div>
-    </div>
 </section>
 
 
@@ -310,9 +314,7 @@ function Replay(id){
   <footer class="py-5 bg-dark">
     <div class="container">
       <div class="row clearfix">
-        <!-- <div class="col-md-2 column">
-          <img class="img-fluid" alt="" src="../templates/Web/Wechat.png" style="width: 100px;">
-      </div> -->
+
         <div class="col-md-10 column"> 
           <br><br>
           <p class="m-0 text-center text-white">Copyright © Jialin Liu</p>
