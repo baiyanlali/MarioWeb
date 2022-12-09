@@ -6,7 +6,7 @@ class idManager():
     levelNum = 200
     typeNum = 100
 
-    timeMin = 0
+    timeMin = 1
     tutorialMax = 3
     ip_dic = {}
     ip_recent = {}
@@ -18,7 +18,7 @@ class idManager():
     def __int__(self):
         self.levelNum = 200
         self.typeNum = 100
-        self.timeMin = 0
+        self.timeMin = 1
 
     def getLevels(self, ip):
         if ip not in self.ip_dic.keys():
