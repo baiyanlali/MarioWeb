@@ -14,9 +14,14 @@ evalDataPath = "evals/"
 
 questionarePath = "data/questionare.csv"
 annotationPath = "data/annotation.csv"
+annotationPath2 = "data/annotation2.csv"
 
 
 @app.route('/')
+def gamewelcome():
+    return render_template('GameWelcome.html')
+
+@app.route('/question')
 def gamequestion():
     return render_template('GameQuestion.html')
 
@@ -28,18 +33,18 @@ def gamepreplay():
         ip = request.remote_addr
         # Save the result to questionare
         idm.write_csv(questionarePath,
-                      [ip, result.get("gamestyle"), result.get("frequency"), result.get("age"), result.get("gender"),
+                      [ip,result.get("playeds"),result.get("playedp"), result.get("gamestyle"), result.get("frequency"), result.get("age"), result.get("gender"),
                        ""])
         idm.setControl(ip, result.get("control"))
         print(result.get("gamestyle"))
-        # return redirect(url_for('gametutorial', id=ip))
+        return redirect(url_for('gametutorial', id=ip))
         # debug use:
-        return redirect(url_for('gameanno2', id=ip))
+        #return redirect(url_for('gameplay2', id=ip))
 
 
 @app.route('/gametutorial/<id>')
 def gametutorial(id):
-    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id))
+    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id),control=idm.getControl(id))
 
 
 @app.route('/again')
@@ -79,6 +84,7 @@ def gameanno(id):
     if (id != "radioresult"):
         print("anno " + id)
         gamelevels = idm.getRecent(id)
+
         level1 = "lvl" + str(gamelevels[0])
         level2 = "lvl" + str(gamelevels[1])
         return render_template('GameAnnotation.html', level1=level1, level2=level2)
@@ -94,15 +100,14 @@ def getRadioData():
         print(result)
         ipRecent = idm.getRecent(ip)
         idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
-        idm.addTimes(ip)
-    finish = idm.getTimes(ip)
-
-    return render_template("GameOver.html", finish=finish, stage=2)
 
 
-@app.route("/gameover/<stage>")
-def over(stage):
-    return render_template("GameOver.html", finish=1, stage=stage)
+    return redirect(url_for('over', stage=1))
+
+
+@app.route('/gameplay2')
+def gamepreplay2():
+    return redirect(url_for('gameplay2', id=request.remote_addr))
 
 
 @app.route('/gameplay2/<id>')
@@ -124,15 +129,15 @@ def getJSONData2(id):
 
 @app.route('/annotation2')
 def gamepreanno2():
-    return redirect(url_for('gameanno', id=request.remote_addr))
+    return redirect(url_for('gameanno2', id=request.remote_addr))
 
 
 @app.route('/annotation2/<id>')
 def gameanno2(id):
     if id != "result":
         print("anno " + id)
-        # gamelevels = idm.getRecent(id)
-        gamelevels = idm.getTypeLevels(id)
+        gamelevels = idm.getRecent(id)
+        # gamelevels = idm.getTypeLevels(id)
         level1 = gamelevels[0]
         level2 = gamelevels[1]
         level3 = gamelevels[2]
@@ -146,9 +151,24 @@ def gameannoresult2(id):
     if request.method == 'POST':
         print("result! " + id)
         resultList = list(request.form)[0].split(",")
+        levelList = idm.getRecent(request.remote_addr)
         print(resultList)
 
-        return redirect(url_for('over',stage=2))
+        idm.write_csv(annotationPath2,
+                      [request.remote_addr, resultList[0], resultList[1], resultList[2], levelList[0], levelList[1], levelList[2],
+                       ""])
+        return redirect(url_for('over', stage=2))
+
+
+@app.route("/gameover/<stage>")
+def over(stage):
+    finish = idm.getTimes(request.remote_addr)
+    print("finish %d",finish)
+    if finish:
+        idm.setTimes(request.remote_addr)
+    else:
+        idm.addTimes(request.remote_addr)
+    return render_template("GameOver.html", finish=finish, stage=stage)
 
 
 def saveFile(path, filename, content):

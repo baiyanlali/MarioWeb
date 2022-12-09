@@ -236,16 +236,16 @@ function Replay(id){
 
 <section id="Reviews">
   <div class="container">
-    <div class="page-header">
-      <h1>
-        <i class="icon-cloud"></i> Reviews
-      </h1>
-    </div>
+{#    <div class="page-header">#}
+{#      <h1>#}
+{#        <i class="icon-cloud"></i> Reviews#}
+{#      </h1>#}
+{#    </div>#}
     <br>
     <div class="row clearfix">
 
     <div class="col-md-5">
-      <h4>Level A Review</h4>
+      <h4>Level A</h4>
       <p style="color:darkgrey">Drag Picture To Move</p>
       <div  style="overflow-x: scroll; height: 350px;" >
         <img src="../levels/{{level1}}.png" height="100%">
@@ -258,7 +258,7 @@ function Replay(id){
     <div class="col-md-2"></div> 
 
     <div class="col-md-5">
-      <h4>Level B Review</h4>
+      <h4>Level B</h4>
       <p style="color:darkgrey">Drag Picture To Move</p>
 
       <div  style="overflow-x: scroll; height: 350px;" >
@@ -272,13 +272,35 @@ function Replay(id){
   </div>
   </div>
 
+
+    <script type="text/javascript">
+                function beforeSubmit(form){
+                    if(isEmpty("fun")){
+                        alert("Question is Empty! Please Fill it!");
+                        return false;
+                    }
+                    return true;
+                }
+
+                function isEmpty(name){
+                    var elements = document.getElementsByName(name)
+                    for (var i = 0; i < elements.length; i++) { //遍历Radio
+                        if (elements[i].checked) {
+                            return 0;
+                        }
+                    }
+                    return 1;
+                }
+            </script>
+
+
 <br><br>
     <div class="container">
       <h1>
-        <i class="icon-cloud"></i> Annotation Questions
+        <i class="icon-cloud"></i> Which level was more fun to play?
       </h1>
       <br>
-      <form action="radioresult" method="POST">
+      <form action="radioresult" method="POST"  onSubmit="return beforeSubmit(this);">
       <div class="row clearfix">
         <div class="col-md-6">
 

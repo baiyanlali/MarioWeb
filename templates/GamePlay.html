@@ -98,11 +98,11 @@
   <section id="news">
 
     <div class="container">
-      <div class="page-header">
-        <h1>
-          <i class="fa-solid fa-gamepad"><b>EDRL Game Demo</b></i>
-        </h1>
-      </div>
+{#      <div class="page-header">#}
+{#        <h1>#}
+{#          <i class="fa-solid fa-gamepad"><b>EDRL Game Demo</b></i>#}
+{#        </h1>#}
+{#      </div>#}
       <br>
 
 
@@ -110,7 +110,7 @@
 
         <div class="col-md-12">
           <div align="center">
-            <h3>Mario Game User Test</h3>
+            <h3 id="Head">Level A</h3>
           </div>
           <div align="center" id = "GameWindow">
             
@@ -120,8 +120,10 @@
             //Init Cheerpj Framework
             cheerpjInit();
             var divElement = document.getElementById("GameWindow");
+            var title = document.getElementById("Head");
             var levelNum = Number("{{levelNum}}")
             var levels = getLevels("{{gamelevels}}",levelNum);
+            var levelNames = ["Level A","Level B","Level C","Level D"];
 
             cheerpjCreateDisplay(500,500,divElement);
             cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
@@ -132,10 +134,13 @@
             for (i = 0; i < levelNum-1; i++) {
                 console.log("Play level: %s",levels[i])
                 PlayLevel(levels[i],control)
-                .then(function (){alert("Game Over!")});
+                .then(function (){alert("Game Over!")})
+                    .then(function (){
+                        console.log(i)
+                        var index = levelNames.indexOf(title.innerText);
+                        title.innerText = levelNames[index+1];});
             }
 
-            console.log("Play level: %s",levels[levelNum-1])
             PlayLevel(levels[levelNum-1],control)
             .then(function (){
               alert("Go to Evaluation Window")
@@ -144,6 +149,10 @@
           
         
           </script>
+
+
+
+
         </div>
       </div>
       <br>

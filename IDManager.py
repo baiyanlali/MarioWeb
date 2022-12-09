@@ -6,7 +6,7 @@ class idManager():
     levelNum = 200
     typeNum = 100
 
-    timeMin = 1
+    timeMin = 0
     tutorialMax = 3
     ip_dic = {}
     ip_recent = {}
@@ -18,6 +18,7 @@ class idManager():
     def __int__(self):
         self.levelNum = 200
         self.typeNum = 100
+        self.timeMin = 0
 
     def getLevels(self, ip):
         if ip not in self.ip_dic.keys():
@@ -85,14 +86,14 @@ class idManager():
         self.ip_time[ip] = 0
 
     def getTimes(self, ip):
-        print(self.ip_time[ip])
+
         if ip not in self.ip_time.keys():
-            return 0
+            self.ip_time[ip] = 0
+
+        if self.ip_time[ip] >= self.timeMin:
+            return 1
         else:
-            if self.ip_time[ip] >= self.timeMin:
-                return 1
-            else:
-                return 0
+            return 0
 
     def addTimes(self, ip):
         if ip not in self.ip_time.keys():

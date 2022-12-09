@@ -143,11 +143,18 @@
 <script>
       window.onload=function(){
         console.log("{{finish}}");
+        var fini = document.getElementById("Finish");
         console.log("{{finish}}" == "1")
         if("{{finish}}" == "1"){
-          document.getElementById("Finish").style.visibility = "visible";
+          fini.style.visibility = "visible";
+          if('{{stage}}' == '2'){
+              fini.innerText = "Finish"
         }else{
-          document.getElementById("Finish").style.visibility = "hidden";
+              fini.innerText = "Go to Phase II"
+        }
+
+        }else{
+          fini.style.visibility = "hidden";
         }
       }
 </script>
@@ -158,13 +165,23 @@
           <i class="icon-cloud"></i> Thank You!!!
         </h1>
         <br>
-        <button onclick='window.location.href = "/again"'>Play And Annotate Again!</button>
+        <button onclick="
+        if('{{stage}}' == '2'){
+            window.location.href = '/gameplay2';
+        }else{
+            window.location.href = '/again'
+        }
+
+
+
+        ">Play And Annotate Again!</button>
         <button id = "Finish" onclick="
-        if('{{stage}}' == '1'){
+        if('{{stage}}' == '2'){
             window.location.href = 'about:blank';
             window.close();
         }else{
-            window.location.href = '/stage2pre';
+
+            window.location.href = '/gameplay2';
         }
 
        ">Finish!</button>

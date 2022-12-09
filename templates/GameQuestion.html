@@ -191,18 +191,70 @@
       </div>
     </div>
   </nav>
+            <script type="text/javascript">
+                function beforeSubmit(form){
+                    var radios = ["playeds","playedp","gamestyle","frequency","age","gender","control"]
+                    for (var i = 0; i < radios.length; i++){
+                        if(isEmpty(radios[i])){
+                            alert("Question "+(i+1)+" is Empty! Please Fill it!");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
 
+                function isEmpty(name){
+                    var elements = document.getElementsByName(name)
+                    for (var i = 0; i < elements.length; i++) { //遍历Radio
+                        if (elements[i].checked) {
+                            return 0;
+                        }
+                    }
+                    return 1;
+                }
+            </script>
 
 <section id="Reviews">
     <div class="container">
         <h1>
-          <i class="icon-cloud"></i> Questionare
+          <i class="icon-cloud"></i> Questionnaire
         </h1>
         <br>
         <div class="row clearfix">
           <div class="col-md-6">
-            <form action="result" method="POST">
-              <p><h4>Which do you prefer in Super Mario Bros?</h4> 
+            <form action="result" method="POST" onSubmit="return beforeSubmit(this);">
+
+              <p><h4>Have you played Super Mario Bros before?</h4>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playeds" value="A" >
+                  Yes, a lot
+                </label>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playeds" value="B" >
+                  Yes, rarely
+                </label>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playeds" value="C" >
+                  No
+                </label>
+              </p>
+
+              <p><h4>Do you played platform games like Super Mario Bros?</h4>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playedp" value="A" >
+                  Yes, a lot
+                </label>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playedp" value="B" >
+                  Yes, rarely
+                </label>
+                <label>
+                  <input type="radio"  class="option-input radio" name="playedp" value="C" >
+                  No
+                </label>
+              </p>
+
+              <p><h4>What is your prefered acion in Super Mario Bros?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="gamestyle" value="A" >
                   Speed run
@@ -220,15 +272,15 @@
                   None of above
                 </label>
               </p>
-W
+
               <p><h4>How frequently do you play game?</h4> 
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="A" >
-                  Never
+                  More than 10 hours a week
                 </label>
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="B" >
-                  Seldom
+                  3-10 hours per week
                 </label>
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="C" >
@@ -236,15 +288,15 @@ W
                 </label>
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="D" >
-                  3-10 hours per week
+                  Rarely
                 </label>
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="E" >
-                  More than 10 hours a week
+                  Never
                 </label>
               </p>
 
-              <p><h4>Your age?</h4> 
+              <p><h4>What is your age?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="age" value="A" >
                   Below 20
@@ -275,7 +327,7 @@ W
                 </label>
               </p>
               
-              <p><h4>Your gender?</h4>
+              <p><h4>What is your gender?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="gender" value="A" >
                   Male
@@ -290,14 +342,14 @@ W
                 </label>
               </p>
 
-              <p><h4>You would like to play in?</h4>
+              <p><h4>How would you like to play?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="control" value="A" >
-                  ASD (run to left; squat; run to right) + JK (Jump; Speed Up)
+                  ASD (run to left; duck; run to right) + JK (Jump; Speed Up)
                 </label>
                 <label>
                   <input type="radio"  class="option-input radio" name="control" value="B" >
-                  ←↓→ (run to left; squat; run to right) + SA (Jump; Speed Up)
+                  ←↓→ (run to left; duck; run to right) + SA (Jump; Speed Up)
                 </label>
 
               </p>
