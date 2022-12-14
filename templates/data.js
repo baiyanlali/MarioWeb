@@ -31,7 +31,7 @@ function PostToServer(url,data) {
 }
 function PlayLevel(level,control){
 
-    var returnVal = cjCall("Play", "playGameMain", level, 5, control);
+    var returnVal = cjCall("Play", "playGameMain", level, 5, control,30,16);
     return returnVal.then(function(){ 
       console.log("the return val is ready");  
       console.log(returnVal.value);

@@ -39,7 +39,7 @@ def gamepreplay():
         print(result.get("gamestyle"))
         return redirect(url_for('gametutorial', id=ip))
         # debug use:
-        #return redirect(url_for('gameplay2', id=ip))
+        #return redirect(url_for('gameanno2', id=ip))
 
 
 @app.route('/gametutorial/<id>')
@@ -137,7 +137,7 @@ def gameanno2(id):
     if id != "result":
         print("anno " + id)
         gamelevels = idm.getRecent(id)
-        # gamelevels = idm.getTypeLevels(id)
+        #gamelevels = idm.getTypeLevels(id)
         level1 = gamelevels[0]
         level2 = gamelevels[1]
         level3 = gamelevels[2]

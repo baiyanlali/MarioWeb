@@ -358,8 +358,8 @@ public class MarioWorld {
 
         if (this.currentTimer > 0) {
             this.currentTimer -= 30;
-//            if (this.segTime > 0 && (int) (this.mario.x / 512) > this.passedSegs) {
-//                this.passedSegs = (int) (this.mario.x / 512);
+//            if (this.segTime > 0 && (int) (this.mario.x / 256) > this.passedSegs) {
+//                this.passedSegs = (int) (this.mario.x / 256);
 //                this.currentTimer = Math.min(this.currentTimer + this.segTime, 2 * this.segTime) ;
 //            }
             if (this.currentTimer <= 0) {
@@ -595,10 +595,9 @@ public class MarioWorld {
         }
     }
 
-//    public void setSegTime(int segTime) {
-//        this.segTime = segTime;
-//        this.currentTimer = 2 * segTime;
-//    }
+    public void setCurrentTimer(int currentTimer) {
+        this.currentTimer = currentTimer;
+    }
 
     //    public void setRevivable(boolean revivable) {
 //        this.revivable = revivable;

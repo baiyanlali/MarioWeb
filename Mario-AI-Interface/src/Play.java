@@ -34,25 +34,30 @@ public class Play {
 //        MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 200, repPath);
 
 //        MarioGame game2 = new MarioGame();
+        //FIXME: Debug Use
+        //playGameMain("lvl1");
 
     }
 
-    public static byte[] playGameMain(String levelName, int lives, boolean control){
+    public static byte[] playGameMain(String levelName, int lives, boolean control,int time,int col){
 
-        String levelPath = String.format("/app/levels/%s.lvl", levelName);			// For web
+        String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
         String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
+
+//        String levelPath = String.format("./levels/group%s/%s.lvl", "0", levelName);			// For local
+//        String repPath = String.format("./reps/%s_sav.rep", levelName);	                        // For local
         MarioGame game = new MarioGame();
 		game.setLives(lives);
-        MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), 200, repPath);
+        MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), time, repPath,col);
 
         return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
     }
 
     public static byte[] playGameMain(String levelName){
-        return playGameMain(levelName, 0, true);
+        return playGameMain(levelName, 5, false,30,16);
     }
 
-    public static void replayGameMain(String levelName, int lives){
+    public static void replayGameMain(String levelName, int lives, int time, int col){
         String levelPath = String.format("/app/levels/%s.lvl", levelName);		    // For web
         String repPath = String.format("/files/%s_sav.rep", levelName);	                                    // For web
 
@@ -61,6 +66,6 @@ public class Play {
 
         MarioGame game = new MarioGame();
         game.setLives(lives);
-        game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 200, repPath);
+        game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), time, repPath,col);
     }
 }

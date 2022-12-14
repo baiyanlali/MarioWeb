@@ -87,8 +87,8 @@ public class MarioGame {
             this.render.addKeyListener((KeyAdapter) this.agent);
         }
     }
-    public MarioResult playGame(String level, String resultPath) {
-        return this.runGame(new agents.HumanAgent(true), level, 200, 0, true, 30, 2, resultPath);
+    public MarioResult playGame(String level, String resultPath,int col) {
+        return this.runGame(new agents.HumanAgent(true), level, 200, 0, true, 30, 2, resultPath,col);
     }
 
     /**
@@ -98,8 +98,8 @@ public class MarioGame {
      * @param timer number of ticks for that level to be played. Setting timer to anything &lt;=0 will make the time infinite
      * @return statistics about the current game
      */
-    public MarioResult playGame(MarioAgent gameAgent,String level, int timer, String resultPath) {
-        return this.runGame(gameAgent, level, timer, 0, true, 30, 2, resultPath);
+    public MarioResult playGame(MarioAgent gameAgent,String level, int timer, String resultPath,int col) {
+        return this.runGame(gameAgent, level, timer, 0, true, 30, 2, resultPath,col);
     }
 
     /**
@@ -110,8 +110,8 @@ public class MarioGame {
      * @param timer number of ticks for that level to be played. Setting timer to anything &lt;=0 will make the time infinite
      * @return statistics about the current game
      */
-    public MarioResult runGame(MarioAgent agent, String level, int timer) {
-        return this.runGame(agent, level, timer, 0, true, 0, 2, "");
+    public MarioResult runGame(MarioAgent agent, String level, int timer,int col) {
+        return this.runGame(agent, level, timer, 0, true, 0, 2, "",col);
     }
 
     /**
@@ -126,7 +126,7 @@ public class MarioGame {
      * @param scale      the screen scale, that scale value is multiplied by the actual width and height
      * @return statistics about the current game
      */
-    public MarioResult runGame(MarioAgent agent, String level, int timer, int marioState, boolean visuals, int fps, float scale, String resultPath) {
+    public MarioResult runGame(MarioAgent agent, String level, int timer, int marioState, boolean visuals, int fps, float scale, String resultPath, int col) {
         if (visuals) {
             this.window = new JFrame("Mario AI Framework");
             this.render = new MarioRender(scale);
@@ -138,10 +138,10 @@ public class MarioGame {
             this.window.setVisible(true);
         }
         this.setAgent(agent);
-        return this.gameLoop(level, timer, marioState, visuals, fps, resultPath);
+        return this.gameLoop(level, timer, marioState, visuals, fps, resultPath, col);
     }
 
-    private MarioResult gameLoop(String level, int timer, int marioState, boolean visual, int fps, String resultPath) {
+    private MarioResult gameLoop(String level, int timer, int marioState, boolean visual, int fps, String resultPath, int col) {
         this.world = new MarioWorld(this.killEvents);
         this.world.visuals = visual;
         this.world.initializeLevel(level, 1000 * timer);
@@ -170,10 +170,19 @@ public class MarioGame {
 
         ArrayList<MarioEvent> gameEvents = new ArrayList<>();
         ArrayList<MarioAgentEvent> agentEvents = new ArrayList<>();
+
+        int segNum = 0;
         while (this.world.gameStatus == GameStatus.RUNNING) {
             if (!this.pause) {
-                //get actions
+                //Update Timer
+
+                if(world.mario.x / (16*col) > segNum){
+                    segNum++;
+                    this.world.setCurrentTimer(1000 * timer);
+                }
+
                 agentTimer = new MarioTimer(MarioGame.maxTime);
+                //get actions
                 boolean[] actions = this.agent.getActions(new MarioForwardModel(this.world.clone()), agentTimer);
                 if (MarioGame.verbose) {
                     if (agentTimer.getRemainingTime() < 0 && Math.abs(agentTimer.getRemainingTime()) > MarioGame.graceTime) {
@@ -210,17 +219,7 @@ public class MarioGame {
         }
         return new MarioResult(this.world, gameEvents, agentEvents);
     }
-    public static void showNewWindow(JFrame relativeWindow) {
-        // 鍒涘缓涓�涓柊绐楀彛
-        JFrame newJFrame = new JFrame("鏂扮殑绐楀彛");
 
-        newJFrame.setSize(250, 250);
-
-        // 鎶婃柊绐楀彛鐨勪綅缃缃埌 relativeWindow 绐楀彛鐨勪腑蹇�
-        newJFrame.setLocationRelativeTo(relativeWindow);
-
-        newJFrame.setVisible(true);
-    }
     public void setLives(int lives) {
         this.initialLives = lives;
     }

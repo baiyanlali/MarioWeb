@@ -154,17 +154,17 @@ function Replay(id){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level1}}",5);
+        cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
     }else if(id==2){
         console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level2}}",5);
+        cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
     }else if(id==3){
         console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level3}}",5);
+        cjCall("Play", "replayGameMain", "{{level3}}",5,30,16);
     }else{
         console.log("No such ID")
     }
@@ -241,7 +241,7 @@ function Replay(id){
 <br><br>
     <div class="container">
       <h1>
-        <i class="icon-cloud"></i> What's their "fun" rank?
+        <i class="icon-heart-empty"></i> What's their "fun" rank?
       </h1>
       <br>
 
@@ -284,13 +284,14 @@ function Replay(id){
     //['443', '3v3', '3vq'] [c,k,r]
     function postOrder(){
         slist = s.toArray();
+        console.log(slist)
         result = []
         for (i = 0; i < 3; i++) {
-            if(slist[i] === '443'){
+            if(slist[i] === '3fx'){
                result[i] = "c"
-            }else if(slist[i] === '3v3'){
+            }else if(slist[i] === '3fy'){
                result[i] = "k"
-            }else if(slist[i] === '3vq'){
+            }else if(slist[i] === '3fz'){
                result[i] = "r"
             }else{
                 console.log("you have change the name, dont you?")

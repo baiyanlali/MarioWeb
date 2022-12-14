@@ -9,14 +9,15 @@
   <meta name="author" content="">
 
   <title>AI and Games </title>
-
+  <!--../templates/Web/-->
+    <!--../templates/Web/-->
   <!-- Bootstrap core CSS -->
   <link href="../templates/Web/bootstrap.min.css" rel="stylesheet">
   <link href="../templates/Web/font-awesome.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="http://aingames.cn/static/img/logo.png">
   
 
-  <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>
+{#  <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>#}
   <script src="../data.js"></script>
   <!-- Custom styles for this template -->
   <link href="../templates/Web/scrolling-nav.css" rel="stylesheet">
@@ -196,7 +197,7 @@
                     var radios = ["playeds","playedp","gamestyle","frequency","age","gender","control"]
                     for (var i = 0; i < radios.length; i++){
                         if(isEmpty(radios[i])){
-                            alert("Question "+(i+1)+" is Empty! Please Fill it!");
+                            alert("Some answers are missing; please fill in the questionnaire before proceeding to play!");
                             return false;
                         }
                     }
@@ -217,7 +218,7 @@
 <section id="Reviews">
     <div class="container">
         <h1>
-          <i class="icon-cloud"></i> Questionnaire
+          <i class="icon-question"></i> Questionnaire
         </h1>
         <br>
         <div class="row clearfix">
@@ -239,7 +240,7 @@
                 </label>
               </p>
 
-              <p><h4>Do you played platform games like Super Mario Bros?</h4>
+              <p><h4>Do you play platform games like Super Mario Bros?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="playedp" value="A" >
                   Yes, a lot
@@ -254,7 +255,7 @@
                 </label>
               </p>
 
-              <p><h4>What is your prefered acion in Super Mario Bros?</h4>
+              <p><h4>What is your preferred action in Super Mario Bros?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="gamestyle" value="A" >
                   Speed run
@@ -273,7 +274,7 @@
                 </label>
               </p>
 
-              <p><h4>How frequently do you play game?</h4> 
+              <p><h4>How frequently do you play games?</h4>
                 <label>
                   <input type="radio"  class="option-input radio" name="frequency" value="A" >
                   More than 10 hours a week

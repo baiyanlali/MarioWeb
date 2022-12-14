@@ -206,12 +206,12 @@ function Replay(id){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level1}}",5);
+        cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
     }else if(id==2){
         console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level2}}",5);
+        cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
     }else{
 
     }
@@ -297,7 +297,7 @@ function Replay(id){
 <br><br>
     <div class="container">
       <h1>
-        <i class="icon-cloud"></i> Which level was more fun to play?
+        <i class="icon-heart-empty"></i> Which level was more fun to play?
       </h1>
       <br>
       <form action="radioresult" method="POST"  onSubmit="return beforeSubmit(this);">
@@ -306,11 +306,11 @@ function Replay(id){
 
           <label>
             <input type="radio"  class="option-input radio" name="fun" value="A">
-            <b>Level A is More Fun</b>
+            <b>A is More Fun than B</b>
           </label>
           <label>
               <input type="radio"  class="option-input radio" name="fun" value="E">
-              <b>Both are Fun</b>
+              <b>Both are equally Fun</b>
           </label>
 
         </div>
@@ -318,7 +318,7 @@ function Replay(id){
 
           <label>
             <input type="radio"  class="option-input radio" name="fun" value="B">
-            <b>Level B is More Fun</b>
+            <b>B is More Fun than A</b>
           </label>
           <label>
               <input type="radio"  class="option-input radio" name="fun" value="N">
