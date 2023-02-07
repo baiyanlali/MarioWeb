@@ -101,8 +101,12 @@ def getRadioData():
         ipRecent = idm.getRecent(ip)
         idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
 
+    if idm.getTimes(ip):
+        return redirect(url_for("gameplay2",id=ip))
+    else:
+        idm.addTimes(ip)
+        return redirect(url_for("gameplay",id=ip))
 
-    return redirect(url_for('over', stage=1))
 
 
 @app.route('/gameplay2')
@@ -157,18 +161,23 @@ def gameannoresult2(id):
         idm.write_csv(annotationPath2,
                       [request.remote_addr, resultList[0], resultList[1], resultList[2], levelList[0], levelList[1], levelList[2],
                        ""])
-        return redirect(url_for('over', stage=2))
+
+        if idm.getTimes(id):
+            return redirect(url_for("over", id=id))
+        else:
+            idm.addTimes(id)
+            return redirect(url_for("gameplay2", id=id))
 
 
-@app.route("/gameover/<stage>")
-def over(stage):
-    finish = idm.getTimes(request.remote_addr)
-    print("finish %d",finish)
-    if finish:
-        idm.setTimes(request.remote_addr)
-    else:
-        idm.addTimes(request.remote_addr)
-    return render_template("GameOver.html", finish=finish, stage=stage)
+@app.route("/gameover")
+def over():
+    # finish = idm.getTimes(request.remote_addr)
+    # print("finish %d",finish)
+    # if finish:
+    #     idm.setTimes(request.remote_addr)
+    # else:
+    #     idm.addTimes(request.remote_addr)
+    return render_template("GameOver.html")
 
 
 def saveFile(path, filename, content):

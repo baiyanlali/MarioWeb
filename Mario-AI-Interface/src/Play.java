@@ -11,6 +11,7 @@ import engine.core.MarioResult;
 import engine.helper.Replay;
 
 public class Play {
+    private static MarioGame game;
     public static String getLevel(String filepath) {
         String content = "";
         try {
@@ -46,7 +47,7 @@ public class Play {
 
 //        String levelPath = String.format("./levels/group%s/%s.lvl", "0", levelName);			// For local
 //        String repPath = String.format("./reps/%s_sav.rep", levelName);	                        // For local
-        MarioGame game = new MarioGame();
+        game = new MarioGame();
 		game.setLives(lives);
         MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), time, repPath,col);
 
@@ -64,8 +65,11 @@ public class Play {
 //        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);			// For local
 //        String repPath = String.format("./files/%s_sav.rep", levelName);	                        // For local
 
-        MarioGame game = new MarioGame();
+        game = new MarioGame();
         game.setLives(lives);
         game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), time, repPath,col);
+    }
+    public static void stopReplay(){
+        game.stopGame();
     }
 }

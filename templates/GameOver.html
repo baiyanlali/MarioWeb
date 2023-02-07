@@ -162,18 +162,21 @@
 <section id="Over">
     <div class="container">
         <h1>
-          <i class="icon-chevron-down"></i> Thank You!!!
+          <i class="icon-chevron-down"></i> Thank You For Playing!!!
         </h1>
         <br>
+        <h3>
+           Do you want to play another round?
+        </h3>
+        <button>Yes</button>
+        <button>No</button>
+        <div style="">
         <button onclick="
         if('{{stage}}' == '2'){
             window.location.href = '/gameplay2';
         }else{
             window.location.href = '/again'
         }
-
-
-
         ">Keep Playing!</button>
         <button id = "Finish" onclick="
         if('{{stage}}' == '2'){
@@ -183,8 +186,8 @@
 
             window.location.href = '/gameplay2';
         }
-
        ">Finish!</button>
+            </div>
       </div>
 </section>
 

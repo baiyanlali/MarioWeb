@@ -220,6 +220,9 @@ public class MarioGame {
         return new MarioResult(this.world, gameEvents, agentEvents);
     }
 
+    public void stopGame(){
+        this.world.gameStatus = GameStatus.LOSE;
+    }
     public void setLives(int lives) {
         this.initialLives = lives;
     }
