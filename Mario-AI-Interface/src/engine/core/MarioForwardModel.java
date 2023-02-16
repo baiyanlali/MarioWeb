@@ -205,7 +205,7 @@ public class MarioForwardModel {
      */
     public final int obsGridHeight = MarioGame.tileHeight;
 
-    private MarioWorld world;
+    public MarioWorld world;
 
     // stats
     private int fallKill;
@@ -232,7 +232,7 @@ public class MarioForwardModel {
      * @return a clone from the current forward model state
      */
     public MarioForwardModel clone() {
-        MarioForwardModel model = new MarioForwardModel(this.world.clone());
+        MarioForwardModel model = new MarioForwardModel(this.world);
         model.fallKill = this.fallKill;
         model.stompKill = this.stompKill;
         model.fireKill = this.fireKill;

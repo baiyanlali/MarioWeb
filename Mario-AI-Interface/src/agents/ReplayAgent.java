@@ -3,17 +3,25 @@ package agents;
 import engine.core.MarioAgent;
 import engine.core.MarioForwardModel;
 import engine.core.MarioTimer;
+import engine.helper.GameStatus;
 
-public class ReplayAgent implements MarioAgent {
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class ReplayAgent extends KeyAdapter implements MarioAgent {
     private int p;
-    private final boolean[][] actions;
+    private  boolean isPressed;
+    private  boolean[][] actions;
+    private MarioForwardModel marioForwardModel;
 
     @Override
     public void initialize(MarioForwardModel model, MarioTimer timer) {
+        marioForwardModel = model;
     }
 
     public ReplayAgent(boolean[][] actions) {
         this.actions = actions;
+        isPressed = false;
         this.p = 0;
     }
 
@@ -23,13 +31,43 @@ public class ReplayAgent implements MarioAgent {
 
     @Override
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
-        if (p >= actions.length)
-            return new boolean[5];
-        return this.actions[p++];
+        if(!isPressed){
+            if (p >= actions.length)
+                return new boolean[5];
+            return this.actions[p++];
+        }else{
+            System.out.println("return true");
+            return new boolean[]{true, true, true, true, true};
+        }
+
     }
 
     @Override
     public String getAgentName() {
         return "ReplayAgent";
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        toggleKey(e.getKeyCode(), true);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        toggleKey(e.getKeyCode(), false);
+    }
+
+    private void toggleKey(int keyCode, boolean isPressed) {
+        if(keyCode == KeyEvent.VK_Q){
+            if(isPressed){
+                this.isPressed = true;
+                System.out.println("Pressed");
+            }else{
+                this.isPressed = false;
+            }
+
+
+        }
+    }
+
 }

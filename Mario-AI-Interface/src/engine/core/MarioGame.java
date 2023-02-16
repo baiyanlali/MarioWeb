@@ -1,5 +1,6 @@
 package engine.core;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -11,7 +12,7 @@ import engine.helper.GameStatus;
 import engine.helper.MarioActions;
 import engine.helper.Replay;
 
-public class MarioGame {
+public class MarioGame extends KeyAdapter{
     /**
      * the maximum time that agent takes for each step
      */
@@ -170,7 +171,7 @@ public class MarioGame {
 
         ArrayList<MarioEvent> gameEvents = new ArrayList<>();
         ArrayList<MarioAgentEvent> agentEvents = new ArrayList<>();
-
+        boolean midBreak = false;
         int segNum = 0;
         while (this.world.gameStatus == GameStatus.RUNNING) {
             if (!this.pause) {
@@ -183,13 +184,20 @@ public class MarioGame {
 
                 agentTimer = new MarioTimer(MarioGame.maxTime);
                 //get actions
-                boolean[] actions = this.agent.getActions(new MarioForwardModel(this.world.clone()), agentTimer);
+                boolean[] actions = this.agent.getActions(new MarioForwardModel(this.world), agentTimer);
                 if (MarioGame.verbose) {
                     if (agentTimer.getRemainingTime() < 0 && Math.abs(agentTimer.getRemainingTime()) > MarioGame.graceTime) {
                         System.out.println("The Agent is slowing down the game by: "
                                 + Math.abs(agentTimer.getRemainingTime()) + " msec.");
                     }
                 }
+                // mid break
+                if(actions[1]&&actions[2]){
+                    this.world.gameStatus = GameStatus.LOSE;
+                    midBreak = true;
+                   break;
+                }
+
                 // update world
                 this.world.update(actions);
                 gameEvents.addAll(this.world.lastFrameEvents);
@@ -213,9 +221,8 @@ public class MarioGame {
             }
         }
         MarioResult res = new MarioResult(this.world, gameEvents, agentEvents);
-        if (!resultPath.isEmpty()) {
+        if (!resultPath.isEmpty()&&!midBreak) {
             Replay.saveReplay(resultPath, res.getAgentEvents());
-            //showNewWindow(this.window);
         }
         return new MarioResult(this.world, gameEvents, agentEvents);
     }
@@ -223,9 +230,31 @@ public class MarioGame {
     public void stopGame(){
         this.world.gameStatus = GameStatus.LOSE;
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        toggleKey(e.getKeyCode(), true);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        toggleKey(e.getKeyCode(), false);
+    }
+
+    private void toggleKey(int keyCode, boolean isPressed) {
+        if(keyCode == KeyEvent.VK_Q){
+            if(isPressed){
+                stopGame();
+                System.out.println("Pressed mg");
+            }
+
+
+        }
+    }
     public void setLives(int lives) {
         this.initialLives = lives;
     }
+
 
 }
 

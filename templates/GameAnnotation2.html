@@ -116,7 +116,8 @@
 <div id="replayWindow" class="popwindow">
   <div id="replayWindowGame">
   </div>
-  <div align="center"><button onClick="closeReplayWindow()">Close Window</button></div>
+    <p>Click "Q" to stop playing and quit</p>
+  <div align="center"  id = "replayButton"><button onClick='closeReplayWindow()'>Close Window</button></div>
 </div>
 
 
@@ -153,18 +154,25 @@ function Replay(id){
     if(id==1){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
+        var replayButton=document.getElementById("replayButton");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
+
+        var result = cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
+        result.then(function(){replayButton.style.visibility = 'visible'});
     }else if(id==2){
-        console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
+        var replayButton=document.getElementById("replayButton");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
+
+        var result = cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
+        result.then(function(){replayButton.style.visibility = 'visible'});
     }else if(id==3){
-        console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
+        var replayButton=document.getElementById("replayButton");
         replayWindow.style.visibility = 'visible';
-        cjCall("Play", "replayGameMain", "{{level3}}",5,30,16);
+
+        var result = cjCall("Play", "replayGameMain", "{{level3}}",5,30,16);
+        result.then(function(){replayButton.style.visibility = 'visible'});
     }else{
         console.log("No such ID")
     }
@@ -175,7 +183,10 @@ function Replay(id){
   <script>
     function closeReplayWindow(){
     var replayWindow=document.getElementById("replayWindow");
-    replayWindow.style.visibility = 'hidden';	
+    var replayButton=document.getElementById("replayButton");
+    cjCall("Play", "stopReplay");
+    replayWindow.style.visibility = 'hidden';
+    replayButton.style.visibility = 'hidden';
 }
     window.onload=function(){
         closeReplayWindow();
