@@ -11,6 +11,7 @@ import engine.helper.MarioActions;
 public class HumanAgent extends KeyAdapter implements MarioAgent {
     private boolean[] actions = null;
     private boolean oldControl = true;
+    private boolean isPressed = false;
 
     public HumanAgent(boolean oldControl){
         this.oldControl = oldControl;
@@ -18,11 +19,18 @@ public class HumanAgent extends KeyAdapter implements MarioAgent {
     @Override
     public void initialize(MarioForwardModel model, MarioTimer timer) {
         actions = new boolean[MarioActions.numberOfActions()];
+        isPressed = false;
     }
 
     @Override
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
-        return actions.clone();
+        if(!isPressed){
+            return actions.clone();
+        }else{
+            System.out.println("return true");
+            return new boolean[]{true, false, true, true, true};
+        }
+
     }
 
     @Override
@@ -43,6 +51,14 @@ public class HumanAgent extends KeyAdapter implements MarioAgent {
     private void toggleKey(int keyCode, boolean isPressed) {
         if (this.actions == null) {
             return;
+        }
+        if(keyCode==KeyEvent.VK_0){
+            if(isPressed){
+                this.isPressed = true;
+                System.out.println("Pressed");
+            }else{
+                this.isPressed = false;
+            }
         }
         if(oldControl){
             switch (keyCode) {

@@ -171,7 +171,8 @@ public class MarioGame extends KeyAdapter{
 
         ArrayList<MarioEvent> gameEvents = new ArrayList<>();
         ArrayList<MarioAgentEvent> agentEvents = new ArrayList<>();
-        boolean midBreak = false;
+        boolean replayBreak = false;
+        boolean cheatBreak = false;
         int segNum = 0;
         while (this.world.gameStatus == GameStatus.RUNNING) {
             if (!this.pause) {
@@ -191,11 +192,16 @@ public class MarioGame extends KeyAdapter{
                                 + Math.abs(agentTimer.getRemainingTime()) + " msec.");
                     }
                 }
-                // mid break
-                if(actions[1]&&actions[2]){
-                    this.world.gameStatus = GameStatus.LOSE;
-                    midBreak = true;
-                   break;
+                // Mid Break & Cheat Mode
+                if(actions[0]&&actions[1]){
+                    this.world.lose();
+                    replayBreak = true;
+                    //break;
+                }
+                if(actions[0]&&actions[2]){
+                    this.world.lose();
+                    cheatBreak = true;
+                    //break;
                 }
 
                 // update world
@@ -221,7 +227,7 @@ public class MarioGame extends KeyAdapter{
             }
         }
         MarioResult res = new MarioResult(this.world, gameEvents, agentEvents);
-        if (!resultPath.isEmpty()&&!midBreak) {
+        if (!resultPath.isEmpty()&&!replayBreak) {
             Replay.saveReplay(resultPath, res.getAgentEvents());
         }
         return new MarioResult(this.world, gameEvents, agentEvents);

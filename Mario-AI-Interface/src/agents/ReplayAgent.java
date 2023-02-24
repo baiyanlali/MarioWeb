@@ -37,7 +37,7 @@ public class ReplayAgent extends KeyAdapter implements MarioAgent {
             return this.actions[p++];
         }else{
             System.out.println("return true");
-            return new boolean[]{true, true, true, true, true};
+            return new boolean[]{true, true, false, true, true};
         }
 
     }
