@@ -29,8 +29,11 @@ function PostToServer(url,data) {
         $.post(url, data);
     }
 }
+function GameLoad(){
+    return cjCall("Play","initialGame");
+}
 function PlayLevel(level,control){
-
+    console.log("HTML:Start PlayLevel cjCall")
     var returnVal = cjCall("Play", "playGameMain", level, 5, control,30,16);
     return returnVal.then(function(){ 
       console.log("the return val is ready");  

@@ -60,6 +60,37 @@
       height: 26px;
       vertical-align:middle;
     }
+        .loading-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 80px;
+      margin: 0 auto;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .loader {
+      position: absolute;
+
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+      z-index: 999;
+    }
+
+    .loading-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 16px;
+      color: #333;
+    }
 
   </style>
 
@@ -98,11 +129,7 @@
   <section id="news">
 
     <div class="container">
-{#      <div class="page-header">#}
-{#        <h1>#}
-{#          <i class="fa-solid fa-gamepad"><b>EDRL Game Demo</b></i>#}
-{#        </h1>#}
-{#      </div>#}
+
       <br>
 
 
@@ -113,7 +140,10 @@
             <h3 id="Head">Level A</h3>
           </div>
           <div align="center" id = "GameWindow">
-            
+              <div class="loading-container" id = "loading" style="visibility: visible">
+              <div class="loader"></div>
+              <div class="loading-text">Loading</div>
+              </div>
           </div>
 
           <script>
@@ -129,8 +159,14 @@
             cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
             console.log("Cheerpj Initialize Succeed!");
             console.log("Going to play %d levels under control %s",levelNum,"{{control}}")
+            var control = ("HTML: {{control}}" == "1");
 
-            var control = ("{{control}}" == "1");
+            GameLoad().then(function (){
+                console.log("Cheerpj Initialize Succeed!");
+                document.getElementById("loading").style.visibility = 'hidden';
+            })
+
+
             for (i = 0; i < levelNum-1; i++) {
                 console.log("Play level: %s",levels[i])
                 PlayLevel(levels[i],control)

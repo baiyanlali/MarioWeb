@@ -19,6 +19,7 @@ annotationPath2 = "data/annotation2.csv"
 
 @app.route('/')
 def gamewelcome():
+    #return redirect(url_for('gameplay', id=request.remote_addr))
     return render_template('GameWelcome.html')
 
 @app.route('/question')
@@ -33,7 +34,13 @@ def gamepreplay():
         ip = request.remote_addr
         # Save the result to questionare
         idm.write_csv(questionarePath,
-                      [ip,result.get("playeds"),result.get("playedp"), result.get("gamestyle"), result.get("frequency"), result.get("age"), result.get("gender"),
+                      [ip,
+                       result.get("playeds"),
+                       result.get("playedp"),
+                       result.get("gamestyle"),
+                       result.get("frequency"),
+                       result.get("age"),
+                       result.get("gender"),
                        ""])
         idm.setControl(ip, result.get("control"))
         print(result.get("gamestyle"))
@@ -64,6 +71,7 @@ def gameplay(id):
                            jump="/annotation")
 
 
+
 @app.route('/gameplay/<id>/data', methods=['POST'])
 def getJSONData(id):
     if request.method == 'POST':
@@ -77,6 +85,7 @@ def getJSONData(id):
 @app.route('/annotation')
 def gamepreanno():
     return redirect(url_for('gameanno', id=request.remote_addr))
+
 
 
 @app.route('/annotation/<id>')

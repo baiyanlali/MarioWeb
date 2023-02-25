@@ -216,6 +216,8 @@ public class MarioWorld {
     }
 
     public void timeout() {
+        System.out.println("Java: Time out");
+        this.addEvent(EventType.LOSE, 0);
         this.gameStatus = GameStatus.TIME_OUT;
         this.mario.alive = false;
     }

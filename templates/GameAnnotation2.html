@@ -4,6 +4,8 @@
   <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+
+  <script src="../templates/data.js"></script>
   </script>
   
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -195,6 +197,7 @@ function Replay(id){
     var divElement = document.getElementById("replayWindowGame");
     cheerpjCreateDisplay(500,500,divElement);
     cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
+    GameLoad()
     closeReplayWindow();
 </script>
 

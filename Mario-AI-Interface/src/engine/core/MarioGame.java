@@ -192,6 +192,10 @@ public class MarioGame extends KeyAdapter{
                                 + Math.abs(agentTimer.getRemainingTime()) + " msec.");
                     }
                 }
+                if(timer==0){
+                    this.world.lose();
+                    replayBreak = true;
+                }
                 // Mid Break & Cheat Mode
                 if(actions[0]&&actions[1]){
                     this.world.lose();
@@ -234,7 +238,7 @@ public class MarioGame extends KeyAdapter{
     }
 
     public void stopGame(){
-        this.world.gameStatus = GameStatus.LOSE;
+        this.world.lose();
     }
 
     @Override

@@ -22,8 +22,7 @@ public class Play {
     }
 
     public static void main(String[] args) throws IOException {
-        String groupID = args[0];
-        String levelName = args[1];
+
         //MarioGame game = new MarioGame();
 
 //        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);		// For web
@@ -38,6 +37,15 @@ public class Play {
         //FIXME: Debug Use
         //playGameMain("lvl1");
 
+        System.out.println("Java: Play Java Main Function Done");
+    }
+    public static boolean initialGame(){
+        game = new MarioGame();
+        String levelName = "t1";
+        String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
+        String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
+        game.playGame(new HumanAgent(true),getLevel(levelPath),0,repPath,10);
+        return true;
     }
 
     public static byte[] playGameMain(String levelName, int lives, boolean control,int time,int col){
@@ -47,8 +55,7 @@ public class Play {
 
 //        String levelPath = String.format("./levels/group%s/%s.lvl", "0", levelName);			// For local
 //        String repPath = String.format("./reps/%s_sav.rep", levelName);	                        // For local
-        game = new MarioGame();
-		game.setLives(lives);
+        game.setLives(lives);
         MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), time, repPath,col);
 
         return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
@@ -64,8 +71,7 @@ public class Play {
 
 //        String levelPath = String.format("/app/levels/group%s/%s.txt", groupID, levelName);			// For local
 //        String repPath = String.format("./files/%s_sav.rep", levelName);	                        // For local
-
-        game = new MarioGame();
+        
         game.setLives(lives);
         return game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), time, repPath,col);
     }
