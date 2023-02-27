@@ -56,7 +56,9 @@
     .cirButton {
       width:100%;
       height:60px;
-      border-radius:15px;
+      border-radius: 40px;
+      cursor: pointer;
+      border: none;
     }
 
     .groupname{
@@ -171,7 +173,7 @@
   <div id="replayWindowGame">
   </div>
     <p>Click "Q" to stop playing and quit</p>
-  <div align="center"  id = "replayButton"><button onClick='closeReplayWindow()'>Close Window</button></div>
+  <div align="center"  id = "replayButton" class="cirButton"><button onClick='closeReplayWindow()'>Close Window</button></div>
 </div>
 
 
@@ -338,6 +340,7 @@ function Replay(id){
               <input type="radio"  class="option-input radio" name="fun" value="N">
               <b>Neither is Fun</b>
           </label>
+         <button type = "submit" value = "submit" class="cirButton" style="position: relative ; right: 25vw; font-weight: bold;">Submit</button>
 
         </div>
 
@@ -345,12 +348,11 @@ function Replay(id){
     
 <br><br>
   
-    <div class="col-md-2"></div>
+    <!-- <div class="col-md-2"></div>
     <div class="col-md-8">
-      <!-- <button onclick="getRadioValue()" class="cirButton"> <h3>Submit</h3> </button>. -->
-      <p><button type = "submit" value = "submit">Submit</button></p>
-
-    </div>
+      <button onclick="getRadioValue()" class="cirButton"> <h3>Submit</h3> </button>. -->
+      
+    <!-- </div> -->
 
 
       <br><br>
