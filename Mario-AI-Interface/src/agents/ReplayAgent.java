@@ -33,11 +33,11 @@ public class ReplayAgent extends KeyAdapter implements MarioAgent {
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
         if(!isPressed){
             if (p >= actions.length)
-                return new boolean[5];
+                return new boolean[6];
             return this.actions[p++];
         }else{
             System.out.println("return true");
-            return new boolean[]{true, true, false, true, true};
+            return new boolean[]{false, true, true, true, true, true};
         }
 
     }

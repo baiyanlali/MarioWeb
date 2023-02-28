@@ -5,7 +5,8 @@ public enum MarioActions {
     RIGHT(1, "Right"),
     DOWN(2, "Down"),
     SPEED(3, "Speed"),
-    JUMP(4, "Jump");
+    JUMP(4, "Jump"),
+    DONE(5,"Done");
 
     private int value;
     private String name;

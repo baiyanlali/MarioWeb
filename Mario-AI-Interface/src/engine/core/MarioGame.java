@@ -197,14 +197,14 @@ public class MarioGame extends KeyAdapter{
                     replayBreak = true;
                 }
                 // Mid Break & Cheat Mode
-                if(actions[0]&&actions[1]){
-                    this.world.lose();
-                    replayBreak = true;
-                    //break;
-                }
-                if(actions[0]&&actions[2]){
+                if(actions[0]&&!actions[1]&&actions[2]&&actions[3]&&actions[4]&&actions[5]){
                     this.world.lose();
                     cheatBreak = true;
+                    //break;
+                }
+                if(!actions[0]&&actions[1]&&actions[2]&&actions[3]&&actions[4]&&actions[5]){
+                    this.world.lose();
+                     replayBreak = true;
                     //break;
                 }
 
@@ -257,8 +257,6 @@ public class MarioGame extends KeyAdapter{
                 stopGame();
                 System.out.println("Pressed mg");
             }
-
-
         }
     }
     public void setLives(int lives) {

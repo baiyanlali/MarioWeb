@@ -28,7 +28,7 @@ public class HumanAgent extends KeyAdapter implements MarioAgent {
             return actions.clone();
         }else{
             System.out.println("return true");
-            return new boolean[]{true, false, true, true, true};
+            return new boolean[]{true, false, true, true, true, true};
         }
 
     }
