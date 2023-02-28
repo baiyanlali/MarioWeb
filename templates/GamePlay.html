@@ -159,7 +159,7 @@
             cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
             console.log("Cheerpj Initialize Succeed!");
             console.log("Going to play %d levels under control %s",levelNum,"{{control}}")
-            var control = ("HTML: {{control}}" == "1");
+            var control = ("{{control}}" == "1")
 
             GameLoad().then(function (){
                 console.log("Cheerpj Initialize Succeed!");
