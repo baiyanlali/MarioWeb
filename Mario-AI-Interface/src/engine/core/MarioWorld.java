@@ -30,6 +30,8 @@ public class MarioWorld {
     public int airStart, airTime;
     public ArrayList<MarioEvent> lastFrameEvents;
 
+    public int deathBuffer;
+
 //    private int segTime = -1;
 //    private int passedSegs = 0;
     private MarioEvent[] killEvents;
@@ -59,6 +61,7 @@ public class MarioWorld {
         this.lives = 0;
         this.kills = 0;
         this.deaths = 0;
+        this.deathBuffer = 0;
     }
 
     public void initializeVisuals(GraphicsConfiguration graphicsConfig) {
@@ -241,6 +244,9 @@ public class MarioWorld {
         }
         this.mario.x = (float)(newTileX * 16.0 + 8);
         this.mario.y = (float)(newTileY * 16.0);
+        //Death Buffer
+        deathBuffer = 1000;
+
     }
 
     public int[][] getSceneObservation(float centerX, float centerY, int detail) {
@@ -360,10 +366,6 @@ public class MarioWorld {
 
         if (this.currentTimer > 0) {
             this.currentTimer -= 30;
-//            if (this.segTime > 0 && (int) (this.mario.x / 256) > this.passedSegs) {
-//                this.passedSegs = (int) (this.mario.x / 256);
-//                this.currentTimer = Math.min(this.currentTimer + this.segTime, 2 * this.segTime) ;
-//            }
             if (this.currentTimer <= 0) {
                 this.currentTimer = 0;
                 this.timeout();

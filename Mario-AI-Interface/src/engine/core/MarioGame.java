@@ -211,6 +211,12 @@ public class MarioGame extends KeyAdapter{
                      replayBreak = true;
                     //break;
                 }
+                if(world.deathBuffer >0){
+                    actions = new boolean[6];
+                    world.deathBuffer -= 30;
+                }else{
+                    world.deathBuffer = 0;
+                }
 
                 // update world
                 this.world.update(actions);
@@ -234,6 +240,11 @@ public class MarioGame extends KeyAdapter{
                 }
             }
         }
+        //Pause 1 second before return
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
+
         MarioResult res = new MarioResult(this.world, gameEvents, agentEvents);
         if (!resultPath.isEmpty()&&!replayBreak) {
             Replay.saveReplay(resultPath, res.getAgentEvents());

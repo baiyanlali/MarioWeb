@@ -408,6 +408,8 @@ public class Mario extends MarioSprite {
             if (this.world.lives <= 0) {
                 this.world.lose();
             } else {
+                world.deathBuffer = 1000;
+                xa = 0;
                 this.world.lives -= 1;
                 this.world.deaths += 1;
                 world.pauseTimer = 3 * POWERUP_TIME;
@@ -430,6 +432,8 @@ public class Mario extends MarioSprite {
             } else if (invulnerableTime <= 0) {
                 this.world.lives -= 1;
                 this.world.deaths += 1;
+                world.deathBuffer = 1000;
+                xa = 0;
                 world.pauseTimer = 3 * POWERUP_TIME;
             }
         }
