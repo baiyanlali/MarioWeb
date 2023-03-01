@@ -45,7 +45,7 @@ public class Play {
         String repPath = "./reps/f_l_sav.rep";	                // For local
         //MarioGame.verbose = true;
         //Play Game
-        MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 1, repPath,30);
+        MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 100, repPath,30);
         //Replay
         //MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 30, repPath,30);
         return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
