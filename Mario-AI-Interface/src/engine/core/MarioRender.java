@@ -3,6 +3,7 @@ package engine.core;
 import javax.swing.*;
 
 import engine.helper.Assets;
+import engine.helper.GameStatus;
 import engine.helper.MarioActions;
 
 import java.awt.*;
@@ -56,8 +57,22 @@ public class MarioRender extends JComponent implements FocusListener {
             drawStringDropShadow(og, "Buttons: " + pressedButtons, 0, 2, 1);
         }
         //Render Status Info
-        drawString(og,"Game Over! ",11,3,1,0.5f);
-        drawString(og,"Game Over! ",11,5,1,0.5f);
+
+        switch (world.gameStatus){
+            case LOSE:
+                drawString(og,"Game Over! ",64,40,1,1.5f);
+                drawString(og,"YOU LOSE! ",66,56,1,1.5f);
+                break;
+            case TIME_OUT:
+                drawString(og,"Game Over! ",64,40,1,1.5f);
+                drawString(og,"Time OUT ",66,56,1,1.5f);
+                break;
+            case WIN:
+                drawString(og,"CONGRATULATION!",32,40,1,1.5f);
+                drawString(og,"YOU WIN!!",64,56,1,1.5f);
+                break;
+        }
+
 
         if (scale > 1) {
             g.drawImage(image, 0, 0, (int) (256 * scale), (int) (240 * scale), null);
@@ -69,7 +84,7 @@ public class MarioRender extends JComponent implements FocusListener {
     public void drawString(Graphics g, String text, int x, int y, int c,float scale){
         char[] ch = text.toCharArray();
         for (int i = 0; i < ch.length; i++) {
-            g.drawImage(Assets.font[ch[i] - 32][c], x + i * 8, y,(int) (256 * scale), (int) (240 * scale), null);
+            g.drawImage(Assets.font[ch[i] - 32][c], x + (int)(i * 8 * scale), y,(int) (8 * scale), (int) (8 * scale), null);
         }
     }
     public void drawStringDropShadow(Graphics g, String text, int x, int y, int c) {
