@@ -201,3 +201,8 @@ IP,Style,Frequency,Age,Gender
 127.0.0.1,A,A,A,A,A,A,,
 127.0.0.1,A,A,A,A,A,A,,
 127.0.0.1,A,B,D,A,A,C,,
+127.0.0.1,A,A,B,A,A,A,,
+,C,A,A,C,A,A,,
+1,B,A,A,C,A,A,,
+1,A,A,A,D,A,A,,
+1,A,A,A,B,A,A,,

@@ -5,9 +5,11 @@ import csv
 class idManager():
     levelNum = 200
     typeNum = 100
+    gid = 0
 
     timeMin = 1
     tutorialMax = 3
+    ip_id = {}
     ip_dic = {}
     ip_recent = {}
     ip_control = {}
@@ -19,6 +21,15 @@ class idManager():
         self.levelNum = 200
         self.typeNum = 100
         self.timeMin = 1
+        self.gid = 0
+
+    def iniId(self, ip):
+        self.gid += 1
+        self.ip_dic[ip] = str(self.gid)
+        return str(self.gid)
+
+    def getId(self, ip):
+        return self.ip_dic[ip]
 
     def getLevels(self, ip):
         if ip not in self.ip_dic.keys():
@@ -45,19 +56,19 @@ class idManager():
         tmp = random.randint(0, self.typeNum - 1)
         while "c" + str(tmp) in self.ip_type[ip]:
             tmp = random.randint(0, self.typeNum - 1)
-        result[0] = "Collector-"+str(tmp)
+        result[0] = "Collector-" + str(tmp)
         self.ip_type[ip].append("c" + str(tmp))
 
         tmp = random.randint(0, self.typeNum - 1)
         while "k" + str(tmp) in self.ip_type[ip]:
             tmp = random.randint(0, self.typeNum - 1)
-        result[1] = "Killer-"+str(tmp)
+        result[1] = "Killer-" + str(tmp)
         self.ip_type[ip].append("k" + str(tmp))
 
         tmp = random.randint(0, self.typeNum - 1)
         while "r" + str(tmp) in self.ip_type[ip]:
             tmp = random.randint(0, self.typeNum - 1)
-        result[2] = "Runner-"+str(tmp)
+        result[2] = "Runner-" + str(tmp)
         self.ip_type[ip].append("r" + str(tmp))
 
         self.ip_recent[ip] = result

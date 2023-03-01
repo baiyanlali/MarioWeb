@@ -33,9 +33,10 @@ def gamepreplay():
     if request.method == 'POST':
         result = request.form
         ip = request.remote_addr
+        cid = idm.iniId(ip)
         # Save the result to questionare
         idm.write_csv(questionarePath,
-                      [ip,
+                      [cid,
                        result.get("playeds"),
                        result.get("playedp"),
                        result.get("gamestyle"),
@@ -43,11 +44,11 @@ def gamepreplay():
                        result.get("age"),
                        result.get("gender"),
                        ""])
-        idm.setControl(ip, result.get("control"))
+        idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
-        return redirect(url_for('gametutorial', id=ip))
+        return redirect(url_for('gametutorial', id=cid))
         # debug use:
-        # return redirect(url_for('gameanno2', id=ip))
+        # return redirect(url_for('gameanno2', id=cid))
 
 
 @app.route('/gametutorial/<id>')
@@ -58,7 +59,7 @@ def gametutorial(id):
 
 @app.route('/again')
 def gamepreplayAgain():
-    return redirect(url_for('gameplay', id=request.remote_addr))
+    return redirect(url_for('gameplay', id=idm.getId(request.remote_addr)))
 
 
 @app.route('/gametutorial/<id>/data')
@@ -85,7 +86,7 @@ def getJSONData(id):
 
 @app.route('/annotation')
 def gamepreanno():
-    return redirect(url_for('gameanno', id=request.remote_addr))
+    return redirect(url_for('gameanno', id=idm.getId(request.remote_addr)))
 
 
 @app.route('/annotation/<id>')
@@ -101,7 +102,7 @@ def gameanno(id):
 
 @app.route('/annotation/radioresult', methods=['POST'])
 def getRadioData():
-    ip = request.remote_addr
+    ip = idm.getId(request.remote_addr)
 
     if request.method == 'POST':
         print("POST Eval")
@@ -119,7 +120,7 @@ def getRadioData():
 
 @app.route('/gameplay2')
 def gamepreplay2():
-    return redirect(url_for('gameplay2', id=request.remote_addr))
+    return redirect(url_for('gameplay2', id=idm.getId(request.remote_addr)))
 
 
 @app.route('/gameplay2/<id>')
@@ -141,7 +142,7 @@ def getJSONData2(id):
 
 @app.route('/annotation2')
 def gamepreanno2():
-    return redirect(url_for('gameanno2', id=request.remote_addr))
+    return redirect(url_for('gameanno2', id=idm.getId(request.remote_addr)))
 
 
 @app.route('/annotation2/<id>')
@@ -163,11 +164,11 @@ def gameannoresult2(id):
     if request.method == 'POST':
         print("result! " + id)
         resultList = list(request.form)[0].split(",")
-        levelList = idm.getRecent(request.remote_addr)
+        levelList = idm.getRecent(idm.getId(request.remote_addr))
         print(resultList)
 
         idm.write_csv(annotationPath2,
-                      [request.remote_addr, resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
+                      [idm.getId(request.remote_addr), resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
                        levelList[2],
                        ""])
 
@@ -180,12 +181,8 @@ def gameannoresult2(id):
 
 @app.route("/gameover")
 def over():
-    finish = idm.getTimes(request.remote_addr)
-    # print("finish %d",finish)
-    # if finish:
-    #     idm.setTimes(request.remote_addr)
-    # else:
-    #     idm.addTimes(request.remote_addr)
+    finish = idm.getTimes(idm.getId(request.remote_addr))
+
     return render_template("GameOver.html", finish=1, stage=1)
 
 

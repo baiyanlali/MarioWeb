@@ -55,6 +55,10 @@ public class MarioRender extends JComponent implements FocusListener {
             }
             drawStringDropShadow(og, "Buttons: " + pressedButtons, 0, 2, 1);
         }
+        //Render Status Info
+        drawString(og,"Game Over! ",11,3,1,0.5f);
+        drawString(og,"Game Over! ",11,5,1,0.5f);
+
         if (scale > 1) {
             g.drawImage(image, 0, 0, (int) (256 * scale), (int) (240 * scale), null);
         } else {
@@ -62,6 +66,12 @@ public class MarioRender extends JComponent implements FocusListener {
         }
     }
 
+    public void drawString(Graphics g, String text, int x, int y, int c,float scale){
+        char[] ch = text.toCharArray();
+        for (int i = 0; i < ch.length; i++) {
+            g.drawImage(Assets.font[ch[i] - 32][c], x + i * 8, y,(int) (256 * scale), (int) (240 * scale), null);
+        }
+    }
     public void drawStringDropShadow(Graphics g, String text, int x, int y, int c) {
         drawString(g, text, x * 8 + 5, y * 8 + 5, 0);
         drawString(g, text, x * 8 + 4, y * 8 + 4, c);
