@@ -33,7 +33,7 @@
 
     .popwindow {
         width:500px;
-        height:580px;
+        height:620px;
         border:3px solid #ff928e;
         visibility: hidden;
         position: absolute;
@@ -55,7 +55,7 @@
       border: none;
       font-weight: 600;
     }
-    .cirButton :hover{
+    .cirButton:hover{
       background-color: rgba(0,0,0,0.2);
     }
     svg{
@@ -64,9 +64,9 @@
       vertical-align:middle;
     }
     label{
-  display:block;
-  line-height:100px;
-}
+      display:block;
+      line-height:100px;
+    }
     .wrapper{
   background: #fff;
   padding: 25px;
@@ -97,7 +97,16 @@
   cursor: pointer;
 }
 
-
+#mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+ 
+}
 
 
 
@@ -115,12 +124,17 @@
     margin-top: -80px;
     opacity: 0;
   }
+
+  
 }
 
     
   </style>
 
 </head>
+
+
+<div id="mask"></div>
 <div id="replayWindow" class="popwindow">
   <div id="replayWindowGame">
   </div>
@@ -163,20 +177,26 @@ function Replay(id){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         var replayButton=document.getElementById("replayButton");
+        var mask=document.getElementById("mask")
         replayWindow.style.visibility = 'visible';
+        mask.style.visibility="visible";
 
         var result = cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
         result.then(function(){replayButton.style.visibility = 'visible'});
     }else if(id==2){
         var replayWindow=document.getElementById("replayWindow");
         var replayButton=document.getElementById("replayButton");
+        var mask=document.getElementById("mask")
+        mask.style.visibility="visible";
         replayWindow.style.visibility = 'visible';
-
+      
         var result = cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
         result.then(function(){replayButton.style.visibility = 'visible'});
     }else if(id==3){
         var replayWindow=document.getElementById("replayWindow");
         var replayButton=document.getElementById("replayButton");
+        var mask=document.getElementById("mask")
+        mask.style.visibility="visible";
         replayWindow.style.visibility = 'visible';
 
         var result = cjCall("Play", "replayGameMain", "{{level3}}",5,30,16);
@@ -193,6 +213,8 @@ function Replay(id){
     var replayWindow=document.getElementById("replayWindow");
     var replayButton=document.getElementById("replayButton");
     cjCall("Play", "stopReplay");
+    var mask=document.getElementById("mask")
+        mask.style.visibility="hidden";
     replayWindow.style.visibility = 'hidden';
     replayButton.style.visibility = 'hidden';
 }

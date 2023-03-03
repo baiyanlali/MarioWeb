@@ -42,7 +42,7 @@
 
     .popwindow {
         width:500px;
-        height:580px;
+        height:620px;
         border:3px solid #ff928e;
         visibility: hidden;
         position: absolute;
@@ -64,7 +64,7 @@
       border: none;
       font-weight: 600;
     }
-    .cirButton :hover{
+    .cirButton:hover{
       background-color: rgba(0,0,0,0.2);
     }
 
@@ -139,7 +139,7 @@
   margin-right: 0.5rem;
   outline: none;
   position: relative;
-  z-index: 1000;
+  z-index: 90;
 }
 .option-input:hover {
   background: #9faab7;
@@ -155,6 +155,15 @@
 }
 
 
+#mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  
 
 @keyframes click-wave {
   0% {
@@ -171,12 +180,12 @@
     opacity: 0;
   }
 }
-
-
     
   </style>
 
 </head>
+
+<div id="mask"></div>
 <div id="replayWindow" class="popwindow">
   <div id="replayWindowGame">
   </div>
@@ -220,6 +229,8 @@ function Replay(id){
         console.log("{{level1}}")
         var replayWindow=document.getElementById("replayWindow");
         var replayButton=document.getElementById("replayButton");
+        var mask=document.getElementById("mask")
+        mask.style.visibility="visible";
         replayWindow.style.visibility = 'visible';
 
         var result = cjCall("Play", "replayGameMain", "{{level1}}",5,30,16);
@@ -228,6 +239,8 @@ function Replay(id){
         console.log("{{level2}}")
         var replayWindow=document.getElementById("replayWindow");
         var replayButton=document.getElementById("replayButton");
+        var mask=document.getElementById("mask")
+        mask.style.visibility="visible";
         replayWindow.style.visibility = 'visible';
 
         var result = cjCall("Play", "replayGameMain", "{{level2}}",5,30,16);
@@ -244,6 +257,8 @@ function Replay(id){
     var replayWindow=document.getElementById("replayWindow");
     var replayButton=document.getElementById("replayButton");
     cjCall("Play", "stopReplay");
+    var mask=document.getElementById("mask")
+        mask.style.visibility="hidden";
     replayWindow.style.visibility = 'hidden';
     replayButton.style.visibility = 'hidden';
     }

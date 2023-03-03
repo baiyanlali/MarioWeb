@@ -60,7 +60,7 @@
       border: none;
       font-weight: 600;
     }
-    .cirButton :hover{
+    .cirButton:hover{
       background-color: rgba(0,0,0,0.2);
     }
 
@@ -224,12 +224,13 @@
 
 <section id="Reviews">
     <div class="container">
-        <h1>
-          <i class="icon-question"></i> Questionnaire
-        </h1>
-        <br>
+        
         <div class="row clearfix">
-          <div class="col-md-6">
+          <div class="col-md-8" style="margin-left:5vw ;" >
+            <h1>
+              <i class="icon-question"></i> Questionnaire
+            </h1>
+            <br>
             <form action="result" method="POST" onSubmit="return beforeSubmit(this);">
 
               <p><h4>1. Have you played Super Mario Bros before?</h4>
@@ -360,7 +361,7 @@
 
 
               <br>
-              <p><input type = "submit" value = "submit" class="cirButton"/></p>
+              <p ><b><input type = "submit" value = "Submit" class="cirButton" style="font-weight: 700; font-size: large; width: 60%;"/></b></p>
             </form>
   
           </div>
