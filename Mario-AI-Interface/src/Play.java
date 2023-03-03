@@ -27,7 +27,7 @@ public class Play {
         //playGameMain("lvl1");
 
 
-        playJavaGame();
+        //playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
     public static boolean initialGame(){
