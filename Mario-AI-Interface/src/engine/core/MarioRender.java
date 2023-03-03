@@ -16,6 +16,7 @@ public class MarioRender extends JComponent implements FocusListener {
     public static final int TICKS_PER_SECOND = 24;
 
     private float scale;
+    private int renderBuffer;
     private GraphicsConfiguration graphicsConfiguration;
 
     int frame;
@@ -57,22 +58,43 @@ public class MarioRender extends JComponent implements FocusListener {
             drawStringDropShadow(og, "Buttons: " + pressedButtons, 0, 2, 1);
         }
         //Render Status Info
-
+        boolean renderOcuppied = false;
         switch (world.gameStatus){
             case LOSE:
                 drawString(og,"Game Over! ",64,40,1,1.5f);
                 drawString(og,"YOU LOSE! ",66,56,1,1.5f);
+                renderOcuppied = true;
                 break;
             case TIME_OUT:
                 drawString(og,"Game Over! ",64,40,1,1.5f);
                 drawString(og,"Time OUT ",66,56,1,1.5f);
+                renderOcuppied = true;
                 break;
             case WIN:
                 drawString(og,"CONGRATULATION!",32,40,1,1.5f);
                 drawString(og,"YOU WIN!!",64,56,1,1.5f);
+                renderOcuppied = true;
                 break;
         }
+        if (!renderOcuppied){
+            System.out.println(renderBuffer);
+            if(world.deathBuffer > 999){
+                renderBuffer = 150;
+            }
+            if(renderBuffer>0){
+                if((renderBuffer/10)%2 == 1){
+                    drawString(og,"YOU LOSE ONE LIFE!!",56,56,1,1f);
+                }else{
+                    drawString(og,"YOU LOSE ONE LIFE!!",56,56,0,1f);
+                }
+                renderBuffer--;
+            }
 
+
+
+
+
+        }
 
         if (scale > 1) {
             g.drawImage(image, 0, 0, (int) (256 * scale), (int) (240 * scale), null);
