@@ -213,9 +213,36 @@
         
         <div class="col-md-6" align="center" style="visibility: hidden;" id = "next">
           <br>
-          <button onclick="
-          window.location.href = window.location.href; 
-          " class="cirButton"><h3>Repeat Tutorial</h3></button>
+          <button onclick='
+                  //Init Cheerpj Framework
+            document.getElementById("game").style.visibility = "hidden";
+            document.getElementById("next").style.visibility = "hidden";
+
+
+          //var divElement = document.getElementById("GameWindow");
+          tutorialId = tutorialId+1
+          var level = "t"+tutorialId;
+          var img=document.getElementById("windowshow");
+
+          GameLoad().then(function(){
+              console.log("Cheerpj Initialize Succeed!");
+              document.getElementById("loading").style.visibility = "hidden";
+          })
+
+          var control = ("{{control}}" == "1");
+
+        PlayLevel(level,control)
+          .then(function (){
+            //play next?
+            if (tutorialId<parseInt("{{maxT}}")){
+              document.getElementById("next").style.visibility = "visible";
+            }
+              document.getElementById("game").style.visibility = "visible";
+
+          });
+
+
+          ' class="cirButton"><h3>Repeat Tutorial</h3></button>
         </div>
         <div class="col-md-6" align="center" style="visibility: hidden;" id = "game">
           <br>
@@ -226,19 +253,12 @@
 
         <script>
           //Init Cheerpj Framework
-
-
           cheerpjInit();
+
           var divElement = document.getElementById("GameWindow");
+          var tutorialId = parseInt("{{tutorial}}")
           var level = "t"+"{{tutorial}}";
           var img=document.getElementById("windowshow");
-          
-            if ("{{next}}"=="1"){
-              img.style.visibility= "visible";
-            }else{
-              img.style.visibility= "hidden";
-            }
-         
 
           cheerpjCreateDisplay(500,500,divElement);
           cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
@@ -253,10 +273,10 @@
         PlayLevel(level,control)
           .then(function (){
             //play next?
-            if ("{{next}}"=="1"){
+            if (tutorialId<parseInt("{{maxT}}")){
               document.getElementById("next").style.visibility = "visible";
             }
-            document.getElementById("game").style.visibility = "visible";
+              document.getElementById("game").style.visibility = "visible";
 
           });
       

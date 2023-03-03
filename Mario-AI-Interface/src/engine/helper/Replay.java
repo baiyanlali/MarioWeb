@@ -29,7 +29,6 @@ public class Replay {
         byte[] content = new byte[events.size()];
         for (int i = 0; i < events.size(); i++) {
             boolean[] action = events.get(i).getActions();
-//            System.out.println(action);
             content[i] = serializeAction(action);
         }
         return content;

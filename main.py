@@ -53,7 +53,7 @@ def gamepreplay():
 
 @app.route('/gametutorial/<id>')
 def gametutorial(id):
-    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id),
+    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id),maxT=idm.tutorialMax,
                            control=idm.getControl(id))
 
 

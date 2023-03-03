@@ -26,6 +26,7 @@ public class Play {
         //FIXME: Debug Use
         //playGameMain("lvl1");
 
+
         playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
