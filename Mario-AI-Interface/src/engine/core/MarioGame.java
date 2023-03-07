@@ -203,12 +203,12 @@ public class MarioGame extends KeyAdapter{
                 }
                 // Mid Break & Cheat Mode
                 if(actions[0]&&!actions[1]&&actions[2]&&actions[3]&&actions[4]&&actions[5]){
-                    this.world.lose();
+                    this.world.debug();
                     cheatBreak = true;
                     //break;
                 }
                 if(!actions[0]&&actions[1]&&actions[2]&&actions[3]&&actions[4]&&actions[5]){
-                    this.world.lose();
+                    this.world.debug();
                      replayBreak = true;
                     //break;
                 }
