@@ -180,15 +180,15 @@
         opacity: 0;
       }
     }
+    @media screen and (max-width: 768px){
+      body{
+        min-width: fit-content;
+      }
+    }
+
   </style>
 
 </head>
-<div id="replayWindow" class="popwindow">
-  <div id="replayWindowGame">
-  </div>
-  <div align="center"><button onClick="closeReplayWindow()" class="cirButton">Close Window</button></div>
-</div>
-
 
 <body id="aingames"><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
     <symbol id="icon-more" viewBox="0 0 1789 1024">
@@ -242,10 +242,6 @@
       </div>
     </div>
   </nav>
-
-
-
-
   <section id="Reviews">
     <div class="container">
       <div class="page-header">
@@ -259,14 +255,12 @@
 
         <div class="col-md-5" style="
         width: fit-content;
-        display: flex;
-        justify-content: center;
-        min-width: fit-content;">
-          <img src="../img/frameworkAD.gif">
+        min-width: fit-content;" height="100%">
+        <br>
+          <img src="../img/frameworkAD.gif" max-height="auto">
         </div>
 
         <div class="col-md-5">
-          <br><br>
           <h4>Purpose of the Experiment</h4>
           <ul>
             <li>
