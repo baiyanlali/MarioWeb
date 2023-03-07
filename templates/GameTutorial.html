@@ -212,8 +212,8 @@
           </div>
 
 
-          <img style=" width: 80%; height: 90vh;top: 62px; left: 10vw;
-            position: fixed;z-index: 900; visibility: visible; " src="../templates/Web/pic.png" id="windowshow">
+          <img style=" height: 90vh;top: -10vh; left: -10vw;
+            position: absolute;z-index: 900; visibility: visible; " src="../templates/Web/pic.png" id="windowshow">
 
           <div align="center" id="GameWindow">
 
@@ -270,10 +270,10 @@
             <h3>Play Game</h3>
           </button>
         </div>
-        <div class="col-md-6" id="countdown" style="z-index:999; position:fixed; left:11vw; bottom: 5vh; color: #000; font-size: xx-large;"></div>
+        <div class="col-md-6" id="countdown" style="z-index:999; position:absolute; left:11vw; bottom: 1vh; color: #000; font-size: xx-large;"></div>
         <script>
           function countdown() {
-            var count = 15; // 设置倒计时秒数
+            var count = 10; // 设置倒计时秒数
             var timer = setInterval(function () {
               count--;
               if (count <= 0) {
@@ -282,7 +282,7 @@
                 $("#windowshow:visible").hide(); // 倒计时结束后隐藏倒计时容器
                 
               } else {
-                $("#countdown").html("This instruction will close in "+ count +"s"); // 更新倒计时容器内容
+                $("#countdown").html("This instruction will close in "+ count +"s. <br>Or click to close."); // 更新倒计时容器内容
                 $("#windowshow").click(function(){
                   $("#windowshow").hide();
                   $("#countdown").hide();
@@ -312,9 +312,8 @@
           GameLoad().then(function () {
             console.log("Cheerpj Initialize Succeed!");
 
-            if (img.style.visibility == "visible") {
-              img.style.visibility = "hidden";
-            }
+            $("#windowshow: visible").hide();
+            $("#countdown").hide();
             document.getElementById("loading").style.visibility = 'hidden';
           })
 
