@@ -175,26 +175,15 @@
 
             </div>
 
-    
-            <script>
-              function display(){
-              var img=document.getElementById("windowshow");
-              if (img.style.visibility == "visible"){
-                img.style.visibility= "hidden";
-              }
-            }
-
-            </script>
-
 
             <img style=" width: 80%; height: 90vh;top: 5vh; left: 10vw;
-            position: fixed;z-index: 900;cursor: pointer; visibility: visible; " src="../templates/Web/pic.png" id="windowshow" onclick="display()"> 
+            position: fixed;z-index: 900; visibility: visible; " src="../templates/Web/pic.png" id="windowshow"> 
           <br>
           <div align="center" id = "GameWindow">
               
               <div class="loading-container" id="loading" style="visibility: visible">
               <div class="loader"></div>
-              <div class="loading-text">Loading</div>
+              <div class="loading-text">Loading</div>e
               </div>
 
           </div>
@@ -213,9 +202,10 @@
           tutorialId = tutorialId+1
           var level = "t"+tutorialId;
           
-
+         
           GameLoad().then(function(){
               console.log("Cheerpj Initialize Succeed!");
+             
               document.getElementById("loading").style.visibility = "hidden";
           })
 
@@ -255,6 +245,10 @@
 
           GameLoad().then(function(){
               console.log("Cheerpj Initialize Succeed!");
+              
+              if (img.style.visibility == "visible"){
+                img.style.visibility= "hidden";
+              }
               document.getElementById("loading").style.visibility = 'hidden';
           })
 
