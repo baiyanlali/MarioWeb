@@ -4,5 +4,6 @@ public enum GameStatus {
     RUNNING,
     WIN,
     LOSE,
-    TIME_OUT
+    TIME_OUT,
+    DEBUG
 }
