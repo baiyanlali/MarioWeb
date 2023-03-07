@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c32bfd4e-6189-47f3-9d6c-c1825d3d7e5f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Mario-AI-Interface/src/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/Mario-AI-Interface/src/Play.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +226,7 @@
       <workItem from="1677595224096" duration="799000" />
       <workItem from="1677674512203" duration="4789000" />
       <workItem from="1677840429576" duration="1147000" />
-      <workItem from="1678093963205" duration="7404000" />
+      <workItem from="1678093963205" duration="7453000" />
     </task>
     <servers />
   </component>
