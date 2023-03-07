@@ -79,7 +79,6 @@ def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
         resultList = list(request.form)[0].split(",")
-        print(resultList)
         saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
     return "return!"
 
@@ -107,7 +106,6 @@ def getRadioData():
     if request.method == 'POST':
         print("POST Eval")
         result = request.form
-        print(result)
         ipRecent = idm.getRecent(ip)
         idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
 
@@ -135,7 +133,6 @@ def getJSONData2(id):
     if request.method == 'POST':
         print("POST Game")
         resultList = list(request.form)[0].split(",")
-        print(resultList)
         saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
     return "return!"
 
@@ -165,9 +162,8 @@ def gameannoresult2(id):
         print("result: " + id)
 
         resultList = list(request.form)[0].split(",")
-        print(resultList)
         levelList = idm.getRecent(idm.getId(request.remote_addr))
-        print(resultList)
+
 
         idm.write_csv(annotationPath2,
                       [idm.getId(request.remote_addr), resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
