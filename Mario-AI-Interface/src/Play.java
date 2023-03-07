@@ -33,9 +33,8 @@ public class Play {
         game = new MarioGame();
         String levelName = "t1";
         String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
-        String repPath = String.format("/files/lvl1_sav.rep");                            // For web
-        //game.playGame(new HumanAgent(true),getLevel(levelPath),0,repPath,10);
-        game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 10, repPath,10);
+        String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
+        game.playGame(new HumanAgent(true),getLevel(levelPath),0,repPath,10);
         return true;
     }
 

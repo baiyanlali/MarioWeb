@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c32bfd4e-6189-47f3-9d6c-c1825d3d7e5f" name="Changes" comment="" />
+    <list default="true" id="c32bfd4e-6189-47f3-9d6c-c1825d3d7e5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Mario-AI-Interface/src/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/Mario-AI-Interface/src/Play.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
