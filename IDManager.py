@@ -8,7 +8,7 @@ class idManager():
     gid = 0
 
     timeMin = 1
-    tutorialMax = 3
+    tutorialMax = 10
     ip_id = {}
     ip_dic = {}
     ip_recent = {}

@@ -27,6 +27,7 @@ hs_err_pid*
 replay_pid*
 *.xml
 *.pyc
+*.csv
 .idea/workspace.xml
 .idea/workspace.xml
 .idea/workspace.xml

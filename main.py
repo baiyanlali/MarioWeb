@@ -46,7 +46,7 @@ def gamepreplay():
                        ""])
         idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
-        return redirect(url_for('gametutorial', id=cid))
+        return redirect(url_for('gameplay', id=cid))
         # debug use:
         # return redirect(url_for('gameanno2', id=cid))
 
@@ -162,8 +162,10 @@ def gameanno2(id):
 @app.route('/annotation2/<id>/result', methods=['POST'])
 def gameannoresult2(id):
     if request.method == 'POST':
-        print("result! " + id)
+        print("result: " + id)
+
         resultList = list(request.form)[0].split(",")
+        print(resultList)
         levelList = idm.getRecent(idm.getId(request.remote_addr))
         print(resultList)
 

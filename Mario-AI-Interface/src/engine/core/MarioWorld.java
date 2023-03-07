@@ -230,13 +230,14 @@ public class MarioWorld {
         int newTileY = (int) this.mario.y / 16;
         try {
             l: while (true) {
+                //System.out.println(newTileX);
                 for (int y = this.level.tileHeight - 2; y >= 8; y--) {
                     if (this.level.standable(newTileX, y)) {
                         newTileY = y;
                         break l;
                     }
                 }
-                newTileX--;
+                newTileX++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             this.lose();
@@ -245,7 +246,7 @@ public class MarioWorld {
         this.mario.x = (float)(newTileX * 16.0 + 8);
         this.mario.y = (float)(newTileY * 16.0);
         //Death Buffer
-        deathBuffer = 1000;
+        deathBuffer = 50;
 
     }
 

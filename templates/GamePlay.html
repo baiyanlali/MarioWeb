@@ -212,12 +212,12 @@
             var control = ("{{control}}" == "1")
 
             GameLoad().then(function () {
-              console.log("Cheerpj Initialize Succeed!");
+              console.log("GameLoad Initialize Succeed!");
               document.getElementById("loading").style.visibility = 'hidden';
-            })
+            }).then(function (){
 
 
-            for (i = 0; i < levelNum - 1; i++) {
+             for (i = 0; i < levelNum - 1; i++) {
               console.log("Play level: %s", levels[i])
               PlayLevel(levels[i], control)
                 .then(function () { alert("Game Over!") })
@@ -233,6 +233,10 @@
                 alert("Please proceed to answer some questions about the levels you just played!")
                 window.location.href = "{{jump}}"
               });
+            })
+
+
+
 
 
           </script>
