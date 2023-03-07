@@ -115,17 +115,6 @@ public class MarioGame extends KeyAdapter{
         return this.runGame(agent, level, timer, 0, true, 50, 2, "",col);
     }
 
-    public boolean renderGame(){
-        this.window = new JFrame("Mario AI Framework");
-        this.render = new MarioRender(2);
-        this.window.setContentPane(this.render);
-        this.window.pack();
-        this.window.setResizable(false);
-        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.render.init();
-        this.window.setVisible(true);
-        return true;
-    }
 
     /**
      * Run a certain mario level with a certain agent
@@ -140,7 +129,7 @@ public class MarioGame extends KeyAdapter{
      * @return statistics about the current game
      */
     public MarioResult runGame(MarioAgent agent, String level, int timer, int marioState, boolean visuals, int fps, float scale, String resultPath, int col) {
-/*        if (visuals) {
+        if (visuals) {
             this.window = new JFrame("Mario AI Framework");
             this.render = new MarioRender(scale);
             this.window.setContentPane(this.render);
@@ -149,7 +138,7 @@ public class MarioGame extends KeyAdapter{
             this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.render.init();
             this.window.setVisible(true);
-        }*/
+        }
         this.setAgent(agent);
         return this.gameLoop(level, timer, marioState, visuals, fps, resultPath, col);
     }

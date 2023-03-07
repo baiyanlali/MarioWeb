@@ -26,13 +26,16 @@ public class Play {
         //FIXME: Debug Use
         //playGameMain("lvl1");
 
-        initialGame();
-        playJavaGame();
+//        initialGame();
+//        playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
     public static boolean initialGame(){
         game = new MarioGame();
-        game.renderGame();
+        String levelName = "t1";
+        String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
+        String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
+        game.playGame(new HumanAgent(true),getLevel(levelPath),0,repPath,10);
         return true;
     }
 
