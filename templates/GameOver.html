@@ -58,12 +58,13 @@
     }
 
     .cirButton {
-      width: 100%;
+      width: 40%;
       height: 60px;
       border-radius: 40px;
       cursor: pointer;
       border: none;
       font-weight: 600;
+      
     }
 
     .cirButton:hover {
@@ -177,24 +178,6 @@
       </div>
     </div>
   </nav>
-  <script>
-    window.onload = function () {
-      console.log("{{finish}}");
-      var fini = document.getElementById("Finish");
-      console.log("{{finish}}" == "1")
-      if ("{{finish}}" == "1") {
-        fini.style.visibility = "visible";
-        if ('{{stage}}' == '2') {
-          fini.innerText = "Finish"
-        } else {
-          fini.innerText = "Go to Phase II"
-        }
-
-      } else {
-        fini.style.visibility = "hidden";
-      }
-    }
-  </script>
 
   <section id="Over">
     <div class="container">
@@ -205,25 +188,12 @@
       <h3>
         Do you want to play another round?
       </h3>
-      <button onclick="window.location.href = '/gameplay2';" class="cirButton">Yes</button>
-      <button onclick="window.location.href = 'about:blank';" class="cirButton">No</button>
-      <div>
-        <button onclick="
-        if('{{stage}}' == '2'){
-            window.location.href = '/gameplay2';
-        }else{
-            window.location.href = '/again'
-        }
-        " style="visibility: hidden">Keep Playing!</button>
-        <button id="Finish" onclick="
-        if('{{stage}}' == '2'){
-            window.location.href = 'about:blank';
-            window.close();
-        }else{
-            window.location.href = '/gameplay2';
-        }
-       " style="visibility: hidden" class="cirButton">Finish!</button>
-      </div>
+      <br>
+      <button onclick="window.location.href = '/gameplay2';" class="cirButton">Yes, I want another round</button>
+      <br>
+      <br>
+      <button onclick="window.location.href = 'window.close';" class="cirButton">No, and close the window</button>
+
     </div>
   </section>
 
