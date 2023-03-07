@@ -403,17 +403,17 @@ public class Mario extends MarioSprite {
             } else {
                 this.isLarge = false;
             }
-            invulnerableTime = 32;
+            invulnerableTime = 75;
         } else if (this.world != null) {
             if (this.world.lives <= 0) {
                 this.world.lose();
             } else {
-                world.deathBuffer = 1000;
+                world.deathBuffer = 50;
                 xa = 0;
                 this.world.lives -= 1;
                 this.world.deaths += 1;
                 world.pauseTimer = 3 * POWERUP_TIME;
-                invulnerableTime = 32;
+                invulnerableTime = 75;
             }
         }
     }
@@ -432,12 +432,11 @@ public class Mario extends MarioSprite {
             } else if (invulnerableTime <= 0) {
                 this.world.lives -= 1;
                 this.world.deaths += 1;
-                world.deathBuffer = 1000;
                 xa = 0;
                 world.pauseTimer = 3 * POWERUP_TIME;
             }
         }
-        invulnerableTime = 72;
+        invulnerableTime = 150;
     }
 
     public void getFlower() {

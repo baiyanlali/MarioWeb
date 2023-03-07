@@ -77,9 +77,9 @@ public class MarioRender extends JComponent implements FocusListener {
                 break;
         }
         if (!renderOcuppied){
-            System.out.println(renderBuffer);
+            //System.out.println(renderBuffer);
             if(world.deathBuffer > 999){
-                renderBuffer = 150;
+                renderBuffer = 100;
             }
             if(renderBuffer>0){
                 if((renderBuffer/10)%2 == 1){

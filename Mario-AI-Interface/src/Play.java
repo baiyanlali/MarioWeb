@@ -32,10 +32,7 @@ public class Play {
     }
     public static boolean initialGame(){
         game = new MarioGame();
-        String levelName = "t1";
-        String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
-        String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
-        game.playGame(new HumanAgent(true),getLevel(levelPath),0,repPath,10);
+        game.renderGame();
         return true;
     }
 
