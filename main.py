@@ -46,7 +46,7 @@ def gamepreplay():
                        ""])
         idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
-        return redirect(url_for('gameplay', id=cid))
+        return redirect(url_for('gametutorial', id=cid))
         # debug use:
         # return redirect(url_for('gameanno2', id=cid))
 

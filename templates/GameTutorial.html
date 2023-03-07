@@ -243,9 +243,8 @@
               console.log("Cheerpj Initialize Succeed!");
              
               document.getElementById("loading").style.visibility = "hidden";
-          })
-
-          var control = ("{{control}}" == "1");
+          }).then(function (){
+               var control = ("{{control}}" == "1");
 
         PlayLevel(level,control)
           .then(function (){
@@ -255,7 +254,11 @@
             }
               document.getElementById("game").style.visibility = "visible";
 
-          });' class="cirButton">
+          });
+
+                  })
+
+         ' class="cirButton">
             <h3>Repeat Tutorial</h3>
           </button>
         </div>
