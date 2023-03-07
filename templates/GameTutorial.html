@@ -270,7 +270,7 @@
         <div class="col-md-6" id="countdown" style="z-index:999; position:fixed; left:11vw; bottom: 5vh; color: #000; font-size: xx-large;"></div>
         <script>
           function countdown() {
-            var count = 15; // 设置倒计时秒数
+            var count = 10; // 设置倒计时秒数
             var timer = setInterval(function () {
               count--;
               if (count <= 0) {
@@ -309,9 +309,8 @@
           GameLoad().then(function () {
             console.log("Cheerpj Initialize Succeed!");
 
-            if (img.style.visibility == "visible") {
-              img.style.visibility = "hidden";
-            }
+            $("#windowshow: visible").hide();
+            $("#countdown").hide();
             document.getElementById("loading").style.visibility = 'hidden';
           })
 
