@@ -26,8 +26,8 @@ public class Play {
         //FIXME: Debug Use
         //playGameMain("lvl1");
 
-
-        //playJavaGame();
+        initialGame();
+        playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
     public static boolean initialGame(){
@@ -37,7 +37,7 @@ public class Play {
     }
 
     public static byte[] playJavaGame(){
-        MarioGame game = new MarioGame();
+
         game.setLives(3);
         String levelPath = "./levels/group0/lvl1.lvl";			// For local
         String repPath = "./reps/f_l_sav.rep";	                // For local
