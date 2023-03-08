@@ -24,7 +24,7 @@ class idManager():
         self.gid = 0
 
     def iniId(self, ip):
-        self.ip_dic[ip] = ip
+        self.ip_id[ip] = ip
         # self.gid += 1
         # self.ip_dic[ip] = str(self.gid)
         # return str(self.gid)
