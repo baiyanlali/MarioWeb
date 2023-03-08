@@ -189,10 +189,10 @@
         Do you want to play another round?
       </h3>
       <br>
-      <button onclick="window.location.href = '/gameplay2';" class="cirButton">Yes, I want another round</button>
+      <button onclick="window.location.href = '/gameplay2';" class="cirButton">Yes</button>
       <br>
       <br>
-      <button id="hideButton" class="cirButton">No</button>
+      <button id="hideButton" class="cirButton" onclick="window.close()">No</button>
       <script>
         // document.getElementById("hideButton").addEventListener("click", function () {
         //   var buttons = document.getElementsByTagName("button");
@@ -203,7 +203,7 @@
 
         document.getElementById("hideButton").addEventListener("click", function () {
           var newWindow = window.open("", "_self");
-          newWindow.close();
+            newWindow.close();
         });
       </script>
 
