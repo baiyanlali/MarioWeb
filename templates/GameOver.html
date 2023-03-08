@@ -28,14 +28,7 @@
   <link href="../templates/Web/css2" rel="stylesheet">
 
   <style>
-    #funding {
-      cursor: pointer;
-      R
-    }
 
-    #prove {
-      display: none;
-    }
 
     #funding:hover+#prove {
       display: block;
@@ -185,26 +178,29 @@
         <i class="icon-chevron-down"></i> Thank You For Playing!!!
       </h1>
       <br>
-      <h3>
+      <h3 id="question">
         Do you want to play another round?
       </h3>
       <br>
       <button onclick="window.location.href = '/gameplay2';" class="cirButton">Yes</button>
       <br>
       <br>
-      <button id="hideButton" class="cirButton" onclick="window.close()">No</button>
+      <button id="hideButton" class="cirButton">No</button>
       <script>
-        // document.getElementById("hideButton").addEventListener("click", function () {
-        //   var buttons = document.getElementsByTagName("button");
-        //   for (var i = 0; i < buttons.length; i++) {
-        //     buttons[i].style.display = "none";
-        //   }
-        // });
-
         document.getElementById("hideButton").addEventListener("click", function () {
-          var newWindow = window.open("", "_self");
-            newWindow.close();
-        });
+          var buttons = document.getElementsByTagName("button");
+          for (var i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+          }
+            var text=document.getElementById("question");
+            text.style.visibility="hidden";
+        }); 
+
+
+        // document.getElementById("hideButton").addEventListener("click", function () {
+        //   var newWindow = window.open("", "_self");
+        //     newWindow.close();
+        // });
       </script>
 
     </div>
