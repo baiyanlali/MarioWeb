@@ -107,7 +107,7 @@
       cursor: pointer;
       border: none;
       font-weight: 600;
-      z-index: 100;
+
     }
 
     .cirButton:hover {
@@ -150,6 +150,12 @@
       background-color: rgba(0, 0, 0, 0);
       z-index: 99;
     }
+
+    .col-md-6 .col-md-12{
+      z-index: 100;
+    }
+
+
   </style>
 
 </head>
@@ -226,17 +232,9 @@
           </div>
 
 
-          <div id="mask" onclick="replay()"></div>
-          <script>
-            function replay(){
-            
-              $("#windowshow:hidden").show();
 
-            
-            }
-          </script>
 
-          <div align="center" id="GameWindow">
+          <div align="center" id="GameWindow" style="z-index: 100;">
 
             <div class="loading-container" id="loading" style="visibility: visible">
               <div class="loader"></div>
@@ -372,7 +370,15 @@
     </div>
 
 
+    <div id="mask" onclick="replay()"></div>
+    <script>
+      function replay(){
+      
+        $("#windowshow:hidden").show();
 
+      
+      }
+    </script>
 
 
   </section>
