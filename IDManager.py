@@ -24,9 +24,11 @@ class idManager():
         self.gid = 0
 
     def iniId(self, ip):
-        self.gid += 1
-        self.ip_dic[ip] = str(self.gid)
-        return str(self.gid)
+        self.ip_dic[ip] = ip
+        # self.gid += 1
+        # self.ip_dic[ip] = str(self.gid)
+        # return str(self.gid)
+        return ip
 
     def getId(self, ip):
         return self.ip_dic[ip]
@@ -89,8 +91,10 @@ class idManager():
 
     def setControl(self, ip, content):
         if content == "A":
+            print("A" + ip)
             self.ip_control[ip] = 0
         else:
+            print("B" + ip)
             self.ip_control[ip] = 1
 
     def setTimes(self, ip):

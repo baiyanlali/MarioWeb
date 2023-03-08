@@ -1,14 +1,15 @@
 import json
 import os
 import struct
+import uuid
 
 from IDManager import idManager
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__, static_folder='')
 idm = idManager()
-
+app.secret_key = 'fkdjsafjdkfdlkjfadskjfadskljdsfklj'
 replayDataPath = "reps/"
 evalDataPath = "evals/"
 
@@ -16,6 +17,11 @@ questionarePath = "data/questionare.csv"
 annotationPath = "data/annotation.csv"
 annotationPath2 = "data/annotation2.csv"
 
+#id=idm.getId(request.remote_addr)
+def getId():
+    if 'name' not in session:
+        session['name'] = str(uuid.uuid4())
+    return session['name']
 
 @app.route('/')
 def gamewelcome():
@@ -32,7 +38,8 @@ def gamequestion():
 def gamepreplay():
     if request.method == 'POST':
         result = request.form
-        ip = request.remote_addr
+        # ip = request.remote_addr
+        ip = getId()
         cid = idm.iniId(ip)
         # Save the result to questionare
         idm.write_csv(questionarePath,
@@ -59,7 +66,7 @@ def gametutorial(id):
 
 @app.route('/again')
 def gamepreplayAgain():
-    return redirect(url_for('gameplay', id=idm.getId(request.remote_addr)))
+    return redirect(url_for('gameplay', getId))
 
 
 @app.route('/gametutorial/<id>/data')
@@ -85,7 +92,7 @@ def getJSONData(id):
 
 @app.route('/annotation')
 def gamepreanno():
-    return redirect(url_for('gameanno', id=idm.getId(request.remote_addr)))
+    return redirect(url_for('gameanno', getId))
 
 
 @app.route('/annotation/<id>')
@@ -118,7 +125,7 @@ def getRadioData():
 
 @app.route('/gameplay2')
 def gamepreplay2():
-    return redirect(url_for('gameplay2', id=idm.getId(request.remote_addr)))
+    return redirect(url_for('gameplay2', getId))
 
 
 @app.route('/gameplay2/<id>')
@@ -139,7 +146,7 @@ def getJSONData2(id):
 
 @app.route('/annotation2')
 def gamepreanno2():
-    return redirect(url_for('gameanno2', id=idm.getId(request.remote_addr)))
+    return redirect(url_for('gameanno2', getId))
 
 
 @app.route('/annotation2/<id>')
