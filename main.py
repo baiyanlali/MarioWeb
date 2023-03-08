@@ -66,7 +66,7 @@ def gametutorial(id):
 
 @app.route('/again')
 def gamepreplayAgain():
-    return redirect(url_for('gameplay', getId()))
+    return redirect(url_for('gameplay', id=getId()))
 
 
 @app.route('/gametutorial/<id>/data')
@@ -92,7 +92,7 @@ def getJSONData(id):
 
 @app.route('/annotation')
 def gamepreanno():
-    return redirect(url_for('gameanno', getId()))
+    return redirect(url_for('gameanno', id=getId()))
 
 
 @app.route('/annotation/<id>')
@@ -125,7 +125,7 @@ def getRadioData():
 
 @app.route('/gameplay2')
 def gamepreplay2():
-    return redirect(url_for('gameplay2', getId()))
+    return redirect(url_for('gameplay2', id=getId()))
 
 
 @app.route('/gameplay2/<id>')
@@ -146,7 +146,7 @@ def getJSONData2(id):
 
 @app.route('/annotation2')
 def gamepreanno2():
-    return redirect(url_for('gameanno2', getId()))
+    return redirect(url_for('gameanno2', id=getId()))
 
 
 @app.route('/annotation2/<id>')
