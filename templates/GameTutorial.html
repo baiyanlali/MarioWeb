@@ -151,11 +151,15 @@
       z-index: 99;
     }
 
-    .col-md-6 .col-md-12{
+    .col-md-6 {
       z-index: 100;
     }
-
-
+    .col-md-12{
+      z-index: 100;
+    }
+    .GameWindow{
+      z-index: 100;
+    }
   </style>
 
 </head>
@@ -262,6 +266,7 @@
               console.log("Cheerpj Initialize Succeed!");
              
               document.getElementById("loading").style.visibility = "hidden";
+              $("#mask").hide();
           })
                var control = ("{{control}}" == "1");
 
