@@ -83,9 +83,9 @@ public class MarioRender extends JComponent implements FocusListener {
             }
             if(renderBuffer>0){
                 if((renderBuffer/10)%2 == 1){
-                    drawString(og,"YOU LOSE ONE LIFE!!",56,56,1,1f);
+                    drawString(og,"YOU LOSE A LIFE!!",56,56,1,1f);
                 }else{
-                    drawString(og,"YOU LOSE ONE LIFE!!",56,56,0,1f);
+                    drawString(og,"YOU LOSE A LIFE!!",56,56,0,1f);
                 }
                 renderBuffer--;
             }
