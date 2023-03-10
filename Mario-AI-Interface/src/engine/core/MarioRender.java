@@ -62,12 +62,12 @@ public class MarioRender extends JComponent implements FocusListener {
         switch (world.gameStatus){
             case LOSE:
                 drawString(og,"Game Over! ",64,40,1,1.5f);
-                drawString(og,"YOU LOSE! ",66,56,1,1.5f);
+                drawString(og,"YOU LOST! ",66,56,1,1.5f);
                 renderOcuppied = true;
                 break;
             case TIME_OUT:
                 drawString(og,"Game Over! ",64,40,1,1.5f);
-                drawString(og,"Time OUT ",66,56,1,1.5f);
+                drawString(og,"Time Out ",66,56,1,1.5f);
                 renderOcuppied = true;
                 break;
             case WIN:
@@ -83,9 +83,9 @@ public class MarioRender extends JComponent implements FocusListener {
             }
             if(renderBuffer>0){
                 if((renderBuffer/10)%2 == 1){
-                    drawString(og,"YOU LOSE A LIFE!!",56,56,1,1f);
+                    drawString(og,"YOU LOST A LIFE!!",56,56,1,1f);
                 }else{
-                    drawString(og,"YOU LOSE A LIFE!!",56,56,0,1f);
+                    drawString(og,"YOU LOST A LIFE!!",56,56,0,1f);
                 }
                 renderBuffer--;
             }
