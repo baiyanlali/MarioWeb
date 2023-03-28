@@ -32,13 +32,9 @@ def getId():
 @app.route('/')
 def gamewelcome():
     ip = getId()
-    return redirect(url_for('gamewelcomeTest',id = ip))
     # return redirect(url_for('gameplay', id=request.remote_addr))
-    # return render_template('GameWelcome.html')
-
-@app.route('/<id>')
-def gamewelcomeTest(id):
     return render_template('GameWelcome.html')
+
 
 @app.route('/question')
 def gamequestion():
