@@ -15,7 +15,7 @@ print = logging.getLogger().info
 
 app = Flask(__name__, static_folder='')
 idm = idManager()
-app.secret_key = 'fkdjsafjdkfdlkjfadskjfadskljdsfklj'
+app.secret_key = 'asdfasdfawefaewvaf'
 replayDataPath = "reps/"
 evalDataPath = "evals/"
 
@@ -31,6 +31,7 @@ def getId():
 
 @app.route('/')
 def gamewelcome():
+    ip = getId()
     # return redirect(url_for('gameplay', id=request.remote_addr))
     return render_template('GameWelcome.html')
 

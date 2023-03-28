@@ -234,16 +234,22 @@ public class MarioWorld {
     public void revive() {
         int newTileX = (int) this.mario.x / 16;
         int newTileY = (int) this.mario.y / 16;
+        int direction = 1;
         try {
             l: while (true) {
-                //System.out.println(newTileX);
-                for (int y = this.level.tileHeight - 2; y >= 8; y--) {
-                    if (this.level.standable(newTileX, y)) {
-                        newTileY = y;
-                        break l;
+                if(newTileX<this.level.tileWidth){
+                    //for (int y = this.level.tileHeight-2; y >= 8; y--) {
+                    for (int y = 0; y <= this.level.tileHeight-2; y++) {
+                        if (this.level.standable(newTileX, y)) {
+                            newTileY = y;
+                            break l;
+                        }
                     }
+                    newTileX+=direction;
+                }else{
+                    direction = -1;
+                    newTileX = (int) this.mario.x / 16;
                 }
-                newTileX++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             this.lose();

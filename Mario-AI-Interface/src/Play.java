@@ -24,8 +24,7 @@ public class Play {
     public static void main(String[] args) throws IOException {
 
         //FIXME: Debug Use
-        //playGameMain("lvl1");
-//        initialGame();
+//        game = new MarioGame();
 //        playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
