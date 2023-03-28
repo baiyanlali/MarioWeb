@@ -212,19 +212,24 @@
   </nav>
 
 
-  <section style="background-color: rgba(255,255,255,0.5);">
+  <section style="background-color: rgb(255, 255, 255);">
 
-    <div class="container" style="font-weight: 600;
-    background-color: rgba(255,255,255,0.7);">
+    <div class="container" style="font-weight: 600
+   ;">
 
-      <div class="row clearfix">
+      <div class="row clearfix" >
+        <!-- <style=" background-color: rgba(255,255,255);height: 130vh;
+      margin-top: -90px;"> -->
 
-        <div class="col-md-12">
+        <div class="col-md-12" style=" background-color: rgba(255,255,255);" >
           <div align="center">
+
             <h3>Super Mario Bros Tutorial</h3>
-            Before proceeding to the main part of the experiment please familiarize yourself with the game.<br>
-            You may proceed to the next phase of this survey once you are ready!
-            <br>
+            <p >  Before proceeding to the main part of the experiment please familiarize yourself with the game.<br>
+            You may proceed to the next phase of this survey once you are ready!</p>
+ 
+            <b>Click <a onclick="replay()" href="#mask">ME</a> to show the instruction page again.</b>
+
             <p class="alert">If the game is not responding to your keyboard, please click on the game screen.</p>
           </div>
 
@@ -240,7 +245,7 @@
 
           </div>
 
-        </div>
+            </div>
 
         <div class="col-md-6" align="center" style="visibility: hidden;" id="next">
           <br>
@@ -283,31 +288,32 @@
             <h3>Play Game</h3>
           </button>
         </div>
+
         <div id="countdown"
-          style="z-index:999; position:absolute; left:50px; bottom: 20px; color: #ffffff; font-size: xx-large; background-color: rgba(0, 0, 0, 0.3);">
+          style="z-index:999; position:absolute; left:50px; bottom: 20px; color: #ffffff; font-size: xx-large; ">
         </div>
         <img style=" height: 90vh;bottom: 3.5vh; left: 0vw;
             position: absolute;z-index: 900; visibility: visible; width: 100%;" src="../templates/Web/pic.png"
           id="windowshow">
         <script>
           function countdown() {
-            var count = 10; // 设置倒计时秒数
-            var timer = setInterval(function () {
-              count--;
-              if (count <= 0) {
-                clearInterval(timer);
-                $("#countdown").hide();
-                $("#windowshow:visible").hide(); // 倒计时结束后隐藏倒计时容器
+            // var count = 10; // 设置倒计时秒数
+            // var timer = setInterval(function () {
+            //   count--;
+            //   if (count <= 0) {
+            //     clearInterval(timer);
+            //     $("#countdown").hide();
+            //     $("#windowshow:visible").hide(); // 倒计时结束后隐藏倒计时容器
 
-              } else {
-                $("#countdown").html("This instruction will close in " + count + "s. <br>Or click to close."); // 更新倒计时容器内容
+            //   } else {
+                $("#countdown").html("Click to close."); // 更新倒计时容器内容
                 $("#windowshow").click(function () {
                   $("#windowshow").hide();
                   $("#countdown").hide();
-                });
-              }
-            }, 1000);
-          }
+                });}
+          //     }
+          //   }, 1000);
+          // }
 
           $(document).ready(function () {
             countdown();
@@ -365,7 +371,6 @@
     </div>
 
 
-    <div id="mask" onclick="replay()"></div>
     <script>
       function replay() {
 
@@ -383,7 +388,7 @@
   <!-- Footer mx-auto -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <div class="row clearfix">
+      <div class="row clearfix" >
         <!-- <div class="col-md-2 column">
           <img class="img-fluid" alt="" src="../templates/Web/Wechat.png" style="width: 100px;">
       </div> -->
