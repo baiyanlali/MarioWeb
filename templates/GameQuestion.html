@@ -294,18 +294,18 @@
             </p>
 
             <p>
-            <h4>3. Which player type represents you the best in Super Mario Bros?</h4>
+            <h4>3. Which following selection represents you the best in Super Mario Bros?</h4>
             <label>
               <input type="radio" class="option-input radio" name="gamestyle" value="A">
-              Runner: try to complete a level as fast as possible by running and jumping
+              Trying to complete a level as fast as possible by running and jumping
             </label>
             <label>
               <input type="radio" class="option-input radio" name="gamestyle" value="B">
-              Killer: prefer killing all the monsters in a level
+              Prefer killing all the monsters in a level
             </label>
             <label>
               <input type="radio" class="option-input radio" name="gamestyle" value="C">
-              Collector: attempt to collect all the coins in a level
+              Attempt to collect all the coins in a level
             </label>
             <label>
               <input type="radio" class="option-input radio" name="gamestyle" value="D">
@@ -340,21 +340,10 @@
             <p>
             <h4>5. What is your age?</h4>
             <label>
-              <input type="radio" class="option-input radio" name="age" value="A">
-              Below 20
+              <input type="radio" class="option-input radio" name="age" value="">
+             <input type="number" value="" step="1" placeholder="Input your age">
             </label>
-            <label>
-              <input type="radio" class="option-input radio" name="age" value="B">
-              20-39
-            </label>
-            <label>
-              <input type="radio" class="option-input radio" name="age" value="C">
-              40-59
-            </label>
-            <label>
-              <input type="radio" class="option-input radio" name="age" value="D">
-              Over 60
-            </label>
+
             <label>
               <input type="radio" class="option-input radio" name="age" value="E">
               Prefer not to say
@@ -375,8 +364,20 @@
               <input type="radio" class="option-input radio" name="gender" value="C">
               Prefer not to say
             </label>
+            <script> 
+            function renew( ){
+              
+              $("input[name='gender']").val($("input[type='text']").val()) 
+                    $("input[name='age']").val($("input[type='number']").val())
+
+            }
+            
+            
+    
+            
+            </script>
             <label>
-              <input type="radio" class="option-input radio" name="gender" value="D">
+              <input type="radio" class="option-input radio" name="gender" value=" ">
               Other: 
               <input type="text" value="">
              
@@ -399,7 +400,7 @@
 
             <br>
             <p><b><input type="submit" value="Submit" class="cirButton"
-                  style="font-weight: 700; font-size: large; width: 60%;" /></b></p>
+                  style="font-weight: 700; font-size: large; width: 60%;" onclick ="renew()" /></b></p>
           </form>
 
         </div>
