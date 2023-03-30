@@ -55,8 +55,8 @@ def gamepreplay():
                        result.get("playedp"),
                        result.get("gamestyle"),
                        result.get("frequency"),
-                       result.get("age"),
-                       result.get("gender"),
+                       result.get("age")+result.get("myAge"),
+                       result.get("gender")+result.get("myGender"),
                        ""])
         idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
