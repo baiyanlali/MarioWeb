@@ -312,6 +312,22 @@
               None of above
             </label>
             </p>
+            <script> 
+            function renew( ){
+              if ($("input[name='gender']").val()=="D"){ 
+                $("input[name='gender']").val($("input[type='text']").val()) 
+              }
+              
+               if(  $("input[name='age']").val()=="A"){
+                $("input[name='age']").val($("input[type='number']").val())
+              }
+              
+                   
+
+            }
+            
+            
+            </script>
 
             <p>
             <h4>4. How often do you play games?</h4>
@@ -340,12 +356,14 @@
             <p>
             <h4>5. What is your age?</h4>
             <label>
-              <input type="radio" class="option-input radio" name="age" value="A">
-             <input type="number" name="myAge" value="" step="1" placeholder="Input your age">
+
+              <input type="radio" class="option-input radio" name="age" value= "A">
+             <input type="number" value="" step="1" placeholder="Input your age">
+
             </label>
 
             <label>
-              <input type="radio" class="option-input radio" name="age" value="E">
+              <input type="radio" class="option-input radio" name="age" value="B">
               Prefer not to say
             </label>
             </p>
@@ -366,7 +384,7 @@
             </label>
 
             <label>
-              <input type="radio" class="option-input radio" name="gender" value=" ">
+              <input type="radio" class="option-input radio" name="gender" value= "D">
               Other: 
               <input type="text" name="myGender" value="">
              
