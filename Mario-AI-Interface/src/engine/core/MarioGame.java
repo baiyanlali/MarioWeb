@@ -144,6 +144,7 @@ public class MarioGame extends KeyAdapter{
     }
 
     private MarioResult gameLoop(String level, int timer, int marioState, boolean visual, int fps, String resultPath, int col) {
+
         this.world = new MarioWorld(this.killEvents);
         this.world.visuals = visual;
         this.world.initializeLevel(level, 1000 * timer);
@@ -153,7 +154,8 @@ public class MarioGame extends KeyAdapter{
         this.world.lives = this.initialLives;
         this.world.mario.isLarge = marioState > 0;
         this.world.mario.isFire = marioState > 1;
-        this.world.update(new boolean[MarioActions.numberOfActions()]);
+
+
         long currentTime = System.currentTimeMillis();
 
         //initialize graphics
@@ -221,6 +223,7 @@ public class MarioGame extends KeyAdapter{
 
                 // update world
                 this.world.update(actions);
+                //System.out.println((int) this.world.mario.y / 16);
                 gameEvents.addAll(this.world.lastFrameEvents);
                 agentEvents.add(new MarioAgentEvent(actions, this.world.mario.x,
                         this.world.mario.y, (this.world.mario.isLarge ? 1 : 0) + (this.world.mario.isFire ? 1 : 0),

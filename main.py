@@ -6,10 +6,16 @@ import uuid
 from IDManager import idManager
 
 from flask import Flask, render_template, request, redirect, url_for, session
+import logging
+
+# 设置logging模块
+logging.basicConfig(filename='log.txt', level=logging.DEBUG)
+# 将print输出重定向到logging模块
+print = logging.getLogger().info
 
 app = Flask(__name__, static_folder='')
 idm = idManager()
-app.secret_key = 'fkdjsafjdkfdlkjfadskjfadskljdsfklj'
+app.secret_key = 'asdfasdfawefaewvaf'
 replayDataPath = "reps/"
 evalDataPath = "evals/"
 
@@ -25,6 +31,7 @@ def getId():
 
 @app.route('/')
 def gamewelcome():
+    ip = getId()
     # return redirect(url_for('gameplay', id=request.remote_addr))
     return render_template('GameWelcome.html')
 
