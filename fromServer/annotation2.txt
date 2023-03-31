@@ -1,0 +1,6 @@
+e13f1fc9-59f4-4585-aa3b-eb807afb3db9,r,c,k,Collector-21,Killer-89,Runner-31,,
+f6db5b9f-bebf-4f86-b80f-c49e55cde2a9,c,k,r,Collector-21,Killer-81,Runner-35,,
+d6feb5dc-b6d9-4f73-9688-29c33edb6d4d,r,k,c,Collector-20,Killer-36,Runner-15,,
+d13e979d-7ecb-43ae-a6cb-c94bfee93d3a,r,c,k,Collector-77,Killer-91,Runner-16,,
+b5d826e2-cc95-4d1c-b1e2-ae6971fa67e7,r,k,c,Collector-81,Killer-63,Runner-17,,
+acea72c7-0e2d-405a-9a5c-459840869add,c,k,r,Collector-71,Killer-39,Runner-24,,
