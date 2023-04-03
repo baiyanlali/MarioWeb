@@ -98,6 +98,8 @@ class idManager():
     def setTimes(self, ip):
         self.ip_time[ip] = 0
 
+    # 1 For next step
+    # 0 For not next step
     def getTimes(self, ip):
 
         if ip not in self.ip_time.keys():
