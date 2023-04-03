@@ -187,6 +187,7 @@
         <div class="col-md-12">
           <div align="center">
             <h3 id="Head">Level A</h3>
+              <p id="leftLevel">There are 7 levels left</p>
             <p class="alert">If the game is not responding to your keyboard, please click on the game screen.</p>
           </div>
           <div align="center" id="GameWindow">
@@ -201,6 +202,7 @@
             cheerpjInit();
             var divElement = document.getElementById("GameWindow");
             var title = document.getElementById("Head");
+            var leftLevel = document.getElementById("leftLevel")
             var levelNum = Number("{{levelNum}}")
             var levels = getLevels("{{gamelevels}}", levelNum);
             var levelNames = ["Level A", "Level B", "Level C", "Level D"];
@@ -215,8 +217,19 @@
               console.log("GameLoad Initialize Succeed!");
               document.getElementById("loading").style.visibility = 'hidden';
             })
+            leftNum = 0;
 
+            if(levelNum === 3) {leftNum = 2}
+            else {
+                if ("{{times}}"==1){
+                    leftNum = 4;
+                }else{
+                    leftNum = 6;
+                }
+            }
 
+            leftLevel.innerText = "There are " + leftNum +" levels left."
+            leftNum--;
              for (i = 0; i < levelNum - 1; i++) {
               console.log("Play level: %s", levels[i])
               PlayLevel(levels[i], control)
@@ -225,6 +238,8 @@
                   console.log(i)
                   var index = levelNames.indexOf(title.innerText);
                   title.innerText = levelNames[index + 1];
+                  leftLevel.innerText = "There are " + leftNum +" levels left."
+                    leftNum--;
                 });
             }
 
@@ -235,7 +250,9 @@
               });
 
 
+          function LeftNum(times, level){
 
+          }
 
 
 

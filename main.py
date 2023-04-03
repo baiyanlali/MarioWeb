@@ -22,12 +22,15 @@ evalDataPath = "evals/"
 questionarePath = "data/questionare.csv"
 annotationPath = "data/annotation.csv"
 annotationPath2 = "data/annotation2.csv"
+feedbackPath = "data/feedback.csv"
 
-#id=idm.getId(request.remote_addr)
+
+# id=idm.getId(request.remote_addr)
 def getId():
     if 'name' not in session:
         session['name'] = str(uuid.uuid4())
     return session['name']
+
 
 @app.route('/')
 def gamewelcome():
@@ -55,8 +58,8 @@ def gamepreplay():
                        result.get("playedp"),
                        result.get("gamestyle"),
                        result.get("frequency"),
-                       result.get("age")+result.get("myAge"),
-                       result.get("gender")+result.get("myGender"),
+                       result.get("age") + result.get("myAge"),
+                       result.get("gender") + result.get("myGender"),
                        ""])
         idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
@@ -67,7 +70,8 @@ def gamepreplay():
 
 @app.route('/gametutorial/<id>')
 def gametutorial(id):
-    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id),maxT=idm.tutorialMax,
+    return render_template('GameTutorial.html', tutorial=idm.addTutorial(id), next=idm.hasNextTutorial(id),
+                           maxT=idm.tutorialMax,
                            control=idm.getControl(id))
 
 
@@ -85,6 +89,7 @@ def gametutorialdata(id):
 def gameplay(id):
     gamelevels = idm.getLevels(id)
     return render_template('GamePlay.html', gamelevels=gamelevels, control=idm.getControl(id), levelNum=2,
+                           times=idm.getTimes(id),
                            jump="/annotation")
 
 
@@ -93,7 +98,7 @@ def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
         resultList = list(request.form)[0].split(",")
-        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
+        saveFile(replayDataPath, id + "_" + resultList[0][:-2], resultList[1:])
     return "return!"
 
 
@@ -147,7 +152,7 @@ def getJSONData2(id):
     if request.method == 'POST':
         print("POST Game")
         resultList = list(request.form)[0].split(",")
-        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
+        saveFile(replayDataPath, id+"_" + resultList[0][:-2], resultList[1:])
     return "return!"
 
 
@@ -174,11 +179,8 @@ def gameanno2(id):
 def gameannoresult2(id):
     if request.method == 'POST':
         print("result: " + id)
-
         resultList = list(request.form)[0].split(",")
         levelList = idm.getRecent(getId())
-
-
         idm.write_csv(annotationPath2,
                       [getId(), resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
                        levelList[2],
@@ -194,8 +196,16 @@ def gameannoresult2(id):
 @app.route("/gameover")
 def over():
     finish = idm.getTimes(getId())
-
     return render_template("GameOver.html", finish=1, stage=1)
+
+
+@app.route("/gameover/<id>/feedback", methods=['POST'])
+def overa():
+    if request.method == 'POST':
+        resultList = list(request.form)[0].split(",")
+        idm.write_csv(feedbackPath,
+                      [getId(), resultList[0],
+                       ""])
 
 
 def saveFile(path, filename, content):
