@@ -228,7 +228,7 @@
                 }
             }
 
-            leftLevel.innerText = "There are " + leftNum +" levels left."
+            leftLevel.innerText =  leftNum +" levels left."
             leftNum--;
              for (i = 0; i < levelNum - 1; i++) {
               console.log("Play level: %s", levels[i])
@@ -238,7 +238,7 @@
                   console.log(i)
                   var index = levelNames.indexOf(title.innerText);
                   title.innerText = levelNames[index + 1];
-                  leftLevel.innerText = "There are " + leftNum +" levels left."
+                  leftLevel.innerText = leftNum +" levels left."
                     leftNum--;
                 });
             }
