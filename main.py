@@ -193,21 +193,27 @@ def gameannoresult2(id):
             return redirect(url_for("gameplay2", id=id))
 
 
-@app.route("/gameover")
+@app.route("/gameover",methods=['POST','GET'])
 def over():
     finish = idm.getTimes(getId())
-    return render_template("GameOver.html", finish=1, stage=1)
-
-
-@app.route("/gameover/<id>/feedback", methods=['POST'])
-def overa():
     if request.method == 'POST':
         resultList = list(request.form)[0].split(",")
         idm.write_csv(feedbackPath,
                       [getId(), resultList[0],
                        ""])
 
+    return render_template("GameOver.html", finish=1, stage=1)
 
+
+# @app.route('/feedback', methods=['POST'])
+# def overa():
+#     if request.method == 'POST':
+#         resultList = list(request.form)[0].split(",")
+#         idm.write_csv(feedbackPath,
+#                       [getId(), resultList[0],
+#                        ""])
+
+    # return redirect(url_for("over", id=id))
 def saveFile(path, filename, content):
     cp = list(map(int, content))
     file_dir = os.path.join(os.getcwd(), path)
