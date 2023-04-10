@@ -293,15 +293,15 @@ function validateForm() {
   return true; // Allow form submission
 }
 </script>
-            <form onsubmit="return validateForm()"  action="window.location.href = '/question';">
 
             <input type="checkbox" id="privacyPolicyCheckbox" name="privacyPolicyCheckbox" required>
             <label for="privacyPolicyCheckbox">I agree to the <a href="/privacy" style="cursor:pointer;" target="_blank">privacy policy</a></label>
             <br>
             <br>
-            <button  class="cirButton" type="submit"><b> Start!</b> </button>
+            <button  class="cirButton" type="submit" onclick="
+                if (validateForm()) { window.location.href = '/question'; }
+                "><b> Start!</b> </button>
 
-                </form>
         </div>
       </div>
     </div>

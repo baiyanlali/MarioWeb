@@ -231,7 +231,8 @@ def saveRepFile(path, filename, content):
             alist = actions["actions0"]
             actionsInput = [alist["0"], alist["1"], alist["2"], alist["3"], alist["4"], alist["5"], alist["6"]]
             actionList.append(serializeAction(actionsInput))
-        except Exception: continue
+        except Exception:
+            continue
 
     cp = list(map(int, actionList))
     file_dir = os.path.join(os.getcwd(), path)
@@ -242,11 +243,12 @@ def saveRepFile(path, filename, content):
 
 def serializeAction(actions):
     res = 0
-    for i in range(5):
-        if not actions[i]:
-            tmp = 1 << i
+    for i in range(1, 6):
+        if actions[i]:
+            tmp = 1 << (i-1)
             res += tmp
     return res
+
 
 def saveJsonFile(path, filename, content):
     file_dir = os.path.join(os.getcwd(), path)
@@ -256,5 +258,6 @@ def saveJsonFile(path, filename, content):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=False)
-    # app.run()
+    #saveRepFile(replayDataPath, "null_test.rep", testJson)
+    # app.run(host='0.0.0.0', port=80, debug=False)
+    app.run()

@@ -25,8 +25,10 @@ public class Play {
     public static void main(String[] args) throws IOException {
 
         //FIXME: Debug Use
-        //game = new MarioGame();
+        game = new MarioGame();
         //System.out.println(playJavaGame());
+        //replayGameMain("dfd40950-75e7-44fe-8833-371d32e525af_lvl144",10,20,5);
+        playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
     public static boolean initialGame(){
@@ -40,14 +42,14 @@ public class Play {
 
     public static String playJavaGame(){
 
-        game.setLives(3);
-        String levelPath = "./levels/group0/lvl1.lvl";			// For local
-        String repPath = "./reps/f_l_sav.rep";	                // For local
+        game.setLives(5);
+        String levelPath = "./levels/group0/lvl73.lvl";			// For local
+        String repPath = "./reps/dfd40950-75e7-44fe-8833-371d32e525af_lvl73.rep";	                // For local
         //MarioGame.verbose = true;
         //Play Game
-        MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 10, repPath,30);
+        //MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 10, repPath,30);
         //Replay
-        //MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 30, repPath,30);
+        MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 60, repPath,30);
         //return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
         String jsonString = Replay.serializeGameResult(tmpResult);
 
