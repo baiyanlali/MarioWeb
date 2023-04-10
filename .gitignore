@@ -36,3 +36,4 @@ __pycache__/IDManager.cpython-39.pyc
 *.pyc
 questionare.csv
 log.txt
+*.json

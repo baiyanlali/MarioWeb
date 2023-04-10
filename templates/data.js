@@ -25,12 +25,18 @@ function GameLoad(){
 function PlayLevel(level,control){
     console.log("HTML:Start PlayLevel cjCall")
     var returnVal = cjCall("Play", "playGameMain", level, 5, control,30,16);
-    return returnVal.then(function(){ 
+    return returnVal.then(function(){
+        stringVal = toJSON(returnVal.value['agentEvents2'])
       console.log("the return val is ready");  
-      console.log(returnVal.value);
-      PostToServer(window.location.href+"/data",level+returnVal.value);    
+      console.log(stringVal);
+      PostToServer(window.location.href+"/data",level+"@@@"+stringVal);
       //Array.from()
     });
+  }
+
+  function toJSON(returnVal)
+  {
+    return JSON.stringify(returnVal)
   }
 
   function GameOver(){

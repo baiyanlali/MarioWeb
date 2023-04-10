@@ -9,14 +9,15 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import logging
 
 # 设置logging模块
-logging.basicConfig(filename='log.txt', level=logging.DEBUG)
+# logging.basicConfig(filename='log.txt', level=logging.DEBUG)
 # 将print输出重定向到logging模块
-print = logging.getLogger().info
+# print = logging.getLogger().info
 
 app = Flask(__name__, static_folder='')
 idm = idManager()
 app.secret_key = 'asdfasdfawefaewvaf'
 replayDataPath = "reps/"
+jsonDataPath = "jsons/"
 evalDataPath = "evals/"
 
 questionarePath = "data/questionare.csv"
@@ -97,8 +98,9 @@ def gameplay(id):
 def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
-        resultList = list(request.form)[0].split(",")
-        saveFile(replayDataPath, id + "_" + resultList[0][:-2], resultList[1:])
+        resultList = list(request.form)[0].split("@@@")
+        saveJsonFile(jsonDataPath, id + "_" + resultList[0], resultList[1])
+        saveRepFile(replayDataPath, id + "_" + resultList[0], resultList[1])
     return "return!"
 
 
@@ -151,8 +153,9 @@ def gameplay2(id):
 def getJSONData2(id):
     if request.method == 'POST':
         print("POST Game")
-        resultList = list(request.form)[0].split(",")
-        saveFile(replayDataPath, id+"_" + resultList[0][:-2], resultList[1:])
+        resultList = list(request.form)[0].split("@@@")
+        saveJsonFile(jsonDataPath, id + "_" + resultList[0], resultList[1])
+        saveRepFile(replayDataPath, id + "_" + resultList[0], resultList[1])
     return "return!"
 
 
@@ -193,7 +196,7 @@ def gameannoresult2(id):
             return redirect(url_for("gameplay2", id=id))
 
 
-@app.route("/gameover",methods=['POST','GET'])
+@app.route("/gameover", methods=['POST', 'GET'])
 def over():
     finish = idm.getTimes(getId())
     if request.method == 'POST':
@@ -213,13 +216,38 @@ def over():
 #                       [getId(), resultList[0],
 #                        ""])
 
-    # return redirect(url_for("over", id=id))
-def saveFile(path, filename, content):
-    cp = list(map(int, content))
+# return redirect(url_for("over", id=id))
+def saveRepFile(path, filename, content):
+    o_dict = json.loads(content)
+    action_dict = o_dict["elementData1"][1:]
+    actionList = []
+    for actions in action_dict:
+        try:
+            alist = actions["actions0"]
+            actionsInput = [alist["0"], alist["1"], alist["2"], alist["3"], alist["4"], alist["5"], alist["6"]]
+            actionList.append(serializeAction(actionsInput))
+        except Exception: continue
+
+    cp = list(map(int, actionList))
     file_dir = os.path.join(os.getcwd(), path)
     file_path = os.path.join(file_dir, filename + ".rep")
     with open(file_path, 'wb') as f:
         f.write(b''.join(struct.pack('B', c) for c in cp))
+
+
+def serializeAction(actions):
+    res = 0
+    for i in range(5):
+        if not actions[i]:
+            tmp = 1 << i
+            res += tmp
+    return res
+
+def saveJsonFile(path, filename, content):
+    file_dir = os.path.join(os.getcwd(), path)
+    file_path = os.path.join(file_dir, filename + ".json")
+    with open(file_path, 'w') as f:
+        f.write(content)
 
 
 if __name__ == '__main__':
