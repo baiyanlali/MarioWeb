@@ -9,9 +9,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import logging
 
 # 设置logging模块
-# logging.basicConfig(filename='log.txt', level=logging.DEBUG)
-# 将print输出重定向到logging模块
-# print = logging.getLogger().info
+logging.basicConfig(filename='log.txt', level=logging.DEBUG)
+#将print输出重定向到logging模块
+print = logging.getLogger().info
 
 app = Flask(__name__, static_folder='')
 idm = idManager()
