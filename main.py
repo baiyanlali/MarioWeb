@@ -44,6 +44,11 @@ def gamequestion():
     return render_template('GameQuestion.html')
 
 
+@app.route('/privacy')
+def privacypage():
+    return render_template('Privacy.html')
+
+
 @app.route('/result', methods=['POST', 'GET'])
 def gamepreplay():
     if request.method == 'POST':
