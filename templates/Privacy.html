@@ -3,13 +3,12 @@
 <html lang="en">
 <script
   id="allow-copy_script">(function t() { var t = !1; document.addEventListener("allow_copy", (function (n) { t = n.detail.unlock })); var n = ["copy", "cut", "contextmenu", "selectstart", "mousedown", "mouseup", "mousemove", "keydown", "keypress", "keyup"], e = function (n) { t && (n.stopPropagation(), n.stopImmediatePropagation && n.stopImmediatePropagation()) }; n.forEach((function (t) { document.documentElement.addEventListener(t, e, { capture: !0 }) })) })()</script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
+  <script src="../templates/Web/jquery.min.js"></script>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+  </script>
 
-  <script src="../templates/data.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -21,57 +20,29 @@
   <link href="../templates/Web/font-awesome.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="http://aingames.cn/static/img/logo.png">
 
-  <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>
 
+  <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>
+  <script src="../data.js"></script>
   <!-- Custom styles for this template -->
   <link href="../templates/Web/scrolling-nav.css" rel="stylesheet">
   <link href="../templates/Web/css2" rel="stylesheet">
 
   <style>
+
+
     #funding:hover+#prove {
       display: block;
     }
 
-    .groupname {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 45px;
-      font-weight: bold;
-    }
 
-    .slogan {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 40px;
-      font-style: italic;
-      /* font-weight:Light 300 italic; */
-      font-family: 'Consolas', monospace;
-      color: #c4cbcf;
-    }
 
-    .hiddenpart {
-      opacity: 0;
-      max-width: 0;
-      color: #c4cbcf;
-      transition: 1.3s ease-out;
-    }
+
 
     .slogan:hover .hiddenpart {
       opacity: 1;
       max-width: 10em;
     }
 
-    .news_prefix {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      background-image: url("static/img/news_prefix.png");
-      background-size: 150px, 30px;
-    }
 
     svg {
       width: 50px;
@@ -79,86 +50,17 @@
       vertical-align: middle;
     }
 
-    .loading-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 60px;
-      height: 80px;
-      margin: 0 auto;
-      text-align: center;
-      transform: translate(-50%, -50%);
-
-    }
-
-    .cirButton {
-      width: 100%;
-      height: 60px;
-      border-radius: 40px;
-      cursor: pointer;
-      border: none;
-      font-weight: 600;
-
-    }
-
-    .cirButton:hover {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .loader {
-      position: absolute;
-
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #3498db;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 2s linear infinite;
-      z-index: 999;
-    }
-
-    .loading-text {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 16px;
-      color: #333;
-    }
-
-    .alert {
-      font-size: x-large;
-      font-weight: 500;
-      color: #1967ab;
-    }
-
-    #mask {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0);
-      z-index: 99;
-    }
-
-    .col-md-6 {
-      z-index: 100;
-    }
-
-    .col-md-12 {
-      z-index: 100;
-    }
-
-    .GameWindow {
-      z-index: 100;
+    label {
+      display: block;
+      line-height: 30px;
     }
   </style>
 
 </head>
 
 <body id="aingames">
-  <svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
+
+<svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
     <symbol id="icon-more" viewBox="0 0 1789 1024">
       <path
         d="M658.96035216 613.49779716h-602.64317146c-5.28634405 9.51541883-9.51541883 21.14537441-13.74449354 30.66079315h602.64317154c3.17180628-9.51541883 7.40088094-20.08810594 13.74449346-30.66079315zM54.20264274 801.69162966c7.40088094 10.57268718 14.80176191 21.14537441 24.31718079 30.66079315h602.64317241c-9.51541883-10.57268718-16.91629967-20.08810594-24.31718063-30.66079315h-602.64317257zM794.29074875 425.30396468h-602.64317156c-9.51541883 9.51541883-19.03083652 20.08810594-28.54625532 30.66079311h602.6431716c9.51541883-9.51541883 19.03083652-20.08810594 28.54625528-30.66079311zM1396.93392025 484.51101309c12.687225 0 24.31718064-10.57268718 24.31718064-24.31718062 0-13.74449341-11.62995564-24.31718064-24.31718054-24.31718059-13.74449341 0-24.31718064 10.57268718-24.31718069 24.31718059 0 13.74449341 11.62995564 24.31718064 24.31718069 24.31718062z">
@@ -185,7 +87,7 @@
     <div class="container">
       <a class="navbar-brand js-scroll-trigger " href="http://aingames.cn/index.html"> <img
           src="../templates/Web/grouplogo.png" height="35px"></a>
-      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 
       </button>
@@ -211,191 +113,49 @@
     </div>
   </nav>
 
-
-  <section style="background-color: rgb(255, 255, 255);">
-
-    <div class="container" style="font-weight: 600
-   ;">
-
-      <div class="row clearfix">
-        <!-- <style=" background-color: rgba(255,255,255);height: 130vh;
-      margin-top: -90px;"> -->
-
-        <div class="col-md-12" style=" background-color: rgba(255,255,255);">
-          <div align="center">
-
-            <h3>Super Mario Bros Tutorial</h3>
-            <p> Before proceeding to the main part of the experiment please familiarize yourself with the game.<br>
-              You may proceed to the next phase of this survey once you are ready!</p>
-
-            <b onclick="replay()" style="cursor: pointer;">Click <u style="color:blue; ">ME</u> to show the instruction
-              page again.</b>
-
-            <p class="alert">If the game is not responding to your keyboard, please click on the game screen.</p>
-          </div>
-
-
-
-
-          <div align="center" id="GameWindow" style="z-index: 100;">
-
-            <div class="loading-container" id="loading" style="visibility: visible">
-              <div class="loader"></div>
-              <div class="loading-text">Loading</div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="col-md-6" align="center" style="visibility: hidden;" id="next">
-          <br>
-          <button onclick='
-                  //Init Cheerpj Framework 
-            document.getElementById("game").style.visibility = "hidden";
-            document.getElementById("next").style.visibility = "hidden";
-            
-             var control = ("{{control}}" == "1");
-          //var divElement = document.getElementById("GameWindow");
-          tutorialId = tutorialId+1
-          var level = "t"+tutorialId;
-          
-         
-          GameLoad().then(function(){
-              console.log("Cheerpj Initialize Succeed!");
-             
-              document.getElementById("loading").style.visibility = "hidden";
-              $("#mask").hide();
-          })
-
-
-        PlayLevel(level,control)
-          .then(function (){
-            //play next?
-            if (tutorialId<parseInt("{{maxT}}")){
-              document.getElementById("next").style.visibility = "visible";
-            }
-              document.getElementById("game").style.visibility = "visible";
-
-          });' class="cirButton">
-            <h3>Repeat Tutorial</h3>
-          </button>
-        </div>
-        <div class="col-md-6" align="center" style="visibility: hidden;" id="game">
-          <br>
-          <button onclick="
-          window.location.href = window.location.href+'/data'
-          " class="cirButton">
-            <h3>Play Game</h3>
-          </button>
-        </div>
-
-
-        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
-            position: absolute;z-index: 900; visibility: visible; width: 99%;" src="../templates/Web/pic.png"
-          id="windowshow">
-        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
-            position: absolute;z-index: 902; visibility: visible; width: 99%;" src="../templates/Web/top.png" id="top">
-        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
-            position: absolute;z-index: 902; visibility: visible; width: 99%;" src="../templates/Web/bot.png" id="bot">
-        <script>
-
-          cheerpjInit();
-          var divElement = document.getElementById("GameWindow");
-          var tutorialId = parseInt("{{tutorial}}")
-          var level = "t" + "{{tutorial}}";
-          var img = document.getElementById("windowshow");
-          var control = ("{{control}}" == "1");
-
-
-
-
-          if (control) {
-            $("#top:visible").hide();
-            console.log("1")
-          } else {
-            $("#bot:visible").hide();
-              console.log("2")
-          }
-
-          $("#windowshow").click(function () {
-            $("#windowshow:visible").hide();
-
-          });
-          $("#bot").click(function () {
-
-            $("#bot:visible").hide();
-
-          });
-          $("#top").click(function () {
-            $("#top:visible").hide();
-          });
-
-
-          cheerpjCreateDisplay(500, 500, divElement);
-          cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
-
-          GameLoad().then(function () {
-            $("#windowshow:visible").hide();
-            {#console.log("Cheerpj Initialize Succeed!", control);#}
-            document.getElementById("loading").style.visibility = 'hidden';
-          })
-
-
-
-          PlayLevel(level, control)
-            .then(function () {
-              //play next?
-              if (tutorialId < parseInt("{{maxT}}")) {
-                document.getElementById("next").style.visibility = "visible";
-              }
-              document.getElementById("game").style.visibility = "visible";
-
-
-              $("#mask").hide();
-
-            });
-          function replay() {
-
-            $("#windowshow:hidden").show();
-            if(control){
-                $("#bot:hidden").show();
-
-            }else {
-                   $("#top:hidden").show();
-            }
-          }
-
-        </script>
-      </div>
+  <section id="Over">
+    <div class="container col-xl-7 align-content-center" style="margin: auto">
+      <h1>
+        <i class="icon-chevron-down"></i> Privacy Policy
+      </h1>
+      <br>
       <br>
 
-
-
+      <h4 >
+        We are committed to protecting the privacy of our users and ensuring that any data we collect is used only for the purposes of academic usage. As part of this commitment, we collect and use anonymous age, gender, and play behavior data. This policy outlines how we collect and use this data. Participation is voluntary. Participants can choose not to answer a question, or quit anytime.
+      </h4>
       <br>
+    <h5>Data Collection</h5>
+        <p>We collect anonymous age, gender, and play behavior data through our games. This data is collected automatically when participants interact with our designed game, and is used to help us understand how our game are being played and gamer research. IP address and any kind of location information will not be collected.</p>
+        <h5>Data Use</h5>
+        <p>The anonymous data we collect is used only for the game user research. We do not link this data to any personally identifiable information, and we do not use it for marketing purposes.</p>
+        <h5>User Rights</h5>
+        <p>As this data is anonymous, it cannot be used to identify individual users. However, if you have any questions or concerns about our data collection and use practices, please contact us at 8143151122_AT_163.com. We are committed to being transparent about our data collection and use practices and will do our best to address any concerns you may have.</p>
+       <br>
 
-      <div style="padding-left:2%; padding-top: 10px;">
-
-      </div>
-
+        <h4>By playing our games, you consent to the collection and use of anonymous age, gender, and play behavior data as outlined in this policy. If you do not agree with this policy, please do not play.</h4>
 
 
     </div>
 
 
-
+  <div class="col-xl-7" style="margin:auto;">
+      <img src="../templates/Web/sustc.png" height="230">
+      <img src="../templates/Web/Malta.png" width="400">
+  </div>
 
   </section>
 
+<div class="col-xl-7 justify-content-between align-content-center" style="margin: auto">This page is created by <a href="https://github.com/BigJIU">Haocheng Du</a>, <a href="https://doveliyuchen.github.io">Yuchen Li</a>; game content is generated by <b>AI </b>designed by<a href="https://github.com/PneuC"> Ziqi Wang</a>.<br> This project is supported by <a href="http://www.liujialin.tech/">Dr. Liu</a> and <a href="https://yannakakis.net/">Prof. Yannakakis</a>.</div>
+
+<br><br>
 
 
   <!-- Footer mx-auto -->
   <footer class="py-5 bg-dark">
     <div class="container">
       <div class="row clearfix">
-        <!-- <div class="col-md-2 column">
-          <img class="img-fluid" alt="" src="../templates/Web/Wechat.png" style="width: 100px;">
-      </div> -->
+
         <div class="col-md-10 column">
           <br><br>
           <p class="m-0 text-center text-white">Copyright © Jialin Liu</p>
@@ -407,7 +167,7 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="../templates/Web/jquery.min.js"></script>
+
   <script src="../templates/Web/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
