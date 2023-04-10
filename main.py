@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import os
 import struct
@@ -10,7 +11,7 @@ import logging
 
 # 设置logging模块
 logging.basicConfig(filename='log.txt', level=logging.DEBUG)
-#将print输出重定向到logging模块
+# 将print输出重定向到logging模块
 print = logging.getLogger().info
 
 app = Flask(__name__, static_folder='')
