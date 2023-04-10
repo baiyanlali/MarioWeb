@@ -107,10 +107,10 @@
       vertical-align: middle;
     }
 
-    label {
-      display: block;
-      line-height: 100px;
-    }
+    {#label {#}
+    {#  display: block;#}
+    {#  line-height: 100px;#}
+
 
     .option-input {
       -webkit-appearance: none;
@@ -281,9 +281,27 @@
             <li> Have Fun!
           </ul>
 
-          <br><br>
+          <br>
+            <script>
+function validateForm() {
+  // Check if the checkbox is checked
+  var checkbox = document.getElementById('privacyPolicyCheckbox');
+  if (!checkbox.checked) {
+    alert('Please agree to the privacy policy');
+    return false; // Prevent form submission
+  }
+  return true; // Allow form submission
+}
+</script>
+            <form onsubmit="return validateForm()"  action="window.location.href = '/question';">
 
-          <button onclick="window.location.href = '/question';" class="cirButton"><b> Start!</b> </button>
+            <input type="checkbox" id="privacyPolicyCheckbox" name="privacyPolicyCheckbox" required>
+            <label for="privacyPolicyCheckbox">I agree to the <a href="/privacy" style="cursor:pointer;" target="_blank">privacy policy</a></label>
+            <br>
+            <br>
+            <button  class="cirButton" type="submit"><b> Start!</b> </button>
+
+                </form>
         </div>
       </div>
     </div>
