@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import agents.HumanAgent;
 import agents.ReplayAgent;
+import com.alibaba.fastjson.JSON;
 import engine.core.MarioAgentEvent;
 import engine.core.MarioGame;
 import engine.core.MarioResult;
@@ -24,8 +25,10 @@ public class Play {
     public static void main(String[] args) throws IOException {
 
         //FIXME: Debug Use
-//        game = new MarioGame();
-//        playJavaGame();
+        game = new MarioGame();
+        //System.out.println(playJavaGame());
+        //replayGameMain("dfd40950-75e7-44fe-8833-371d32e525af_lvl144",10,20,5);
+        playJavaGame();
         System.out.println("Java: Play Java Main Function Done");
     }
     public static boolean initialGame(){
@@ -37,21 +40,24 @@ public class Play {
         return true;
     }
 
-    public static byte[] playJavaGame(){
+    public static String playJavaGame(){
 
-        game.setLives(3);
-        String levelPath = "./levels/group0/lvl1.lvl";			// For local
-        String repPath = "./reps/f_l_sav.rep";	                // For local
+        game.setLives(5);
+        String levelPath = "./levels/group0/lvl73.lvl";			// For local
+        String repPath = "./reps/dfd40950-75e7-44fe-8833-371d32e525af_lvl73.rep";	                // For local
         //MarioGame.verbose = true;
         //Play Game
-        MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 10, repPath,30);
+        //MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 10, repPath,30);
         //Replay
-        //MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 30, repPath,30);
-        return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
+        MarioResult tmpResult = game.playGame(Replay.getRepAgentFromFile(repPath),getLevel(levelPath), 60, repPath,30);
+        //return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
+        String jsonString = Replay.serializeGameResult(tmpResult);
 
+
+        return jsonString;//Replay.serializeAgentEvents(tmpResult.getAgentEvents());
     }
 
-    public static byte[] playGameMain(String levelName, int lives, boolean control,int time,int col){
+    public static MarioResult playGameMain(String levelName, int lives, boolean control,int time,int col){
 
         String levelPath = String.format("/app/levels/%s.lvl", levelName);			                // For web
         String repPath = String.format("/files/%s_sav.rep", levelName);                            // For web
@@ -61,10 +67,12 @@ public class Play {
         game.setLives(lives);
         MarioResult tmpResult = game.playGame(new HumanAgent(control),getLevel(levelPath), time, repPath,col);
 
-        return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
+        //return Replay.serializeAgentEvents(tmpResult.getAgentEvents());
+        //return Replay.serializeGameResult(tmpResult);
+        return tmpResult;
     }
 
-    public static byte[] playGameMain(String levelName){
+    public static MarioResult playGameMain(String levelName){
         return playGameMain(levelName, 5, false,30,16);
     }
 
@@ -80,5 +88,16 @@ public class Play {
     }
     public static void stopReplay(){
         game.stopGame();
+    }
+
+    public static byte[] serializeActionFromJson(String jsonString){
+        MarioResult marioResult= JSON.parseObject(jsonString,MarioResult.class);
+        ArrayList<MarioAgentEvent> events = marioResult.getAgentEvents();
+        byte[] content = new byte[events.size()];
+        for (int i = 0; i < events.size(); i++) {
+            boolean[] action = events.get(i).getActions();
+            content[i] = Replay.serializeAction(action);
+        }
+        return content;
     }
 }

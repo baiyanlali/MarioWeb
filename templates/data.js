@@ -11,17 +11,7 @@ function getValue(){
         }
     }
 }
-// function PostToServer(data) {
-//     var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
-//     httpRequest.open("POST","");  //调用AddDataToServer
-//     httpRequest.setRequestHeader("Content-Type", "application/json");   //设置请求头信息
-//     httpRequest.onreadystatechange = function () {
-//         if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-//         //alert('添加成功');
-//         }
-//     }
-//     httpRequest.send(JSON.stringify(data)); //设置为发送给服务器数据
-// }
+
 function PostToServer(url,data) {
     if(url == null){
         $.post(window.location.href, data);
@@ -35,12 +25,18 @@ function GameLoad(){
 function PlayLevel(level,control){
     console.log("HTML:Start PlayLevel cjCall")
     var returnVal = cjCall("Play", "playGameMain", level, 5, control,30,16);
-    return returnVal.then(function(){ 
+    return returnVal.then(function(){
+        stringVal = toJSON(returnVal.value['agentEvents2'])
       console.log("the return val is ready");  
-      console.log(returnVal.value);
-      PostToServer(window.location.href+"/data",level+returnVal.value);    
+      console.log(stringVal);
+      PostToServer(window.location.href+"/data",level+"@@@"+stringVal);
       //Array.from()
     });
+  }
+
+  function toJSON(returnVal)
+  {
+    return JSON.stringify(returnVal)
   }
 
   function GameOver(){
@@ -59,9 +55,6 @@ function PlayLevel(level,control){
             alert(obj[i].value);
         }
     }
-    // var radio = document.getElementsByName("gameRadio");
-    // var addressID = $("input[name='sex']:checked").val();
-    // alert(addressID)
     
     }
 

@@ -3,7 +3,7 @@
 <html lang="en">
 <script
   id="allow-copy_script">(function t() { var t = !1; document.addEventListener("allow_copy", (function (n) { t = n.detail.unlock })); var n = ["copy", "cut", "contextmenu", "selectstart", "mousedown", "mouseup", "mousemove", "keydown", "keypress", "keyup"], e = function (n) { t && (n.stopPropagation(), n.stopImmediatePropagation && n.stopImmediatePropagation()) }; n.forEach((function (t) { document.documentElement.addEventListener(t, e, { capture: !0 }) })) })()</script>
-
+  <script src="../templates/Web/jquery.min.js"></script>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
@@ -20,86 +20,29 @@
   <link href="../templates/Web/font-awesome.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="http://aingames.cn/static/img/logo.png">
 
-  <script src="../templates/Web/dynamics.js"></script>
+
   <script src="../templates/Web/font_3071663_oravow8bb8q.js"></script>
+  <script src="../data.js"></script>
   <!-- Custom styles for this template -->
   <link href="../templates/Web/scrolling-nav.css" rel="stylesheet">
   <link href="../templates/Web/css2" rel="stylesheet">
 
   <style>
+
+
     #funding:hover+#prove {
       display: block;
     }
 
-    .popwindow {
-      width: 500px;
-      height: 550px;
-      border: 3px solid #ff928e;
-      visibility: hidden;
-      position: absolute;
-      z-index: 999;
-      opacity: 1;
-      overflow: hidden;
-      background-color: white;
-      text-align: center;
-      margin-top: 10%;
-      margin-left: 35%;
-      border-radius: 10px;
-    }
 
-    .cirButton {
-      width: 100%;
-      height: 60px;
-      border-radius: 40px;
-      cursor: pointer;
-      border: none;
-      font-weight: 600;
-    }
 
-    .cirButton:hover {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
 
-    .groupname {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 45px;
-      font-weight: bold;
-    }
-
-    .slogan {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 40px;
-      font-style: italic;
-      /* font-weight:Light 300 italic; */
-      font-family: 'Consolas', monospace;
-      color: #c4cbcf;
-    }
-
-    .hiddenpart {
-      opacity: 0;
-      max-width: 0;
-      color: #c4cbcf;
-      transition: 1.3s ease-out;
-    }
 
     .slogan:hover .hiddenpart {
       opacity: 1;
       max-width: 10em;
     }
 
-    .news_prefix {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      background-image: url("static/img/news_prefix.png");
-      background-size: 150px, 30px;
-    }
 
     svg {
       width: 50px;
@@ -107,87 +50,17 @@
       vertical-align: middle;
     }
 
-    {#label {#}
-    {#  display: block;#}
-    {#  line-height: 100px;#}
-
-
-    .option-input {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      -ms-appearance: none;
-      -o-appearance: none;
-      appearance: none;
-      position: relative;
-      top: 13.33333px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 40px;
-      width: 40px;
-      transition: all 0.15s ease-out 0s;
-      background: #cbd1d8;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      display: inline-block;
-      margin-right: 0.5rem;
-      outline: none;
-      position: relative;
-      z-index: 1000;
-    }
-
-    .option-input:hover {
-      background: #9faab7;
-    }
-
-    .option-input:checked {
-      background: #0d007e;
-    }
-
-    .option-input.radio {
-      border-radius: 50%;
-    }
-
-    .option-input.radio::after {
-      border-radius: 50%;
-    }
-
-
-
-    @keyframes click-wave {
-      0% {
-        height: 40px;
-        width: 40px;
-        opacity: 0.35;
-        position: relative;
-      }
-
-      100% {
-        height: 200px;
-        width: 200px;
-        margin-left: -80px;
-        margin-top: -80px;
-        opacity: 0;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      body {
-        min-width: fit-content;
-      }
-    }
-
-    @media screen and (max-width:992px) and (min-width:769px) {
-      #info {
-        min-width: fit-content;
-      }
+    label {
+      display: block;
+      line-height: 30px;
     }
   </style>
 
 </head>
 
-<body id="aingames"><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
+<body id="aingames">
+
+<svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
     <symbol id="icon-more" viewBox="0 0 1789 1024">
       <path
         d="M658.96035216 613.49779716h-602.64317146c-5.28634405 9.51541883-9.51541883 21.14537441-13.74449354 30.66079315h602.64317154c3.17180628-9.51541883 7.40088094-20.08810594 13.74449346-30.66079315zM54.20264274 801.69162966c7.40088094 10.57268718 14.80176191 21.14537441 24.31718079 30.66079315h602.64317241c-9.51541883-10.57268718-16.91629967-20.08810594-24.31718063-30.66079315h-602.64317257zM794.29074875 425.30396468h-602.64317156c-9.51541883 9.51541883-19.03083652 20.08810594-28.54625532 30.66079311h602.6431716c9.51541883-9.51541883 19.03083652-20.08810594 28.54625528-30.66079311zM1396.93392025 484.51101309c12.687225 0 24.31718064-10.57268718 24.31718064-24.31718062 0-13.74449341-11.62995564-24.31718064-24.31718054-24.31718059-13.74449341 0-24.31718064 10.57268718-24.31718069 24.31718059 0 13.74449341 11.62995564 24.31718064 24.31718069 24.31718062z">
@@ -212,8 +85,8 @@
   </svg>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger " href="http://aingames.cn/index.html">
-        <img src="../templates/Web/grouplogo.png" height="35px"></a>
+      <a class="navbar-brand js-scroll-trigger " href="http://aingames.cn/index.html"> <img
+          src="../templates/Web/grouplogo.png" height="35px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -239,88 +112,53 @@
       </div>
     </div>
   </nav>
-  <section id="Reviews">
-    <div class="container">
-      <div class="page-header">
-        <h1>
-          <i class="icon-rocket"></i> Welcome to the study of fun!
-        </h1>
 
-      </div>
+  <section id="Over">
+    <div class="container col-xl-7 align-content-center" style="margin: auto">
+      <h1>
+        <i class="icon-chevron-down"></i> Privacy Policy
+      </h1>
       <br>
-      <div class="row clearfix">
+      <br>
 
-        <div class="col-md-5" style="
-        width: fit-content;
-        min-width: fit-content;" height="100%">
-          <br>
-          <img src="../img/frameworkAD.gif" max-height="auto">
-        </div>
+      <h4 >
+        We are committed to protecting the privacy of our users and ensuring that any data we collect is used only for the purposes of academic usage. As part of this commitment, we collect and use anonymous age, gender, and play behavior data. This policy outlines how we collect and use this data. Participation is voluntary. Participants can choose not to answer a question, or quit anytime.
+      </h4>
+      <br>
+    <h5>Data Collection</h5>
+        <p>We collect anonymous age, gender, and play behavior data through our games. This data is collected automatically when participants interact with our designed game, and is used to help us understand how our game are being played and gamer research. IP address and any kind of location information will not be collected.</p>
+        <h5>Data Use</h5>
+        <p>The anonymous data we collect is used only for the game user research. We do not link this data to any personally identifiable information, and we do not use it for marketing purposes.</p>
+        <h5>User Rights</h5>
+        <p>As this data is anonymous, it cannot be used to identify individual users. However, if you have any questions or concerns about our data collection and use practices, please contact us at 8143151122_AT_163.com. We are committed to being transparent about our data collection and use practices and will do our best to address any concerns you may have.</p>
+       <br>
 
-        <div class="col-md-5" id="info">
-          <h4>Purpose of the Experiment</h4>
-          <ul>
-            <li>
-              This Experiment is designed to study <b>the notion of "<em>fun</em>"</b> elicited while playing Super
-              Mario
-              Bros levels.
+        <h4>By playing our games, you consent to the collection and use of anonymous age, gender, and play behavior data as outlined in this policy. If you do not agree with this policy, please do not play.</h4>
 
-          </ul>
-          <br>
-          <h4>Procedure of the Experiment</h4>
-          <ul>
-            <li> This experiment has <b>three phases</b>.
-              <ol style="list-style-type: lower-roman;">
-                <li>First you must answer <b>a questionnaire</b>. </li>
-                <li>Then you will complete a <b>short game tutorial</b>, play<b> 2 levels</b> of the game and answer a
-                  simple question. You will play<b> another 2 levels</b>. </li>
-                <li>Finally you will play <b>3 levels</b> and answer a simple question.</li>
-                <li>You can also replay the second phase after finishing the whole process.</li>
-              </ol>
-            <li>In total, the experiment takes approximately <b>15 minutes</b> to complete.</li>
-            <li> Have Fun!
-          </ul>
 
-          <br>
-            <script>
-function validateForm() {
-  // Check if the checkbox is checked
-  var checkbox = document.getElementById('privacyPolicyCheckbox');
-  if (!checkbox.checked) {
-    alert('Please agree to the privacy policy');
-    return false; // Prevent form submission
-  }
-  return true; // Allow form submission
-}
-</script>
-
-            <input type="checkbox" id="privacyPolicyCheckbox" name="privacyPolicyCheckbox" required>
-            <label for="privacyPolicyCheckbox">I agree to the <a href="/privacy" style="cursor:pointer;" target="_blank">privacy policy</a></label>
-            <br>
-            <br>
-            <button  class="cirButton" type="submit" onclick="
-                if (validateForm()) { window.location.href = '/question'; }
-                "><b> Start!</b> </button>
-
-        </div>
-      </div>
     </div>
+
+
+  <div class="col-xl-8" style="margin:auto;">
+      <img src="../templates/Web/sustc.png" height="200">
+      <img src="../templates/Web/Malta.png" height="200">
+  </div>
+
   </section>
 
- <div class="col-xl-7 justify-content-between align-content-center" style="margin: auto">This page is created by <a href="https://github.com/BigJIU" target="_blank">Haocheng Du</a>, <a href="https://doveliyuchen.github.io" target="_blank">Yuchen Li</a>; game content is generated by <b>AI </b>designed by<a href="https://github.com/PneuC" target="_blank"> Ziqi Wang</a>.<br> This project is supported by <a href="http://www.liujialin.tech/" target="_blank">Dr. Liu</a> and <a href="https://yannakakis.net/" target="_blank">Prof. Yannakakis</a>.</div>
+<div class="col-xl-7 justify-content-between align-content-center" style="margin: auto">This page is created by <a href="https://github.com/BigJIU">Haocheng Du</a>, <a href="https://doveliyuchen.github.io">Yuchen Li</a>; game content is generated by <b>AI </b>designed by<a href="https://github.com/PneuC"> Ziqi Wang</a>.<br> This project is supported by <a href="http://www.liujialin.tech/">Dr. Liu</a> and <a href="https://yannakakis.net/">Prof. Yannakakis</a>.</div>
 
 <br><br>
+
 
   <!-- Footer mx-auto -->
   <footer class="py-5 bg-dark">
     <div class="container">
       <div class="row clearfix">
-        <!-- <div class="col-md-2 column">
-          <img class="img-fluid" alt="" src="../templates/Web/Wechat.png" style="width: 100px;">
-      </div> -->
+
         <div class="col-md-10 column">
-          <div class="col-xl-3 justify-content-center" style="margin: auto" align="center"><a href="/privacy" style="cursor:pointer; color: white;" target="_blank">Privacy Policy</a> </div>
-          <div class="col-xl-3 justify-content-center text-white" style="margin: auto" align="center">Copyright © Jialin Liu</div>
+          <br><br>
+          <p class="m-0 text-center text-white">Copyright © Jialin Liu</p>
 
         </div>
 
@@ -329,7 +167,7 @@ function validateForm() {
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="../templates/Web/jquery.min.js"></script>
+
   <script src="../templates/Web/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->

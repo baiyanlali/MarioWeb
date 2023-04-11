@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 import os
 import struct
@@ -18,13 +17,11 @@ app = Flask(__name__, static_folder='')
 idm = idManager()
 app.secret_key = 'asdfasdfawefaewvaf'
 replayDataPath = "reps/"
-jsonDataPath = "jsons/"
 evalDataPath = "evals/"
 
 questionarePath = "data/questionare.csv"
 annotationPath = "data/annotation.csv"
 annotationPath2 = "data/annotation2.csv"
-feedbackPath = "data/feedback.csv"
 
 
 # id=idm.getId(request.remote_addr)
@@ -35,20 +32,20 @@ def getId():
 
 
 @app.route('/')
-def gamewelcome():
-    ip = getId()
-    # return redirect(url_for('gameplay', id=request.remote_addr))
-    return render_template('GameWelcome.html')
+def gameinit():
+    index = getId()
+    cid = idm.iniId(index)
+    return redirect(url_for('Main.html', id=index))
+
+
+@app.route('/<id>')
+def gamewelcome(index):
+    return render_template('Main.html', id=index)
 
 
 @app.route('/question')
 def gamequestion():
     return render_template('GameQuestion.html')
-
-
-@app.route('/privacy')
-def privacypage():
-    return render_template('Privacy.html')
 
 
 @app.route('/result', methods=['POST', 'GET'])
@@ -96,7 +93,6 @@ def gametutorialdata(id):
 def gameplay(id):
     gamelevels = idm.getLevels(id)
     return render_template('GamePlay.html', gamelevels=gamelevels, control=idm.getControl(id), levelNum=2,
-                           times=idm.getTimes(id),
                            jump="/annotation")
 
 
@@ -104,9 +100,8 @@ def gameplay(id):
 def getJSONData(id):
     if request.method == 'POST':
         print("POST Game")
-        resultList = list(request.form)[0].split("@@@")
-        saveJsonFile(jsonDataPath, id + "_" + resultList[0], resultList[1])
-        saveRepFile(replayDataPath, id + "_" + resultList[0], resultList[1])
+        resultList = list(request.form)[0].split(",")
+        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
     return "return!"
 
 
@@ -159,9 +154,8 @@ def gameplay2(id):
 def getJSONData2(id):
     if request.method == 'POST':
         print("POST Game")
-        resultList = list(request.form)[0].split("@@@")
-        saveJsonFile(jsonDataPath, id + "_" + resultList[0], resultList[1])
-        saveRepFile(replayDataPath, id + "_" + resultList[0], resultList[1])
+        resultList = list(request.form)[0].split(",")
+        saveFile(replayDataPath, id + resultList[0][:-2], resultList[1:])
     return "return!"
 
 
@@ -188,8 +182,10 @@ def gameanno2(id):
 def gameannoresult2(id):
     if request.method == 'POST':
         print("result: " + id)
+
         resultList = list(request.form)[0].split(",")
         levelList = idm.getRecent(getId())
+
         idm.write_csv(annotationPath2,
                       [getId(), resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
                        levelList[2],
@@ -202,63 +198,21 @@ def gameannoresult2(id):
             return redirect(url_for("gameplay2", id=id))
 
 
-@app.route("/gameover", methods=['POST', 'GET'])
+@app.route("/gameover")
 def over():
     finish = idm.getTimes(getId())
-    if request.method == 'POST':
-        resultList = list(request.form)[0].split(",")
-        idm.write_csv(feedbackPath,
-                      [getId(), resultList[0],
-                       ""])
 
     return render_template("GameOver.html", finish=1, stage=1)
 
 
-# @app.route('/feedback', methods=['POST'])
-# def overa():
-#     if request.method == 'POST':
-#         resultList = list(request.form)[0].split(",")
-#         idm.write_csv(feedbackPath,
-#                       [getId(), resultList[0],
-#                        ""])
-
-# return redirect(url_for("over", id=id))
-def saveRepFile(path, filename, content):
-    o_dict = json.loads(content)
-    action_dict = o_dict["elementData1"][1:]
-    actionList = []
-    for actions in action_dict:
-        try:
-            alist = actions["actions0"]
-            actionsInput = [alist["0"], alist["1"], alist["2"], alist["3"], alist["4"], alist["5"], alist["6"]]
-            actionList.append(serializeAction(actionsInput))
-        except Exception:
-            continue
-
-    cp = list(map(int, actionList))
+def saveFile(path, filename, content):
+    cp = list(map(int, content))
     file_dir = os.path.join(os.getcwd(), path)
     file_path = os.path.join(file_dir, filename + ".rep")
     with open(file_path, 'wb') as f:
         f.write(b''.join(struct.pack('B', c) for c in cp))
 
 
-def serializeAction(actions):
-    res = 0
-    for i in range(1, 6):
-        if actions[i]:
-            tmp = 1 << (i-1)
-            res += tmp
-    return res
-
-
-def saveJsonFile(path, filename, content):
-    file_dir = os.path.join(os.getcwd(), path)
-    file_path = os.path.join(file_dir, filename + ".json")
-    with open(file_path, 'w') as f:
-        f.write(content)
-
-
 if __name__ == '__main__':
-    #saveRepFile(replayDataPath, "null_test.rep", testJson)
-    # app.run(host='0.0.0.0', port=80, debug=False)
-    app.run()
+    app.run(host='0.0.0.0', port=80, debug=False)
+    # app.run()

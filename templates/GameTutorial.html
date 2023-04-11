@@ -217,18 +217,19 @@
     <div class="container" style="font-weight: 600
    ;">
 
-      <div class="row clearfix" >
+      <div class="row clearfix">
         <!-- <style=" background-color: rgba(255,255,255);height: 130vh;
       margin-top: -90px;"> -->
 
-        <div class="col-md-12" style=" background-color: rgba(255,255,255);" >
+        <div class="col-md-12" style=" background-color: rgba(255,255,255);">
           <div align="center">
 
             <h3>Super Mario Bros Tutorial</h3>
-            <p >  Before proceeding to the main part of the experiment please familiarize yourself with the game.<br>
-            You may proceed to the next phase of this survey once you are ready!</p>
- 
-            <b  onclick="replay()" style="cursor: pointer;">Click <u style="color:blue; ">ME</u> to show the instruction page again.</b>
+            <p> Before proceeding to the main part of the experiment please familiarize yourself with the game.<br>
+              You may proceed to the next phase of this survey once you are ready!</p>
+
+            <b onclick="replay()" style="cursor: pointer;">Click <u style="color:blue; ">ME</u> to show the instruction
+              page again.</b>
 
             <p class="alert">If the game is not responding to your keyboard, please click on the game screen.</p>
           </div>
@@ -245,7 +246,7 @@
 
           </div>
 
-            </div>
+        </div>
 
         <div class="col-md-6" align="center" style="visibility: hidden;" id="next">
           <br>
@@ -254,7 +255,7 @@
             document.getElementById("game").style.visibility = "hidden";
             document.getElementById("next").style.visibility = "hidden";
             
-
+             var control = ("{{control}}" == "1");
           //var divElement = document.getElementById("GameWindow");
           tutorialId = tutorialId+1
           var level = "t"+tutorialId;
@@ -266,7 +267,7 @@
               document.getElementById("loading").style.visibility = "hidden";
               $("#mask").hide();
           })
-               var control = ("{{control}}" == "1");
+
 
         PlayLevel(level,control)
           .then(function (){
@@ -289,59 +290,58 @@
           </button>
         </div>
 
-        <div id="countdown"
-          style="z-index:999; position:absolute; left:50px; bottom: 20px; color: #ffffff; font-size: xx-large; ">
-        </div>
-        <img style=" height: 90vh;bottom: 3.5vh; left: 0vw;
-            position: absolute;z-index: 900; visibility: visible; width: 100%;" src="../templates/Web/pic.png"
+
+        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
+            position: absolute;z-index: 900; visibility: visible; width: 99%;" src="../templates/Web/pic.png"
           id="windowshow">
+        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
+            position: absolute;z-index: 902; visibility: visible; width: 99%;" src="../templates/Web/top.png" id="top">
+        <img style=" height: 90vh;bottom: 3.5vh; left: 1vw;
+            position: absolute;z-index: 902; visibility: visible; width: 99%;" src="../templates/Web/bot.png" id="bot">
         <script>
-          function countdown() {
-            // var count = 10; // 设置倒计时秒数
-            // var timer = setInterval(function () {
-            //   count--;
-            //   if (count <= 0) {
-            //     clearInterval(timer);
-            //     $("#countdown").hide();
-            //     $("#windowshow:visible").hide(); // 倒计时结束后隐藏倒计时容器
 
-            //   } else {
-                $("#countdown").html("Click to close."); // 更新倒计时容器内容
-                $("#windowshow").click(function () {
-                  $("#windowshow").hide();
-                  $("#countdown").hide();
-                });}
-          //     }
-          //   }, 1000);
-          // }
-
-          $(document).ready(function () {
-            countdown();
-          });
-        </script>
-
-        <script>
-          //Init Cheerpj Framework
           cheerpjInit();
-
-
           var divElement = document.getElementById("GameWindow");
           var tutorialId = parseInt("{{tutorial}}")
           var level = "t" + "{{tutorial}}";
           var img = document.getElementById("windowshow");
+          var control = ("{{control}}" == "1");
+
+
+
+
+          if (control) {
+            $("#top:visible").hide();
+            console.log("1")
+          } else {
+            $("#bot:visible").hide();
+              console.log("2")
+          }
+
+          $("#windowshow").click(function () {
+            $("#windowshow:visible").hide();
+
+          });
+          $("#bot").click(function () {
+
+            $("#bot:visible").hide();
+
+          });
+          $("#top").click(function () {
+            $("#top:visible").hide();
+          });
+
 
           cheerpjCreateDisplay(500, 500, divElement);
           cheerpjRunMain("Play", "/app/Mario-AI-Interface.jar", "0", "f_l");
 
           GameLoad().then(function () {
-            console.log("Cheerpj Initialize Succeed!");
-
             $("#windowshow:visible").hide();
-            $("#countdown").hide();
+            {#console.log("Cheerpj Initialize Succeed!", control);#}
             document.getElementById("loading").style.visibility = 'hidden';
           })
 
-          var control = ("{{control}}" == "1");
+
 
           PlayLevel(level, control)
             .then(function () {
@@ -350,9 +350,21 @@
                 document.getElementById("next").style.visibility = "visible";
               }
               document.getElementById("game").style.visibility = "visible";
+
+
               $("#mask").hide();
 
             });
+          function replay() {
+
+            $("#windowshow:hidden").show();
+            if(control){
+                $("#bot:hidden").show();
+
+            }else {
+                   $("#top:hidden").show();
+            }
+          }
 
         </script>
       </div>
@@ -366,19 +378,11 @@
 
       </div>
 
-      <!-- <p>more icon-more</p> -->
+
 
     </div>
 
 
-    <script>
-      function replay() {
-
-        $("#windowshow:hidden").show();
-
-
-      }
-    </script>
 
 
   </section>
@@ -388,7 +392,7 @@
   <!-- Footer mx-auto -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <div class="row clearfix" >
+      <div class="row clearfix">
         <!-- <div class="col-md-2 column">
           <img class="img-fluid" alt="" src="../templates/Web/Wechat.png" style="width: 100px;">
       </div> -->

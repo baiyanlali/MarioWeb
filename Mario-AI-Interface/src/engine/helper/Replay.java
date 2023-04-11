@@ -1,7 +1,12 @@
 package engine.helper;
+import java.io.IOException;
 
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import agents.ReplayAgent;
 import engine.core.MarioAgentEvent;
+import engine.core.MarioResult;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,6 +39,11 @@ public class Replay {
         return content;
     }
 
+    public static String serializeGameResult(MarioResult marioResult) {
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(marioResult);
+        return jsonObject.toJSONString();
+    }
+
     public static void saveReplay(String filepath, ArrayList<MarioAgentEvent> events) {
         try {
             byte[] content = serializeAgentEvents(events);
@@ -61,4 +71,5 @@ public class Replay {
         }
         return action;
     }
+
 }
