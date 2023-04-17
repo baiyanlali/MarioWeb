@@ -261,5 +261,5 @@ def saveJsonFile(path, filename, content):
 
 if __name__ == '__main__':
     #saveRepFile(replayDataPath, "null_test.rep", testJson)
-    # app.run(host='0.0.0.0', port=80, debug=False)
-    app.run()
+    app.run(host='0.0.0.0', port=80, debug=False)
+    # app.run()
