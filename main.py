@@ -38,7 +38,8 @@ def getId():
 def gamewelcome():
     ip = getId()
     # return redirect(url_for('gameplay', id=request.remote_addr))
-    return render_template('GameWelcome.html')
+    return render_template('Maintenance.html')
+    # return render_template('GameWelcome.html')
 
 
 @app.route('/question')
