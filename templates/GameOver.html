@@ -3,7 +3,8 @@
 <html lang="en">
 <script
   id="allow-copy_script">(function t() { var t = !1; document.addEventListener("allow_copy", (function (n) { t = n.detail.unlock })); var n = ["copy", "cut", "contextmenu", "selectstart", "mousedown", "mouseup", "mousemove", "keydown", "keypress", "keyup"], e = function (n) { t && (n.stopPropagation(), n.stopImmediatePropagation && n.stopImmediatePropagation()) }; n.forEach((function (t) { document.documentElement.addEventListener(t, e, { capture: !0 }) })) })()</script>
-  <script src="../templates/Web/jquery.min.js"></script>
+<script src="../templates/Web/jquery.min.js"></script>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
@@ -28,27 +29,11 @@
   <link href="../templates/Web/css2" rel="stylesheet">
 
   <style>
-
-
     #funding:hover+#prove {
       display: block;
     }
 
-    .popwindow {
-      width: 500px;
-      height: 550px;
-      border: 3px solid #ff928e;
-      visibility: hidden;
-      position: absolute;
-      z-index: 999;
-      opacity: 1;
-      overflow: hidden;
-      background-color: white;
-      text-align: center;
-      margin-top: 10%;
-      margin-left: 35%;
-      border-radius: 10px;
-    }
+
 
     .cirButton {
       width: 40%;
@@ -62,47 +47,6 @@
 
     .cirButton:hover {
       background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .groupname {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 45px;
-      font-weight: bold;
-    }
-
-    .slogan {
-      justify-content: center;
-      display: flex;
-      position: relative;
-      text-align: center;
-      font-size: 40px;
-      font-style: italic;
-      /* font-weight:Light 300 italic; */
-      font-family: 'Consolas', monospace;
-      color: #c4cbcf;
-    }
-
-    .hiddenpart {
-      opacity: 0;
-      max-width: 0;
-      color: #c4cbcf;
-      transition: 1.3s ease-out;
-    }
-
-    .slogan:hover .hiddenpart {
-      opacity: 1;
-      max-width: 10em;
-    }
-
-    .news_prefix {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      background-image: url("static/img/news_prefix.png");
-      background-size: 150px, 30px;
     }
 
     svg {
@@ -187,31 +131,25 @@
       <br>
       <button id="hideButton" class="cirButton">No</button>
 
-        <br>
-        <br>
+      <br>
+      <br>
 
-        <form id="ajaxform">
-             <h3>Do you have any feedback?</h3>
+      <form id="ajaxform">
+        <h3>Do you have any feedback?</h3>
         <br>
-              <textarea
-            id="message"
-            cols="60"
-            rows="10"
-            placeholder="Enter your message"
-
-          ></textarea>
-            <br><br>
-            <input type="submit" value="Submit" class="cirButton" onclick="submit_it()">
-        </form>
+        <textarea id="message" cols="60" rows="10" placeholder="Enter your message"></textarea>
+        <br><br>
+        <input type="submit" value="Submit" class="cirButton" onclick="submit_it()">
+      </form>
       <script>
         document.getElementById("hideButton").addEventListener("click", function () {
           var buttons = document.getElementsByTagName("button");
           for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.display = "none";
           }
-            var text=document.getElementById("question");
-            text.style.visibility="hidden";
-        }); 
+          var text = document.getElementById("question");
+          text.style.visibility = "hidden";
+        });
 
 
         // document.getElementById("hideButton").addEventListener("click", function () {
@@ -220,45 +158,48 @@
         // });
 
         function submit_it() {
-             $("#ajaxform").hide()
-        $("#ajaxform").submit(function(e)
-    {
+          $("#ajaxform").hide()
+          $("#ajaxform").submit(function (e) {
 
-        var postData = JSON.stringify($("#message").val());
-        {#var formURL = $(this).attr("action");#}
-        $.ajax(
-        {
-            url : "gameover",
-            type: "POST",
-            data : postData,
-            success:function(data) 
-            {
+            var postData = JSON.stringify($("#message").val());
 
-                //data: return data from server
-            }
+            $.ajax(
+              {
+                url: "gameover",
+                type: "POST",
+                data: postData,
+                success: function (data) {
 
-        });
-        e.preventDefault(); //STOP default action
-        {#e.unbind(); //unbind. to stop multiple form submit.#}
-    });
+                  //data: return data from server
+                }
 
-}
+              });
+            e.preventDefault(); //STOP default action
+
+            });
+
+        }
 
       </script>
 
     </div>
 
 
-  <div class="col-xl-8" style="margin:auto;">
+    <div class="col-xl-8" style="margin:auto;">
       <img src="../templates/Web/sustc.png" height="200">
       <img src="../templates/Web/Malta.png" height="200">
-  </div>
+    </div>
 
   </section>
 
-<div class="col-xl-7 justify-content-between align-content-center" style="margin: auto">This page is created by <a href="https://github.com/BigJIU" target="_blank">Haocheng Du</a>, <a href="https://doveliyuchen.github.io" target="_blank">Yuchen Li</a>; game content is generated by <b>AI </b>designed by<a href="https://github.com/PneuC" target="_blank"> Ziqi Wang</a>.<br> This project is supported by <a href="http://www.liujialin.tech/" target="_blank">Dr. Liu</a> and <a href="https://yannakakis.net/" target="_blank">Prof. Yannakakis</a>.</div>
+    <div class="col-xl-7 justify-content-between align-content-center" style="margin: auto">This platform is created by <a
+      href="https://github.com/BigJIU" target="_blank">Haocheng Du</a>, <a href="https://doveliyuchen.github.io"
+      target="_blank">Yuchen Li</a>; game content is generated by <b>procedural content generation (PCG) </b>techniques developed by <a
+      href="https://github.com/PneuC" target="_blank">Ziqi Wang</a>.<br> This project is supported by <a
+      href="http://www.liujialin.tech/" target="_blank">Dr. Liu</a> and <a href="https://yannakakis.net/"
+      target="_blank">Prof. Yannakakis</a>.</div>
 
-<br><br>
+  <br><br>
 
 
   <!-- Footer mx-auto -->
@@ -267,8 +208,10 @@
       <div class="row clearfix">
 
         <div class="col-md-10 column">
-          <div class="col-xl-3 justify-content-center" style="margin: auto" align="center"><a href="/privacy" style="cursor:pointer; color: white;" target="_blank">Privacy Policy</a> </div>
-          <div class="col-xl-3 justify-content-center text-white" style="margin: auto" align="center">Copyright © Jialin Liu</div>
+          <div class="col-xl-3 justify-content-center" style="margin: auto" align="center"><a href="/privacy"
+              style="cursor:pointer; color: white;" target="_blank">Privacy Policy</a> </div>
+          <div class="col-xl-3 justify-content-center text-white" style="margin: auto" align="center">Copyright © Jialin
+            Liu</div>
 
         </div>
 
