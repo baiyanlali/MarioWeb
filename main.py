@@ -38,7 +38,8 @@ def getId():
 def gamewelcome():
     ip = getId()
     # return redirect(url_for('gameplay', id=request.remote_addr))
-    return render_template('GameWelcome.html')
+    return render_template('Maintenance.html')
+    # return render_template('GameWelcome.html')
 
 
 @app.route('/question')
@@ -260,5 +261,5 @@ def saveJsonFile(path, filename, content):
 
 if __name__ == '__main__':
     #saveRepFile(replayDataPath, "null_test.rep", testJson)
-    # app.run(host='0.0.0.0', port=80, debug=False)
-    app.run()
+    app.run(host='0.0.0.0', port=80, debug=False)
+    # app.run()
