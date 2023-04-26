@@ -3,5 +3,8 @@ echo "" > data/annotation2.csv
 echo "" > data/feedback.csv
 echo "" > data/questionare.csv
 
-rm -f reps
-rm -f json
+rm -rf reps
+rm -rf jsons
+
+mkdir reps
+mkdir jsons
