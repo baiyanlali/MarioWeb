@@ -1,0 +1,7 @@
+echo "" > data/annotation.csv
+echo "" > data/annotation2.csv
+echo "" > data/feedback.csv
+echo "" > data/questionare.csv
+
+rm -f reps
+rm -f json
