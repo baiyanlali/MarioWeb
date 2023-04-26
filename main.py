@@ -3,6 +3,7 @@ import json
 import os
 import struct
 import uuid
+from datetime import datetime
 
 from IDManager import idManager
 
@@ -68,7 +69,7 @@ def gamepreplay():
                        result.get("frequency"),
                        result.get("age") + result.get("myAge"),
                        result.get("gender") + result.get("myGender"),
-                       ""])
+                       datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
         idm.setControl(cid, result.get("control"))
         print(result.get("gamestyle"))
         return redirect(url_for('gametutorial', id=cid))
@@ -135,7 +136,8 @@ def getRadioData():
         print("POST Eval")
         result = request.form
         ipRecent = idm.getRecent(ip)
-        idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"]])
+        idm.write_csv(annotationPath, [ip, ipRecent[0], ipRecent[1], result["fun"],
+                       datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
 
     if idm.getTimes(ip):
         return redirect(url_for("gameplay2", id=ip))
@@ -194,7 +196,7 @@ def gameannoresult2(id):
         idm.write_csv(annotationPath2,
                       [getId(), resultList[0], resultList[1], resultList[2], levelList[0], levelList[1],
                        levelList[2],
-                       ""])
+                       datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
 
         if idm.getTimes(id):
             return redirect(url_for("over", id=id))

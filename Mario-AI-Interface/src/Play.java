@@ -43,8 +43,8 @@ public class Play {
     public static String playJavaGame(){
 
         game.setLives(5);
-        String levelPath = "./levels/group0/lvl73.lvl";			// For local
-        String repPath = "./reps/dfd40950-75e7-44fe-8833-371d32e525af_lvl73.rep";	                // For local
+        String levelPath = "./levels/lvl155.lvl";			// For local
+        String repPath = "./reps/b179cbd3-ee8e-48de-baf8-da6438461d1d_lvl155.rep";	                // For local
         //MarioGame.verbose = true;
         //Play Game
         //MarioResult tmpResult = game.playGame(new HumanAgent(false),getLevel(levelPath), 10, repPath,30);
