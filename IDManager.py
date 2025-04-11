@@ -1,3 +1,4 @@
+import os
 import random
 import csv
 
@@ -138,6 +139,9 @@ class idManager():
         return self.ip_control[ip]
 
     def write_csv(self, path, data):
+        # 确保目录存在
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+    
         with open(path, 'a+', newline='') as f:
             csv_write = csv.writer(f)
             csv_write.writerow([*data, ''])
