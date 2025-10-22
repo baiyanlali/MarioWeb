@@ -4,6 +4,7 @@ import os
 import struct
 import uuid
 from datetime import datetime
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from IDManager import idManager
 
@@ -15,7 +16,19 @@ logging.basicConfig(filename='log.txt', level=logging.DEBUG)
 # 将print输出重定向到logging模块
 print = logging.getLogger().info
 
-app = Flask(__name__, static_folder='')
+# app = Flask(__name__, static_folder='')
+app = Flask(__name__)
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, 
+    x_for=1,       # 转发 X-Forwarded-For
+    x_host=1,      # 转发 Host
+    x_proto=1,     # 转发 Scheme (http/https)
+    x_prefix=1     # 转发 X-Forwarded-Prefix (Caddy 会自动添加)
+)
+
+# os.environ['SCRIPT_NAME'] = '/funmario'
+
 idm = idManager()
 app.secret_key = 'asdfasdfawefaewvaf'
 replayDataPath = "reps/"
@@ -260,8 +273,49 @@ def saveJsonFile(path, filename, content):
     with open(file_path, 'w') as f:
         f.write(content)
 
+@app.route('/debug-headers')
+def debug_headers():
+    # 检查原始的 HTTP 头部，看 Caddy 是否发送了 X-Forwarded-Prefix
+    x_prefix_header = request.headers.get('X-Forwarded-Prefix')
+    
+    # 检查 WSGI 环境，看 ProxyFix 是否成功设置了 SCRIPT_NAME
+    # SCRIPT_NAME 是 Flask/Werkzeug 用来构建 url_for() 的关键变量
+    script_name = request.environ.get('SCRIPT_NAME')
+    
+    # 检查 url_for 是否包含了前缀
+    test_url = url_for('static', filename='test.css')
+    
+    # 检查所有路由规则，看 'privacy' 路由的构建情况
+    routes = []
+    # 绑定 URL Map 到当前请求环境，以确保 SCRIPT_NAME 生效
+    adapter = app.url_map.bind_to_environ(request.environ)
+    
+    # 检查 'privacy' 路由生成
+    try:
+        privacy_url = adapter.build('privacypage', force_external=False, method='GET')
+    except Exception as e:
+        privacy_url = f"Error building URL: {e}"
+
+    output = f"""
+    <h2>Flask 代理调试信息</h2>
+    <p><strong>URL_ROOT:</strong> {request.url_root}</p>
+    <p><strong>X-Forwarded-Prefix 头部 (Caddy 发送):</strong> <code>{x_prefix_header}</code></p>
+    <p><strong>SCRIPT_NAME 环境变量 (ProxyFix 设置):</strong> <code>{script_name}</code></p>
+    <p><strong>测试 url_for('static', 'test.css') 生成的 URL:</strong> <code>{test_url}</code></p>
+    
+    <h3>预期结果:</h3>
+    <ul>
+        <li>X-Forwarded-Prefix 应该等于 <code>/funmario</code></li>
+        <li>SCRIPT_NAME 应该等于 <code>/funmario</code></li>
+        <li>测试 URL 应该以 <code>/funmario/static/test.css</code> 开头</li>
+    </ul>
+    
+    <h3>路由检查:</h3>
+    <p><strong>'privacypage' 路由生成的 URL:</strong> <code>{privacy_url}</code></p>
+    """
+    return output
 
 if __name__ == '__main__':
     #saveRepFile(replayDataPath, "null_test.rep", testJson)
-    app.run(host='0.0.0.0', port=80, debug=False)
+    app.run(host='0.0.0.0', port=9881, debug=True)
     # app.run()
