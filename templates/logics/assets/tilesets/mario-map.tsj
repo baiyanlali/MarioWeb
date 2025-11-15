@@ -1,0 +1,14 @@
+{ "columns":8,
+ "image":"..\/mapsheet.png",
+ "imageheight":112,
+ "imagewidth":128,
+ "margin":0,
+ "name":"mario-map",
+ "spacing":0,
+ "tilecount":56,
+ "tiledversion":"1.10.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}
